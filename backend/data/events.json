@@ -1,0 +1,177 @@
+[
+  {
+    "id": "covid_march_2020",
+    "label": "COVID-19 market crash",
+    "date": "2020-03-16",
+    "type": "macro_shock",
+    "description": "S&P 500 fell 34% in 33 days. Fed cut rates to zero, launched unlimited QE.",
+    "affected_nodes": [
+      "spx",
+      "vix",
+      "xauusd",
+      "wti",
+      "hy_spreads",
+      "fed_rate"
+    ],
+    "primary_direction": -1
+  },
+  {
+    "id": "fed_pivot_2022",
+    "label": "Fed tightening cycle 2022",
+    "date": "2022-03-16",
+    "type": "monetary_policy",
+    "description": "Fed began fastest rate hike cycle since 1980s. 525bps over 16 months.",
+    "affected_nodes": [
+      "fed_rate",
+      "yield_2y",
+      "yield_curve",
+      "sec_tech",
+      "housing",
+      "dxy"
+    ],
+    "primary_direction": 1
+  },
+  {
+    "id": "svb_collapse_2023",
+    "label": "SVB collapse",
+    "date": "2023-03-10",
+    "type": "financial_shock",
+    "description": "Silicon Valley Bank failed due to HTM bond losses. Triggered regional bank contagion fears.",
+    "affected_nodes": [
+      "sec_financials",
+      "hy_spreads",
+      "vix",
+      "xauusd"
+    ],
+    "primary_direction": -1
+  },
+  {
+    "id": "ukraine_invasion_2022",
+    "label": "Russia invades Ukraine",
+    "date": "2022-02-24",
+    "type": "geopolitical",
+    "description": "Commodity shock. WTI surged to $130. European energy crisis. USD safe-haven bid.",
+    "affected_nodes": [
+      "wti",
+      "xauusd",
+      "cpi",
+      "dxy",
+      "eurusd",
+      "sec_energy"
+    ],
+    "primary_direction": 1
+  },
+  {
+    "id": "trump_tariffs_2018",
+    "label": "US-China trade war begins",
+    "date": "2018-03-22",
+    "type": "trade_policy",
+    "description": "Trump announced tariffs on $50B of Chinese goods. Escalated through 2019.",
+    "affected_nodes": [
+      "spx",
+      "dxy",
+      "consumer_sent",
+      "sec_tech"
+    ],
+    "primary_direction": -1
+  },
+  {
+    "id": "fed_rate_cut_dec_2024",
+    "label": "Fed 25bp Rate Cut \u2013 Dec 2024",
+    "date": "2024-12-18",
+    "type": "monetary_policy",
+    "description": "The Federal Reserve cut the fed funds rate by 25 basis points to 4.25\u20134.50%, citing cooling inflation and rising unemployment. The decision triggered immediate weakness in the dollar and a rally in gold.",
+    "affected_nodes": [
+      "fed_rate",
+      "cpi",
+      "pce",
+      "unemployment",
+      "dxy",
+      "xauusd",
+      "yield_2y",
+      "yield_10y",
+      "yield_curve"
+    ],
+    "primary_direction": -1
+  },
+  {
+    "id": "iran_israel_direct_conflict_apr_2024",
+    "label": "Iran Direct Attack on Israel \u2013 Apr 2024",
+    "date": "2024-04-13",
+    "type": "geopolitical",
+    "description": "Iran launched over 300 drones and ballistic missiles directly at Israel in the first-ever direct military confrontation between the two nations, with over 99% intercepted. Markets spiked on fears of broader Middle East escalation before partially recovering as the limited scope of retaliation became clear.",
+    "affected_nodes": [
+      "wti",
+      "xauusd",
+      "dxy",
+      "spx",
+      "vix",
+      "yield_10y",
+      "yield_2y",
+      "sec_energy"
+    ],
+    "primary_direction": 1
+  },
+  {
+    "id": "crypto_selloff_fed_hawkish_apr_2024",
+    "label": "Crypto Selloff on Fed Higher-for-Longer \u2013 Apr 2024",
+    "date": "2024-04-16",
+    "type": "monetary_policy",
+    "description": "Bitcoin fell 15% in a week after the Federal Reserve signalled rates would remain higher for longer, with Ethereum and crypto-related equities declining in tandem. The selloff reflected crypto's increasing correlation with high-beta risk assets and sensitivity to real yield movements.",
+    "affected_nodes": [
+      "fed_rate",
+      "bitcoin",
+      "ethereum",
+      "coinbase_stock",
+      "sec_tech",
+      "xauusd",
+      "vix",
+      "yield_10y"
+    ],
+    "primary_direction": -1
+  },
+  {
+    "id": "us_iran_framework_deal_jun_2026",
+    "label": "US-Iran Framework Deal Announced \u2013 Jun 2026",
+    "date": "2026-06-11",
+    "type": "geopolitical",
+    "description": "President Trump announced a framework agreement with Iran to end their months-long war, calling off planned US strikes and signalling the Strait of Hormuz would reopen once finalized; oil prices fell sharply across two sessions to multi-month lows despite Tehran publicly disputing the deal's terms.",
+    "affected_nodes": [
+      "mideast_geopolitical_risk",
+      "executive",
+      "iran_government",
+      "strait_of_hormuz_status",
+      "wti",
+      "sec_energy",
+      "xauusd",
+      "vix",
+      "spx",
+      "yield_10y",
+      "dxy"
+    ],
+    "primary_direction": -1
+  },
+  {
+    "id": "us_equity_rally_iran_deescalation_jun_2026",
+    "label": "US Equities Surge as Trump Cancels Iran Strikes",
+    "date": "2026-06-11",
+    "type": "geopolitical",
+    "description": "US equities staged a sharp rally (S&P 500 +1.7-1.8%, Nasdaq +2.5%, Dow +930pts) and the VIX fell nearly 12% after Trump cancelled planned strikes on Iran and signalled a peace deal was imminent. Falling oil prices pulled Treasury yields lower, high-beta tech led gains, while energy, real estate and utilities declined.",
+    "affected_nodes": [
+      "spx",
+      "sec_tech",
+      "sec_energy",
+      "sec_realestate",
+      "sec_utilities",
+      "vix",
+      "yield_10y",
+      "yield_2y",
+      "wti",
+      "consumer_sent",
+      "mideast_geopolitical_risk",
+      "executive",
+      "iran_government"
+    ],
+    "primary_direction": 1
+  }
+]

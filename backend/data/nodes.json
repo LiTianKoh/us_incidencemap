@@ -1,0 +1,242 @@
+[
+  {
+    "id": "fed",
+    "label": "Federal Reserve",
+    "type": "actor",
+    "description": "Sets US monetary policy. Controls fed funds rate, QE/QT, and forward guidance."
+  },
+  {
+    "id": "congress",
+    "label": "US Congress",
+    "type": "actor",
+    "description": "Passes fiscal legislation, budget bills, and debt ceiling resolutions."
+  },
+  {
+    "id": "executive",
+    "label": "Executive branch",
+    "type": "actor",
+    "description": "Issues executive orders, negotiates trade deals, appoints Fed chair."
+  },
+  {
+    "id": "opec",
+    "label": "OPEC+",
+    "type": "actor",
+    "description": "Controls ~40% of global oil supply. Production cuts/hikes move energy prices."
+  },
+  {
+    "id": "ecb",
+    "label": "ECB",
+    "type": "actor",
+    "description": "European Central Bank. Policy divergence vs Fed drives EUR/USD."
+  },
+  {
+    "id": "pbocc",
+    "label": "PBoC",
+    "type": "actor",
+    "description": "People's Bank of China. Yuan policy and reserve requirement changes."
+  },
+  {
+    "id": "fed_rate",
+    "label": "Fed Funds Rate",
+    "type": "indicator",
+    "description": "Overnight lending rate between banks. Primary monetary policy lever."
+  },
+  {
+    "id": "cpi",
+    "label": "CPI inflation",
+    "type": "indicator",
+    "description": "Consumer Price Index. Key input to Fed rate decisions."
+  },
+  {
+    "id": "pce",
+    "label": "PCE inflation",
+    "type": "indicator",
+    "description": "Fed's preferred inflation measure. Drives dot-plot projections."
+  },
+  {
+    "id": "nfp",
+    "label": "Non-Farm Payrolls",
+    "type": "indicator",
+    "description": "Monthly jobs report. Dual mandate signal alongside inflation."
+  },
+  {
+    "id": "unemployment",
+    "label": "Unemployment rate",
+    "type": "indicator",
+    "description": "U3 headline rate. Fed dual mandate target ~4%."
+  },
+  {
+    "id": "gdp",
+    "label": "GDP Growth",
+    "type": "indicator",
+    "description": "Quarterly real GDP. Defines recession (2 consecutive negative quarters)."
+  },
+  {
+    "id": "yield_2y",
+    "label": "2Y Treasury yield",
+    "type": "market",
+    "description": "Sensitive to near-term Fed rate expectations."
+  },
+  {
+    "id": "yield_10y",
+    "label": "10Y Treasury yield",
+    "type": "market",
+    "description": "Benchmark long-term rate. Drives mortgage rates and equity discount rates."
+  },
+  {
+    "id": "yield_curve",
+    "label": "Yield curve (2s10s)",
+    "type": "indicator",
+    "description": "Spread between 10Y and 2Y yield. Inversion historically precedes recession."
+  },
+  {
+    "id": "dxy",
+    "label": "DXY (USD index)",
+    "type": "market",
+    "description": "Trade-weighted USD vs major currencies. Inversely correlated with commodities."
+  },
+  {
+    "id": "spx",
+    "label": "S&P 500",
+    "type": "market",
+    "description": "Broad US equity benchmark. 11 sectors."
+  },
+  {
+    "id": "vix",
+    "label": "VIX",
+    "type": "market",
+    "description": "30-day implied volatility of S&P 500. Fear gauge."
+  },
+  {
+    "id": "xauusd",
+    "label": "Gold (XAUUSD)",
+    "type": "market",
+    "description": "Safe-haven asset. Inversely correlated with real yields and USD.\n\nDoesn't always rise when there's war, you'd have to take note of how the DXY is moving first before looking into precious metals"
+  },
+  {
+    "id": "wti",
+    "label": "WTI crude oil",
+    "type": "market",
+    "description": "US oil benchmark. Input cost for industrials, transport, energy sector."
+  },
+  {
+    "id": "hy_spreads",
+    "label": "HY credit spreads",
+    "type": "market",
+    "description": "High-yield bond spread over Treasuries. Widens in risk-off, tightens in expansion."
+  },
+  {
+    "id": "gbpusd",
+    "label": "GBP/USD",
+    "type": "market",
+    "description": "Sensitive to BoE vs Fed divergence and UK macro data."
+  },
+  {
+    "id": "eurusd",
+    "label": "EUR/USD",
+    "type": "market",
+    "description": "Most liquid FX pair. Driven by ECB vs Fed policy differential."
+  },
+  {
+    "id": "usdjpy",
+    "label": "USD/JPY",
+    "type": "market",
+    "description": "Carry trade proxy. Rises with US yields, falls in risk-off."
+  },
+  {
+    "id": "sec_energy",
+    "label": "Energy sector",
+    "type": "sector",
+    "description": "XLE. Correlated with WTI. Largest components: XOM, CVX."
+  },
+  {
+    "id": "sec_financials",
+    "label": "Financials Sector",
+    "type": "sector",
+    "description": "XLF. Benefits from steeper yield curve and higher rates."
+  },
+  {
+    "id": "sec_tech",
+    "label": "Technology sector",
+    "type": "sector",
+    "description": "XLK. Long-duration; sensitive to real yield moves and discount rates."
+  },
+  {
+    "id": "sec_utilities",
+    "label": "Utilities sector",
+    "type": "sector",
+    "description": "XLU. Defensive, high dividend. Competes with bonds in high-rate environment."
+  },
+  {
+    "id": "sec_realestate",
+    "label": "Real estate sector",
+    "type": "sector",
+    "description": "XLRE. Highly leveraged. Hurt by rising rates, mortgage costs."
+  },
+  {
+    "id": "housing",
+    "label": "Housing market",
+    "type": "indicator",
+    "description": "New starts, existing sales, Case-Shiller. Sensitive to mortgage rates."
+  },
+  {
+    "id": "consumer_sent",
+    "label": "Consumer sentiment",
+    "type": "indicator",
+    "description": "UMich/Conference Board surveys. Leading indicator of spending."
+  },
+  {
+    "id": "mideast_geopolitical_risk",
+    "label": "Middle East Geopolitical Risk (indicator)",
+    "type": "indicator",
+    "description": "Composite representation of geopolitical tension and conflict risk in the Middle East, particularly affecting oil supply routes and global safe-haven flows."
+  },
+  {
+    "id": "bitcoin",
+    "label": "Bitcoin (BTC/USD)",
+    "type": "market",
+    "description": "Bitcoin spot price in USD; increasingly traded as a high-beta risk asset correlated with Nasdaq and sensitive to real yield movements."
+  },
+  {
+    "id": "ethereum",
+    "label": "Ethereum (ETH/USD)",
+    "type": "market",
+    "description": "Ethereum spot price in USD; major altcoin that tends to move directionally with Bitcoin with higher beta."
+  },
+  {
+    "id": "coinbase_stock",
+    "label": "Coinbase (COIN)",
+    "type": "market",
+    "description": "Coinbase Global equity price; acts as a leveraged proxy for crypto market sentiment and volumes."
+  },
+  {
+    "id": "real_yield_10y",
+    "label": "10Y Real Yield (TIPS)",
+    "type": "indicator",
+    "description": "10-year Treasury Inflation-Protected Securities yield; the nominal 10Y yield minus breakeven inflation, representing the true risk-free real rate."
+  },
+  {
+    "id": "crypto_etf_flows",
+    "label": "Crypto ETF Inflows",
+    "type": "indicator",
+    "description": "Net institutional and retail inflows into Bitcoin and Ethereum spot/futures ETFs; a measure of demand and sentiment in regulated crypto exposure."
+  },
+  {
+    "id": "iran_government",
+    "label": "Iran (Government/Regime)",
+    "type": "actor",
+    "description": "Iranian government and military leadership; central actor in the 2026 US-Israel-Iran war over its nuclear program and Strait of Hormuz access, and counterpart in framework deal negotiations with the US."
+  },
+  {
+    "id": "israel_government",
+    "label": "Israel (Government/Military)",
+    "type": "actor",
+    "description": "Israeli government and military, conducting direct strikes against Iran during the 2026 conflict and a key constraint on US-brokered de-escalation efforts."
+  },
+  {
+    "id": "strait_of_hormuz_status",
+    "label": "Strait of Hormuz Shipping Status",
+    "type": "indicator",
+    "description": "Operational disruption level of the Strait of Hormuz (the chokepoint for roughly a fifth of global oil flows), ranging from open/normal transit to naval-blockade/closure; higher values indicate greater disruption."
+  }
+]

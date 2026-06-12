@@ -1,0 +1,950 @@
+[
+  {
+    "source": "fed",
+    "target": "fed_rate",
+    "direction": 1,
+    "label": "sets directly",
+    "lag_days": 0,
+    "confidence": 3,
+    "magnitude": null,
+    "notes": "FOMC votes directly set the target range"
+  },
+  {
+    "source": "cpi",
+    "target": "fed",
+    "direction": 1,
+    "label": "informs rate decision",
+    "lag_days": 30,
+    "confidence": 3,
+    "magnitude": null,
+    "notes": "Higher CPI increases probability of hike. Key input to dot plot."
+  },
+  {
+    "source": "nfp",
+    "target": "fed",
+    "direction": 1,
+    "label": "dual mandate signal",
+    "lag_days": 30,
+    "confidence": 3,
+    "magnitude": null,
+    "notes": "Strong NFP reduces urgency to cut; weak NFP increases it"
+  },
+  {
+    "source": "fed_rate",
+    "target": "yield_2y",
+    "direction": 1,
+    "label": "anchors short end",
+    "lag_days": 1,
+    "confidence": 3,
+    "magnitude": null,
+    "notes": "2Y yield tightly tracks fed funds rate expectations"
+  },
+  {
+    "source": "fed_rate",
+    "target": "dxy",
+    "direction": 1,
+    "label": "rate differential",
+    "lag_days": 3,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Higher rates attract foreign capital, strengthening USD. Effect varies by regime."
+  },
+  {
+    "source": "fed_rate",
+    "target": "xauusd",
+    "direction": -1,
+    "label": "real yield pressure",
+    "lag_days": 3,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Rate hikes raise real yields, increasing opportunity cost of holding gold"
+  },
+  {
+    "source": "fed_rate",
+    "target": "sec_tech",
+    "direction": -1,
+    "label": "discount rate effect",
+    "lag_days": 5,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Tech is long-duration. Higher rates compress DCF valuations more than other sectors."
+  },
+  {
+    "source": "fed_rate",
+    "target": "sec_financials",
+    "direction": 1,
+    "label": "net interest margin",
+    "lag_days": 30,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Banks earn more on loans vs deposits when rates rise. NIM expands."
+  },
+  {
+    "source": "fed_rate",
+    "target": "housing",
+    "direction": -1,
+    "label": "mortgage rate pass-through",
+    "lag_days": 60,
+    "confidence": 3,
+    "magnitude": null,
+    "notes": "30Y mortgage rates track 10Y yield. Rising rates reduce affordability."
+  },
+  {
+    "source": "yield_2y",
+    "target": "yield_curve",
+    "direction": -1,
+    "label": "flattens curve",
+    "lag_days": 1,
+    "confidence": 3,
+    "magnitude": null,
+    "notes": "Rising 2Y with stable 10Y flattens or inverts the curve"
+  },
+  {
+    "source": "yield_10y",
+    "target": "yield_curve",
+    "direction": 1,
+    "label": "steepens curve",
+    "lag_days": 1,
+    "confidence": 3,
+    "magnitude": null
+  },
+  {
+    "source": "yield_curve",
+    "target": "gdp",
+    "direction": 1,
+    "label": "recession predictor",
+    "lag_days": 365,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Inverted curve has preceded every US recession since 1970. Lag is 12\u201318 months."
+  },
+  {
+    "source": "dxy",
+    "target": "xauusd",
+    "direction": -1,
+    "label": "inverse relationship",
+    "lag_days": 1,
+    "confidence": 3,
+    "magnitude": null,
+    "notes": "Gold priced in USD. Strong dollar makes gold more expensive for foreign buyers."
+  },
+  {
+    "source": "dxy",
+    "target": "wti",
+    "direction": -1,
+    "label": "commodity suppression",
+    "lag_days": 1,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Oil priced in USD. Strong dollar suppresses prices; weak dollar inflates them."
+  },
+  {
+    "source": "wti",
+    "target": "cpi",
+    "direction": 1,
+    "label": "energy component",
+    "lag_days": 30,
+    "confidence": 3,
+    "magnitude": null,
+    "notes": "Energy is ~7% of CPI basket. Oil spikes pass through to headline CPI quickly."
+  },
+  {
+    "source": "wti",
+    "target": "sec_energy",
+    "direction": 1,
+    "label": "revenue driver",
+    "lag_days": 5,
+    "confidence": 3,
+    "magnitude": null,
+    "notes": "Energy sector earnings directly correlated with oil prices"
+  },
+  {
+    "source": "opec",
+    "target": "wti",
+    "direction": -1,
+    "label": "supply control",
+    "lag_days": 30,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Production cuts raise prices; increases lower them. Effect depends on demand backdrop."
+  },
+  {
+    "source": "vix",
+    "target": "spx",
+    "direction": -1,
+    "label": "fear suppresses prices",
+    "lag_days": 1,
+    "confidence": 3,
+    "magnitude": null,
+    "notes": "VIX spikes coincide with equity selloffs. Not purely causal \u2014 both reflect risk-off."
+  },
+  {
+    "source": "hy_spreads",
+    "target": "spx",
+    "direction": -1,
+    "label": "credit stress signal",
+    "lag_days": 5,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Widening HY spreads often lead equity weakness by a few days"
+  },
+  {
+    "source": "congress",
+    "target": "gdp",
+    "direction": 1,
+    "label": "fiscal stimulus",
+    "lag_days": 180,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Deficit spending adds to aggregate demand. Multiplier effect varies by type."
+  },
+  {
+    "source": "ecb",
+    "target": "eurusd",
+    "direction": -1,
+    "label": "rate differential",
+    "lag_days": 3,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "ECB easing weakens EUR vs USD when Fed holds. Divergence is the key driver."
+  },
+  {
+    "source": "fed_rate",
+    "target": "usdjpy",
+    "direction": 1,
+    "label": "carry trade driver",
+    "lag_days": 3,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Higher US rates widen US-Japan rate differential, attracting carry traders long USD/JPY."
+  },
+  {
+    "source": "gdp",
+    "target": "nfp",
+    "direction": 1,
+    "label": "growth drives hiring",
+    "lag_days": 90,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Okun's Law: ~2% GDP growth needed to hold unemployment stable"
+  },
+  {
+    "source": "consumer_sent",
+    "target": "gdp",
+    "direction": 1,
+    "label": "spending intention",
+    "lag_days": 60,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Consumer spending is ~70% of US GDP. Sentiment is a leading indicator."
+  },
+  {
+    "source": "housing",
+    "target": "gdp",
+    "direction": 1,
+    "label": "construction and wealth effect",
+    "lag_days": 90,
+    "confidence": 2,
+    "magnitude": null
+  },
+  {
+    "source": "fed_rate",
+    "target": "hy_spreads",
+    "direction": -1,
+    "label": "credit conditions",
+    "lag_days": 14,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Rate hikes tighten credit conditions, widening HY spreads over time"
+  },
+  {
+    "source": "yield_10y",
+    "target": "sec_tech",
+    "direction": -1,
+    "label": "discount rate effect",
+    "lag_days": 5,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Rising long-end yields compress tech valuations via DCF discount rate"
+  },
+  {
+    "source": "spx",
+    "target": "consumer_sent",
+    "direction": 1,
+    "label": "wealth effect",
+    "lag_days": 30,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Rising equity prices boost household net worth and spending confidence"
+  },
+  {
+    "source": "fed_rate",
+    "target": "yield_10y",
+    "direction": 1,
+    "label": "long end pressure",
+    "lag_days": 7,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Rate hikes push up long-end yields, though effect is weaker than on 2Y"
+  },
+  {
+    "source": "hy_spreads",
+    "target": "spx",
+    "direction": -1,
+    "label": "credit stress signal",
+    "lag_days": 5,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Widening HY spreads signal corporate stress and lead equity weakness"
+  },
+  {
+    "source": "cpi",
+    "target": "fed_rate",
+    "direction": 1,
+    "label": "cooling inflation supports cut",
+    "lag_days": 30,
+    "confidence": 3,
+    "notes": "Fed cited disinflation progress as a key factor in the decision",
+    "magnitude": null
+  },
+  {
+    "source": "unemployment",
+    "target": "fed_rate",
+    "direction": -1,
+    "label": "rising unemployment supports cut",
+    "lag_days": 30,
+    "confidence": 3,
+    "notes": "Labour market softening cited alongside inflation as a dual-mandate trigger",
+    "magnitude": null
+  },
+  {
+    "source": "mideast_geopolitical_risk",
+    "target": "wti",
+    "direction": 1,
+    "label": "conflict escalation spikes oil",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "WTI briefly surged above $90 on fears of supply disruption through Strait of Hormuz and broader regional conflict",
+    "magnitude": null
+  },
+  {
+    "source": "mideast_geopolitical_risk",
+    "target": "xauusd",
+    "direction": 1,
+    "label": "safe-haven flight to gold",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Gold hit record highs above $2,400 as investors sought safe-haven assets amid escalation fears",
+    "magnitude": null
+  },
+  {
+    "source": "mideast_geopolitical_risk",
+    "target": "dxy",
+    "direction": 1,
+    "label": "safe-haven demand strengthens USD",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Dollar strengthened on safe-haven flows; consistent with flight-to-safety dynamics in prior geopolitical shocks",
+    "magnitude": null
+  },
+  {
+    "source": "mideast_geopolitical_risk",
+    "target": "spx",
+    "direction": -1,
+    "label": "risk-off selloff on escalation fears",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "US equities fell on initial news but recovered as limited retaliation scope became clear; net impact muted",
+    "magnitude": null
+  },
+  {
+    "source": "mideast_geopolitical_risk",
+    "target": "vix",
+    "direction": 1,
+    "label": "geopolitical shock spikes implied vol",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Uncertainty around escalation path and potential oil supply disruption drove near-term volatility premium",
+    "magnitude": null
+  },
+  {
+    "source": "mideast_geopolitical_risk",
+    "target": "yield_10y",
+    "direction": -1,
+    "label": "flight-to-safety bid on Treasuries",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Yields initially dropped on flight-to-safety Treasury buying before rebounding as risk sentiment stabilised",
+    "magnitude": null
+  },
+  {
+    "source": "mideast_geopolitical_risk",
+    "target": "yield_2y",
+    "direction": -1,
+    "label": "short-end safety bid",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Front end also caught safe-haven bid; rebound was faster as geopolitical risk was contained within days",
+    "magnitude": null
+  },
+  {
+    "source": "fed_rate",
+    "target": "real_yield_10y",
+    "direction": 1,
+    "label": "higher-for-longer lifts real yields",
+    "lag_days": 1,
+    "confidence": 3,
+    "notes": "Hawkish Fed signalling pushes nominal yields up; if inflation expectations are anchored, real yields rise in tandem",
+    "magnitude": null
+  },
+  {
+    "source": "real_yield_10y",
+    "target": "bitcoin",
+    "direction": -1,
+    "label": "rising real yields pressure BTC",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "Higher real yields raise the opportunity cost of holding non-yielding speculative assets; well-documented in 2022 cycle",
+    "magnitude": null
+  },
+  {
+    "source": "real_yield_10y",
+    "target": "xauusd",
+    "direction": -1,
+    "label": "rising real yields pressure gold",
+    "lag_days": 1,
+    "confidence": 3,
+    "notes": "Gold is a non-yielding asset; real yield is its primary macro driver. Article notes gold initially sold off before recovering on safe-haven demand",
+    "magnitude": null
+  },
+  {
+    "source": "yield_10y",
+    "target": "real_yield_10y",
+    "direction": 1,
+    "label": "nominal yield component of real yield",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Real yield = nominal 10Y minus breakeven inflation; nominal move is the primary driver when inflation expectations are stable",
+    "magnitude": null
+  },
+  {
+    "source": "bitcoin",
+    "target": "ethereum",
+    "direction": 1,
+    "label": "BTC leads ETH directionally",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Ethereum moves directionally with Bitcoin with higher beta; near-simultaneous in this event",
+    "magnitude": null
+  },
+  {
+    "source": "bitcoin",
+    "target": "coinbase_stock",
+    "direction": 1,
+    "label": "crypto price decline hits exchange equity",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Coinbase revenues tied to trading volumes and asset prices; equity trades as a leveraged proxy for crypto market sentiment",
+    "magnitude": null
+  },
+  {
+    "source": "bitcoin",
+    "target": "crypto_etf_flows",
+    "direction": 1,
+    "label": "price decline slows ETF inflows",
+    "lag_days": 2,
+    "confidence": 2,
+    "notes": "Retail and institutional appetite for crypto ETF exposure cools when spot prices fall sharply",
+    "magnitude": null
+  },
+  {
+    "source": "real_yield_10y",
+    "target": "crypto_etf_flows",
+    "direction": -1,
+    "label": "higher real yields reduce risk appetite for crypto ETFs",
+    "lag_days": 3,
+    "confidence": 2,
+    "notes": "Rising real yields shift capital allocation away from speculative high-beta assets including crypto ETF products",
+    "magnitude": null
+  },
+  {
+    "source": "bitcoin",
+    "target": "sec_tech",
+    "direction": 1,
+    "label": "crypto-tech risk-off correlation",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Analysts note crypto increasingly correlates with Nasdaq/tech; shared macro driver of real yields and risk appetite means co-movement in risk-off episodes",
+    "magnitude": null
+  },
+  {
+    "source": "vix",
+    "target": "bitcoin",
+    "direction": -1,
+    "label": "rising vol triggers crypto de-risking",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Bitcoin behaves as high-beta risk asset; VIX spikes associated with leveraged position unwinds in crypto",
+    "magnitude": null
+  },
+  {
+    "source": "executive",
+    "target": "wti",
+    "direction": 1,
+    "label": "sanctions/trade policy",
+    "lag_days": 7,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Executive sanctions on oil producers (Iran, Russia, Venezuela) restrict supply and raise prices"
+  },
+  {
+    "source": "executive",
+    "target": "dxy",
+    "direction": 1,
+    "label": "safe haven demand",
+    "lag_days": 3,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Geopolitical escalation drives safe haven USD demand"
+  },
+  {
+    "source": "executive",
+    "target": "spx",
+    "direction": -1,
+    "label": "policy uncertainty",
+    "lag_days": 5,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Trade wars, sanctions, and policy uncertainty weigh on equity risk premium"
+  },
+  {
+    "source": "executive",
+    "target": "sec_tech",
+    "direction": -1,
+    "label": "export controls",
+    "lag_days": 14,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Semiconductor export controls and China tech restrictions hit tech sector directly"
+  },
+  {
+    "source": "opec",
+    "target": "cpi",
+    "direction": 1,
+    "label": "energy inflation",
+    "lag_days": 45,
+    "confidence": 3,
+    "magnitude": null,
+    "notes": "OPEC production cuts raise oil prices which pass through to headline CPI with ~6 week lag"
+  },
+  {
+    "source": "opec",
+    "target": "sec_energy",
+    "direction": 1,
+    "label": "revenue uplift",
+    "lag_days": 14,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Production cuts raise oil prices benefiting energy sector earnings"
+  },
+  {
+    "source": "congress",
+    "target": "yield_10y",
+    "direction": 1,
+    "label": "deficit supply pressure",
+    "lag_days": 30,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Large deficit spending increases Treasury supply, pushing up long-end yields"
+  },
+  {
+    "source": "congress",
+    "target": "cpi",
+    "direction": 1,
+    "label": "demand stimulus",
+    "lag_days": 90,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Fiscal stimulus adds to aggregate demand, contributing to inflation with a lag"
+  },
+  {
+    "source": "congress",
+    "target": "consumer_sent",
+    "direction": 1,
+    "label": "transfer payments",
+    "lag_days": 30,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Direct stimulus payments and unemployment benefits support consumer confidence"
+  },
+  {
+    "source": "executive",
+    "target": "congress",
+    "direction": 1,
+    "label": "budget proposals",
+    "lag_days": 60,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Executive budget proposals shape congressional spending priorities"
+  },
+  {
+    "source": "hy_spreads",
+    "target": "gdp",
+    "direction": -1,
+    "label": "credit tightening",
+    "lag_days": 90,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Wide HY spreads signal tight credit conditions that slow business investment and GDP"
+  },
+  {
+    "source": "hy_spreads",
+    "target": "unemployment",
+    "direction": 1,
+    "label": "hiring freeze",
+    "lag_days": 120,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Credit stress leads companies to freeze hiring and cut headcount"
+  },
+  {
+    "source": "yield_curve",
+    "target": "sec_financials",
+    "direction": 1,
+    "label": "NIM expansion",
+    "lag_days": 60,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Steeper yield curve expands bank net interest margins, boosting financials"
+  },
+  {
+    "source": "housing",
+    "target": "sec_financials",
+    "direction": 1,
+    "label": "mortgage demand",
+    "lag_days": 30,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Strong housing market drives mortgage origination and fee income for banks"
+  },
+  {
+    "source": "housing",
+    "target": "consumer_sent",
+    "direction": 1,
+    "label": "wealth effect",
+    "lag_days": 60,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Rising home values increase household net worth and consumer confidence"
+  },
+  {
+    "source": "dxy",
+    "target": "spx",
+    "direction": -1,
+    "label": "earnings headwind",
+    "lag_days": 30,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Strong USD hurts S&P 500 multinationals by reducing overseas earnings in dollar terms"
+  },
+  {
+    "source": "dxy",
+    "target": "eurusd",
+    "direction": -1,
+    "label": "inverse by definition",
+    "lag_days": 1,
+    "confidence": 3,
+    "magnitude": null,
+    "notes": "EUR/USD is directly inverse to DXY by construction \u2014 USD strength = EUR/USD falls"
+  },
+  {
+    "source": "dxy",
+    "target": "gbpusd",
+    "direction": -1,
+    "label": "inverse relationship",
+    "lag_days": 1,
+    "confidence": 3,
+    "magnitude": null,
+    "notes": "GBP/USD falls when USD strengthens. Also sensitive to UK-specific risk."
+  },
+  {
+    "source": "ecb",
+    "target": "gbpusd",
+    "direction": 1,
+    "label": "EUR/GBP spillover",
+    "lag_days": 3,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "ECB easing weakens EUR which spills over to GBP via EUR/GBP cross"
+  },
+  {
+    "source": "fed_rate",
+    "target": "eurusd",
+    "direction": -1,
+    "label": "rate differential",
+    "lag_days": 3,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Fed hikes widen US-EU rate differential, strengthening USD and weakening EUR/USD"
+  },
+  {
+    "source": "fed_rate",
+    "target": "gbpusd",
+    "direction": -1,
+    "label": "rate differential",
+    "lag_days": 3,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Fed hikes strengthen USD, weakening GBP/USD unless BoE hikes in tandem"
+  },
+  {
+    "source": "cpi",
+    "target": "yield_10y",
+    "direction": 1,
+    "label": "inflation premium",
+    "lag_days": 7,
+    "confidence": 3,
+    "magnitude": null,
+    "notes": "Higher inflation raises inflation expectations embedded in long-end yields"
+  },
+  {
+    "source": "cpi",
+    "target": "xauusd",
+    "direction": 1,
+    "label": "inflation hedge",
+    "lag_days": 14,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Gold is a traditional inflation hedge. High CPI prints support gold demand."
+  },
+  {
+    "source": "gdp",
+    "target": "spx",
+    "direction": 1,
+    "label": "earnings growth",
+    "lag_days": 30,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Strong GDP growth supports corporate earnings and equity valuations"
+  },
+  {
+    "source": "gdp",
+    "target": "fed",
+    "direction": 1,
+    "label": "growth mandate",
+    "lag_days": 45,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Weak GDP growth increases pressure on Fed to cut rates"
+  },
+  {
+    "source": "unemployment",
+    "target": "fed",
+    "direction": -1,
+    "label": "dual mandate",
+    "lag_days": 30,
+    "confidence": 3,
+    "magnitude": null,
+    "notes": "Rising unemployment increases probability of Fed cuts via dual mandate"
+  },
+  {
+    "source": "unemployment",
+    "target": "consumer_sent",
+    "direction": -1,
+    "label": "job security",
+    "lag_days": 30,
+    "confidence": 3,
+    "magnitude": null,
+    "notes": "Rising unemployment directly damages consumer confidence and spending intentions"
+  },
+  {
+    "source": "pce",
+    "target": "fed",
+    "direction": 1,
+    "label": "preferred inflation gauge",
+    "lag_days": 30,
+    "confidence": 3,
+    "magnitude": null,
+    "notes": "PCE is the Fed's preferred inflation measure, directly informing rate decisions"
+  },
+  {
+    "source": "nfp",
+    "target": "yield_10y",
+    "direction": 1,
+    "label": "rate expectations",
+    "lag_days": 1,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Strong NFP raises rate hike expectations, pushing up 10Y yields on release day"
+  },
+  {
+    "source": "nfp",
+    "target": "dxy",
+    "direction": 1,
+    "label": "rate expectations",
+    "lag_days": 1,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "Strong jobs report strengthens USD via higher rate expectations"
+  },
+  {
+    "source": "pbocc",
+    "target": "wti",
+    "direction": 1,
+    "label": "demand signal",
+    "lag_days": 30,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "PBoC stimulus signals stronger Chinese growth and higher commodity demand"
+  },
+  {
+    "source": "pbocc",
+    "target": "eurusd",
+    "direction": 1,
+    "label": "risk sentiment",
+    "lag_days": 7,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "PBoC easing boosts global risk appetite, lifting EUR vs safe-haven USD"
+  },
+  {
+    "source": "pbocc",
+    "target": "xauusd",
+    "direction": 1,
+    "label": "reserve diversification",
+    "lag_days": 30,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "PBoC is a major gold buyer, diversifying reserves away from USD"
+  },
+  {
+    "source": "pbocc",
+    "target": "sec_energy",
+    "direction": 1,
+    "label": "China demand",
+    "lag_days": 30,
+    "confidence": 2,
+    "magnitude": null,
+    "notes": "China is the world's largest energy importer. PBoC stimulus drives energy demand."
+  },
+  {
+    "source": "executive",
+    "target": "mideast_geopolitical_risk",
+    "direction": -1,
+    "label": "framework deal announcement de-escalates conflict",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Trump announced a framework agreement and called off a planned round of US strikes, the most concrete de-escalation step in the months-long war; primary driver of the two-session oil selloff",
+    "magnitude": null
+  },
+  {
+    "source": "iran_government",
+    "target": "mideast_geopolitical_risk",
+    "direction": 1,
+    "label": "Tehran pushback sustains residual risk premium",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Iranian state-affiliated outlet Fars denied Tehran had approved any draft memorandum, undercutting Trump's framework claim; tempers the de-escalation but did not reverse Friday's continued price decline",
+    "magnitude": null
+  },
+  {
+    "source": "mideast_geopolitical_risk",
+    "target": "strait_of_hormuz_status",
+    "direction": 1,
+    "label": "conflict intensity drives Hormuz disruption level",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Throughout the 2026 war, escalation phases coincided with naval blockades and dark-fleet activity through Hormuz; this de-escalation event corresponds to easing disruption, with reopening explicitly conditioned on deal finalization",
+    "magnitude": null
+  },
+  {
+    "source": "strait_of_hormuz_status",
+    "target": "wti",
+    "direction": 1,
+    "label": "Hormuz disruption severity sets oil supply-risk premium",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "~20% of global crude flows transit Hormuz; closure/blockade phases drove WTI/Brent to $115+/$140, and easing disruption expectations drove the fall to ~$86 here. JPMorgan estimated ~2mbpd still moving via dark fleet during blockade, implying any reopening is only partial near-term",
+    "magnitude": null
+  },
+  {
+    "source": "israel_government",
+    "target": "iran_government",
+    "direction": 1,
+    "label": "Israeli strikes on Iran complicate US-brokered de-escalation",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Israel struck central/western Iran (Isfahan, Tabriz, Tehran) days before this deal announcement, despite Trump's calls for restraint; illustrates the fragile, non-linear path toward the framework agreement and a recurring risk of relapse",
+    "magnitude": null
+  },
+  {
+    "source": "executive",
+    "target": "israel_government",
+    "direction": -1,
+    "label": "US pressures Israel to avoid retaliation during talks",
+    "lag_days": 0,
+    "confidence": 1,
+    "notes": "Reports indicate Trump called the Israeli PM to advise against retaliation; speculative as a market-relevant causal lever but relevant to the stability of any ceasefire/deal",
+    "magnitude": null
+  },
+  {
+    "source": "wti",
+    "target": "yield_10y",
+    "direction": 1,
+    "label": "falling oil lowers inflation breakevens, pulling yields down",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Bloomberg reported bond yields 'sinking' alongside oil's slide to ~$86, even as risk-on sentiment would normally unwind safe-haven Treasury demand (which alone implies higher yields). The dominant effect here was the inflation-expectations/breakeven channel, distinct from the flight-to-safety edge already in the graph",
+    "magnitude": null
+  },
+  {
+    "source": "wti",
+    "target": "yield_2y",
+    "direction": 1,
+    "label": "falling oil lowers near-term inflation expectations",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Front-end yields are highly sensitive to near-term inflation/Fed-path expectations; falling energy prices reduce the urgency of further Fed tightening",
+    "magnitude": null
+  },
+  {
+    "source": "wti",
+    "target": "consumer_sent",
+    "direction": -1,
+    "label": "lower gas/freight costs lift consumer confidence",
+    "lag_days": 7,
+    "confidence": 2,
+    "notes": "Article explicitly ties Victoria's Secret's rally to 'improved consumer confidence and lower freight costs' following the oil price decline; a well-known but previously uncaptured pass-through from energy prices to sentiment",
+    "magnitude": null
+  },
+  {
+    "source": "yield_10y",
+    "target": "sec_realestate",
+    "direction": -1,
+    "label": "lower long rates support REIT valuations",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Standard rate-sensitivity mechanism via cap rates and financing costs - a well-established edge missing from the graph. Note: real estate actually declined today despite falling yields, reflecting a rotation effect (capital moving into cyclicals/tech on the risk-on day) that this edge alone doesn't capture - flagged for review",
+    "magnitude": null
+  },
+  {
+    "source": "yield_10y",
+    "target": "sec_utilities",
+    "direction": -1,
+    "label": "lower long rates support utilities as bond-proxies",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Utilities trade as bond-proxy/dividend plays, well-established inverse rate sensitivity. As with real estate, today's decline reflects a defensive-sector rotation effect competing with this mechanism",
+    "magnitude": null
+  },
+  {
+    "source": "vix",
+    "target": "sec_tech",
+    "direction": -1,
+    "label": "falling vol disproportionately lifts high-beta tech",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Tech/growth has higher market beta than the broad index; VIX fell ~12% while tech (and the chipmaker gauge, +8%) led gains, consistent with high-beta names outperforming on sharp de-risking days",
+    "magnitude": null
+  }
+]
