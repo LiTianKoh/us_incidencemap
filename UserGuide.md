@@ -212,7 +212,7 @@ FEDFUNDS and VIX data:
 | Regime | Condition |
 |--------|-----------|
 | **Risk-Off** | VIX > 28 (takes priority over all rate regimes) |
-| **ZIRP** | Fed funds rate < 0.5% |
+| **Zero Interest-Rate Policy (ZIRP)** | Fed funds rate < 0.5% |
 | **Hiking** | Fed funds 3-month delta > +0.25% |
 | **Easing** | Fed funds 3-month delta < −0.25% |
 | **Normal** | Everything else |
