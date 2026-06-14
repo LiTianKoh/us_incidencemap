@@ -145,7 +145,7 @@ export default function App() {
             <PathFinder
               nodes={nodes}
               onPathSelect={(path) => {
-                setHighlightedPath(path)
+                setHighlightedPath({ ...path, sourceNode: path.path[0] })
                 setActivePanel("inspector")
               }}
             />
@@ -168,6 +168,7 @@ export default function App() {
                 setHighlightedPath({
                   path: event.affected_nodes,
                   edges: affectedEdges,
+                  sourceNode: event.affected_nodes[0],
                   net_direction: event.primary_direction,
                   total_lag_days: 0,
                   isEvent: true,

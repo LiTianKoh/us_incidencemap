@@ -946,5 +946,25 @@
     "confidence": 2,
     "notes": "Tech/growth has higher market beta than the broad index; VIX fell ~12% while tech (and the chipmaker gauge, +8%) led gains, consistent with high-beta names outperforming on sharp de-risking days",
     "magnitude": null
+  },
+  {
+    "source": "executive",
+    "target": "iran_oil_sanctions_status",
+    "direction": -1,
+    "label": "draft deal commits US to lift oil sanctions on Iran",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "OFAC/Treasury sanctions designations are a direct US executive policy lever; the reported 14-point MOU explicitly includes 'lifting of oil sanctions' as a term, distinct from and additional to the Hormuz transit provisions",
+    "magnitude": null
+  },
+  {
+    "source": "iran_oil_sanctions_status",
+    "target": "wti",
+    "direction": 1,
+    "label": "sanctions relief implies incremental Iranian supply, pressuring prices",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "A distinct supply-side channel from strait_of_hormuz_status: Hormuz reopening restores transit for ALL Gulf producers, whereas sanctions relief specifically unlocks Iran's own suppressed export capacity (~1.5-2.5mbpd historically under sanctions vs ~3.5-4mbpd potential). Markets reprice on the announcement immediately (lag 0), though physical export ramp-up historically takes 6-12 months (cf. 2015-16 JCPOA relief)",
+    "magnitude": null
   }
 ]

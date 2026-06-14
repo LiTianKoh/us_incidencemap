@@ -173,5 +173,25 @@
       "iran_government"
     ],
     "primary_direction": 1
+  },
+  {
+    "id": "us_iran_mou_sanctions_relief_jun_2026",
+    "label": "Draft US-Iran MOU Details Reported (Sanctions Relief, Hormuz)",
+    "date": "2026-06-12",
+    "type": "geopolitical",
+    "description": "Iran's state-run Mehr News Agency reported details of a draft 14-point memorandum of understanding between the US and Iran, including US lifting of oil sanctions on Iran, mutual reopening of Strait of Hormuz transit, and an end to regional hostilities including Lebanon. Oil extended its decline while Treasury yields edged higher after Thursday's sharp drop, and global equities (Stoxx 600, Nikkei, Kospi) rallied further.",
+    "affected_nodes": [
+      "mideast_geopolitical_risk",
+      "executive",
+      "iran_government",
+      "wti",
+      "strait_of_hormuz_status",
+      "iran_oil_sanctions_status",
+      "yield_10y",
+      "sec_energy",
+      "spx",
+      "vix"
+    ],
+    "primary_direction": -1
   }
 ]

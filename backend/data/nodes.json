@@ -19,9 +19,9 @@
   },
   {
     "id": "opec",
-    "label": "OPEC+",
+    "label": "OPEC+ (Organization of the Petroleum Exporting Countries Plus)",
     "type": "actor",
-    "description": "Controls ~40% of global oil supply. Production cuts/hikes move energy prices."
+    "description": "* Controls ~40% of global oil supply. \n* Production cuts/hikes move energy prices.\n* An alliance of 22 major oil-producing nations that coordinates global crude oil production to influence market prices"
   },
   {
     "id": "ecb",
@@ -238,5 +238,11 @@
     "label": "Strait of Hormuz Shipping Status",
     "type": "indicator",
     "description": "Operational disruption level of the Strait of Hormuz (the chokepoint for roughly a fifth of global oil flows), ranging from open/normal transit to naval-blockade/closure; higher values indicate greater disruption."
+  },
+  {
+    "id": "iran_oil_sanctions_status",
+    "label": "Iran Oil Export Sanctions Severity",
+    "type": "indicator",
+    "description": "Severity of US sanctions restricting Iran's crude oil exports under the 'maximum pressure' campaign (which directed Iranian exports toward zero); higher values mean tighter restrictions and less sanctioned Iranian crude reaching global markets."
   }
 ]
