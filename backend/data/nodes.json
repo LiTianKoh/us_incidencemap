@@ -244,5 +244,665 @@
     "label": "Iran Oil Export Sanctions Severity",
     "type": "indicator",
     "description": "Severity of US sanctions restricting Iran's crude oil exports under the 'maximum pressure' campaign (which directed Iranian exports toward zero); higher values mean tighter restrictions and less sanctioned Iranian crude reaching global markets."
+  },
+  {
+    "id": "iran_nuclear_program",
+    "label": "Iran Nuclear Program Status",
+    "type": "indicator",
+    "description": "Advancement level of Iran's nuclear enrichment and weapons-development capability; a key deal term requires a moratorium on enrichment, making this a structural geopolitical risk variable distinct from near-term military conflict risk."
+  },
+  {
+    "id": "pakistan_government",
+    "label": "Pakistan (Government/Mediator)",
+    "type": "actor",
+    "description": "Pakistani government, which served as the principal mediator between the US and Iran throughout the 2026 war ceasefire and peace deal negotiations."
+  },
+  {
+    "id": "defense_sector",
+    "label": "Defense & Aerospace Sector",
+    "type": "sector",
+    "description": "US defense and aerospace equities (e.g. RTX, LMT, NOC, GD); elevated by Middle East conflict and war-risk premium, pressured by confirmed peace deals and de-escalation."
+  },
+  {
+    "id": "nvidia_stock",
+    "label": "Nvidia (NVDA)",
+    "type": "market",
+    "description": "Nvidia Corp equity; the dominant AI GPU supplier whose revenue, margins, and capital allocation decisions are a primary bellwether for the entire AI infrastructure investment cycle."
+  },
+  {
+    "id": "ai_capex_cycle",
+    "label": "AI Infrastructure Capex Cycle",
+    "type": "indicator",
+    "description": "Aggregate capital expenditure by hyperscalers (Alphabet, Amazon, Microsoft, Meta, Oracle, etc.) on AI chips, data centres, and related infrastructure; on pace to exceed $725 billion in 2026 and a dominant force in corporate credit and equipment markets."
+  },
+  {
+    "id": "corporate_ig_spreads",
+    "label": "Investment-Grade Corporate Spreads",
+    "type": "market",
+    "description": "Option-adjusted spreads on investment-grade corporate bonds (e.g. ICE BofA US Corporate Index); distinct from hy_spreads and the primary credit market through which large-cap tech AI debt issuance is priced."
+  },
+  {
+    "id": "global_shipping_risk",
+    "label": "Global Shipping Disruption Risk",
+    "type": "indicator",
+    "description": "Composite indicator of disruption to major global shipping routes (Hormuz, Suez, Panama, Cape of Good Hope diversions); captures tanker backlog clearance timelines, mine-clearance uncertainty, and insurer risk appetite for transit."
+  },
+  {
+    "id": "boj",
+    "label": "Bank of Japan (BoJ)",
+    "type": "actor",
+    "description": "Japan's central bank; conducting a cautious multi-year policy normalization from ultra-loose/NIRP toward positive rates, with the June 2026 hike to 1% the highest level since 1995 and a material global liquidity event due to Japan's role as the world's largest creditor nation and the yen carry trade."
+  },
+  {
+    "id": "boj_policy_rate",
+    "label": "BoJ Policy Rate",
+    "type": "indicator",
+    "description": "Bank of Japan overnight call rate target; the benchmark short-term rate in Japan, held near zero or negative for decades and now being normalized, with direct implications for the yen carry trade and global risk-asset liquidity."
+  },
+  {
+    "id": "japan_cpi",
+    "label": "Japan CPI Inflation",
+    "type": "indicator",
+    "description": "Japan's Consumer Price Index, particularly core CPI (ex-fresh food); structurally important as Japan's decades of deflation/disinflation have given way to sustained above-target inflation driven by yen weakness and imported energy costs, determining the pace of BoJ normalization."
+  },
+  {
+    "id": "yen_carry_trade",
+    "label": "Yen Carry Trade Positioning",
+    "type": "indicator",
+    "description": "Aggregate speculative short-yen/long-risk-asset positioning funded by cheap yen borrowing; a global liquidity variable where carry trade unwinds (triggered by BoJ hikes or JPY strengthening) transmit into simultaneous selling of risk assets worldwide including equities, crypto, and EM."
+  },
+  {
+    "id": "japan_exports",
+    "label": "Japan Export Growth",
+    "type": "indicator",
+    "description": "Year-on-year growth rate of Japan's merchandise exports (in yen terms); heavily influenced by USD/JPY (weak yen inflates value), AI-driven semiconductor/machinery demand, and global trade route disruptions such as the Hormuz blockade."
+  },
+  {
+    "id": "intel_stock",
+    "label": "Intel (INTC)",
+    "type": "market",
+    "description": "Intel Corp equity; undergoing a foundry-led turnaround under CEO Lip-Bu Tan with the 18A/18A-P node, up 200%+ YTD in 2026 on US government investment, Nvidia's $5B stake, and Apple/Microsoft/Amazon foundry commitments; a bellwether for US domestic semiconductor manufacturing credibility."
+  },
+  {
+    "id": "tsmc_stock",
+    "label": "TSMC (TSM)",
+    "type": "market",
+    "description": "Taiwan Semiconductor Manufacturing Company equity; the dominant global contract chipmaker (makes chips for Apple, Nvidia, AMD, etc.) and Intel's primary competitive target in advanced foundry nodes, with geopolitical concentration risk in Taiwan a key structural vulnerability."
+  },
+  {
+    "id": "apple_stock",
+    "label": "Apple (AAPL)",
+    "type": "market",
+    "description": "Apple Inc equity; the world's largest company by market cap and near-total TSMC customer for its silicon, now diversifying to Intel foundry for lower-end chips to reduce supply chain concentration risk and support US domestic semiconductor manufacturing."
+  },
+  {
+    "id": "us_semiconductor_policy",
+    "label": "US Semiconductor Industrial Policy",
+    "type": "indicator",
+    "description": "Aggregate US government support for domestic semiconductor manufacturing including CHIPS Act funding, government equity stakes (e.g. 10% in Intel), export controls on advanced chips/equipment to China, and DoD procurement; a structural driver of Intel foundry viability and TSMC US fab investment."
+  },
+  {
+    "id": "semiconductor_supply_chain",
+    "label": "Semiconductor Supply Chain Concentration",
+    "type": "indicator",
+    "description": "Degree of geographic and supplier concentration in advanced semiconductor manufacturing; high concentration (e.g. TSMC Taiwan dominance) is a systemic risk variable for tech sector earnings, AI capex delivery, and geopolitical leverage."
+  },
+  {
+    "id": "fed_chair_regime",
+    "label": "Fed Chair Policy Regime",
+    "type": "indicator",
+    "description": "Qualitative indicator of the Federal Reserve chair's policy philosophy, communication style, and independence posture; shifts when a new chair takes over and materially affect how markets price Fed reaction functions \u2014 Warsh's regime is characterised by dropped forward guidance, data-dependence emphasis, Greenspan-style opacity, and hawkish inflation priority."
+  },
+  {
+    "id": "fed_forward_guidance",
+    "label": "Fed Forward Guidance Clarity",
+    "type": "indicator",
+    "description": "Degree of explicit forward-looking communication from the Federal Reserve about the likely path of interest rates; high values mean clear, priced-in guidance (Powell era dot plot); low values mean deliberate opacity and market data-dependence (Warsh era, dropped forward guidance)."
+  },
+  {
+    "id": "fed_dot_plot",
+    "label": "FOMC Dot Plot Median Rate Projection",
+    "type": "indicator",
+    "description": "The median of individual FOMC member interest rate projections for the current and future years as published in the Summary of Economic Projections; a key signal of the committee's collective rate path expectations that directly drives yield curve repricing."
+  },
+  {
+    "id": "us_cpi_energy_component",
+    "label": "US CPI Energy Component",
+    "type": "indicator",
+    "description": "The energy sub-index of US CPI; the dominant transmission channel from WTI/oil prices to headline CPI, responsible for the surge to 4.2% YoY in May 2026 driven by the Iran-war Hormuz blockade oil shock."
+  },
+  {
+    "id": "us_retail_gasoline",
+    "label": "US Retail Gasoline Price ($/gallon)",
+    "type": "indicator",
+    "description": "Average US retail gasoline price per gallon; the most visible consumer-facing transmission of WTI crude prices into household budgets, consumer sentiment, and CPI \u2014 fell below $4 post-Iran MOU after spiking to $5+ during the Hormuz blockade."
+  },
+  {
+    "id": "iran_reconstruction_fund",
+    "label": "Iran $300B Reconstruction Fund",
+    "type": "indicator",
+    "description": "Proposed $300 billion economic development and reconstruction fund for Iran under the MOU, not directly US-funded but contingent on third-party investment unlocked by sanctions relief; a key political flashpoint driving Republican opposition and a structural variable for future Iranian oil supply ramp-up."
+  },
+  {
+    "id": "us_iran_deal_ratification_risk",
+    "label": "US-Iran Deal Congressional Ratification Risk",
+    "type": "indicator",
+    "description": "Risk that the US Congress blocks or constrains implementation of the Iran MOU's sanctions-relief provisions, which require Congressional action; elevated by bipartisan hawkish Republican backlash including Senators Cassidy, Tillis, and Wicker calling the deal a 'foreign policy blunder.'"
+  },
+  {
+    "id": "lng_market",
+    "label": "Global LNG Spot Market",
+    "type": "market",
+    "description": "Global liquefied natural gas spot prices, particularly Asian LNG; surged 140%+ during the Iran war after Iran struck Qatar's Ras Laffan LNG complex (reducing Qatar's LNG output by 17%), and partially recovering on Hormuz deal; structurally important for Japan, South Korea, Europe, and the UK energy security."
+  },
+  {
+    "id": "samsung_stock",
+    "label": "Samsung Electronics (005930.KS)",
+    "type": "market",
+    "description": "South Korean semiconductor and consumer electronics giant; one of the world's largest DRAM and NAND flash memory producers and a key AI hardware supplier."
+  },
+  {
+    "id": "sk_hynix_stock",
+    "label": "SK Hynix (000660.KS)",
+    "type": "market",
+    "description": "South Korean memory chipmaker and leading supplier of High Bandwidth Memory (HBM) to Nvidia; a primary beneficiary and bellwether of the AI chip demand cycle."
+  },
+  {
+    "id": "micron_stock",
+    "label": "Micron Technology (MU)",
+    "type": "market",
+    "description": "US-listed DRAM and NAND flash memory manufacturer; key proxy for AI memory demand in US markets alongside Samsung and SK Hynix."
+  },
+  {
+    "id": "hbm_memory_market",
+    "label": "HBM / AI Memory Market",
+    "type": "indicator",
+    "description": "High Bandwidth Memory pricing, allocation, and demand outlook; a critical upstream input for AI accelerator chips including Nvidia GPUs."
+  },
+  {
+    "id": "kospi_index",
+    "label": "KOSPI Index (South Korea)",
+    "type": "market",
+    "description": "South Korea's benchmark equity index, heavily weighted toward Samsung and SK Hynix (~50% combined); a real-time sentiment gauge for global semiconductor demand cycles."
+  },
+  {
+    "id": "ai_roi_sentiment",
+    "label": "AI Capex ROI Investor Sentiment",
+    "type": "indicator",
+    "description": "Market-wide assessment of whether hyperscaler AI infrastructure spending will generate sufficient revenue returns; a key swing factor for tech equity valuations."
+  },
+  {
+    "id": "iran_oil_export_volume",
+    "label": "Iran Oil Export Volume (mbd)",
+    "type": "indicator",
+    "description": "Daily barrels of Iranian crude oil exported internationally; collapsed from ~1.5 million bpd pre-war to ~260K bpd under blockade, now subject to rapid recovery under General License X."
+  },
+  {
+    "id": "global_oil_supply_glut_risk",
+    "label": "Global Oil Supply Surplus Risk",
+    "type": "indicator",
+    "description": "Risk that aggregate crude oil supply (OPEC+, Iran, US shale, SPR releases) exceeds demand, creating downward price pressure; amplified by Iran re-entry and pre-existing OPEC+ production increases."
+  },
+  {
+    "id": "shadow_fleet_iran_tankers",
+    "label": "Iran Shadow Fleet / Sanctioned Tanker Network",
+    "type": "indicator",
+    "description": "Network of vessels and intermediaries previously used to circumvent Iran oil sanctions; General License X converts these into legitimate trade participants, dramatically reducing transaction costs and discount spreads on Iranian crude."
+  },
+  {
+    "id": "brent_crude",
+    "label": "Brent Crude Oil ($/bbl)",
+    "type": "market",
+    "description": "International benchmark crude oil price; closely tracks WTI with a typical Brent-WTI spread of $3-5/bbl; fell 2.8% to $78.29 on General License X announcement."
+  },
+  {
+    "id": "iran_us_ag_trade",
+    "label": "Iran\u2013US Agricultural Trade Flow",
+    "type": "indicator",
+    "description": "Bilateral agricultural exports from the US to Iran; Trump publicly stated Iranian oil revenues are intended for US agricultural goods purchases, creating a novel trade linkage."
+  },
+  {
+    "id": "mou_implementation_risk",
+    "label": "US-Iran MOU Implementation Risk",
+    "type": "indicator",
+    "description": "The risk that the June 17 MOU breaks down in implementation due to conflicting interpretations on asset use, Hormuz route authority, IAEA access, nuclear terms, or Hezbollah ceasefire compliance \u2014 distinct from the longer-term Congressional ratification risk."
+  },
+  {
+    "id": "irgc",
+    "label": "Iran IRGC (Islamic Revolutionary Guard Corps)",
+    "type": "actor",
+    "description": "Iran's elite military force that controls Strait of Hormuz enforcement, mine-laying operations, and proxy militia networks; operationally separate from the Iranian government's diplomatic channel and a key wildcard in MOU compliance."
+  },
+  {
+    "id": "imo_hormuz_evacuation",
+    "label": "IMO Hormuz Ship Evacuation Programme",
+    "type": "indicator",
+    "description": "The International Maritime Organization's coordinated programme to clear stranded vessels through the Strait of Hormuz; paused June 25 after a cargo ship was struck, serving as a real-time indicator of Hormuz transit safety status."
+  },
+  {
+    "id": "fed_stress_test_result",
+    "label": "Fed Annual Bank Stress Test Result",
+    "type": "indicator",
+    "description": "The Federal Reserve's annual supervisory stress test outcome for large US banks; a pass enables immediate dividend increases and share buybacks, while a fail or weak result forces capital retention and constrains shareholder returns."
+  },
+  {
+    "id": "bank_dividend_capacity",
+    "label": "Bank Dividend & Buyback Capacity",
+    "type": "indicator",
+    "description": "The aggregate ability of large US banks to return capital to shareholders via dividends and buybacks, gated by Fed stress test results and stress capital buffer requirements; directly influences financials sector equity valuations."
+  },
+  {
+    "id": "apple_memory_cost_passthrough",
+    "label": "Apple Memory Cost Pass-Through",
+    "type": "indicator",
+    "description": "The degree to which Apple passes rising DRAM/NAND/HBM input costs onto consumers via product price hikes; a key transmission mechanism from semiconductor supply tightness to consumer electronics inflation and consumer sentiment."
+  },
+  {
+    "id": "consumer_electronics_cpi",
+    "label": "Consumer Electronics CPI Component",
+    "type": "indicator",
+    "description": "The consumer electronics sub-component of CPI, which historically deflates due to tech efficiency gains but is now under upward pressure from AI-driven memory shortages and OEM price hikes from Apple, Microsoft, and others."
+  },
+  {
+    "id": "oman_government",
+    "label": "Oman (Government/Sultan Haitham)",
+    "type": "actor",
+    "description": "The Sultanate of Oman under Sultan Haitham bin Tarik; a trusted neutral mediator between Iran and the West with a coastline adjacent to the Strait of Hormuz, making it the indispensable third party for any alternative transit corridor arrangement."
+  },
+  {
+    "id": "multinational_military_mission",
+    "label": "Multinational Military Mission (Hormuz)",
+    "type": "actor",
+    "description": "The 40+ nation coalition of naval assets (led by UK and France) assembled to escort and protect commercial shipping through the Strait of Hormuz; distinct from the US Navy's unilateral posture and operating primarily through Omani territorial waters."
+  },
+  {
+    "id": "hormuz_route_sovereignty_dispute",
+    "label": "Hormuz Transit Route Sovereignty Dispute",
+    "type": "indicator",
+    "description": "The unresolved contest between Iran's assertion that all Hormuz transit must pass through Iranian-approved lanes (with potential fees and coordination requirements) versus the Western/Omani position that transit passage under international law (UNCLOS) requires no Iranian permission; the single most important structural risk to the MOU."
+  },
+  {
+    "id": "gulf_state_security_risk",
+    "label": "Gulf State Security Risk (Bahrain/Kuwait/Qatar/UAE)",
+    "type": "indicator",
+    "description": "The risk of IRGC or Iranian proxy attacks on Gulf Cooperation Council member states' military bases, energy infrastructure, or ports; elevated after IRGC strikes on Kuwait and Bahrain on June 28, 2026."
+  },
+  {
+    "id": "shipping_war_risk_insurance",
+    "label": "Shipping War Risk Insurance Premium",
+    "type": "market",
+    "description": "The additional insurance cost levied on vessels transiting the Strait of Hormuz and adjacent Gulf waters, reflecting the probability-weighted risk of attack; a key input to global shipping cost and a transmission mechanism from geopolitical risk to trade and inflation."
+  },
+  {
+    "id": "hormuz_cargo_toll",
+    "label": "US-Claimed Hormuz Cargo Transit Toll (20%)",
+    "type": "indicator",
+    "description": "Trump's unilateral declaration that the US will charge a 20% reimbursement fee on all cargo transiting the Strait of Hormuz under US naval protection \u2014 legally unprecedented, practically unenforceable on non-Iranian vessels, but a significant escalation of the Hormuz sovereignty dispute and a direct US entry into the tolling contest with Iran."
+  },
+  {
+    "id": "us_iran_mou_status",
+    "label": "US-Iran MOU Status (Active/Collapsed)",
+    "type": "indicator",
+    "description": "Binary/ordinal indicator of whether the June 17 US-Iran MOU is in force, degraded, or collapsed; Trump's July 13 blockade reinstatement effectively collapsed the MOU, but Iran's continued negotiations and the open Omani corridor create ambiguity about full breakdown."
+  },
+  {
+    "id": "warsh_congressional_testimony",
+    "label": "Fed Chair Warsh Congressional Testimony",
+    "type": "indicator",
+    "description": "Warsh's first semiannual Humphrey-Hawkins testimony before Congress (due Tuesday July 15), a high-stakes event in which the new Fed chair will face direct questioning on inflation from the Iran war, rate hike timing, and the Fed's response function to geopolitical energy shocks."
+  },
+  {
+    "id": "june_cpi_release",
+    "label": "June 2026 CPI Release",
+    "type": "indicator",
+    "description": "The Labor Department's June CPI report (due Tuesday July 15), expected to show cooling from May's elevated levels due to mid-June energy price declines \u2014 but now complicated by the July 13 oil price spike reversing the June trend before the report even lands."
+  },
+  {
+    "id": "canada_government",
+    "label": "Canada (Government/PM Carney)",
+    "type": "actor",
+    "description": "The Canadian federal government under Prime Minister Mark Carney; the primary counterparty in US-Canada trade negotiations and the subject of Trump's wildfire tariff threat, USMCA non-renewal, and broader bilateral trade tensions."
+  },
+  {
+    "id": "usmca_status",
+    "label": "USMCA Trade Agreement Status",
+    "type": "indicator",
+    "description": "The operational status of the United States-Mexico-Canada Agreement; declined for renewal by the Trump administration in early July 2026, triggering a 10-year sunset period that leaves the door open for renegotiation but removes the ~80% duty-free umbrella for Canadian imports on a forward basis."
+  },
+  {
+    "id": "canada_us_tariff_rate",
+    "label": "US Tariff Rate on Canadian Imports",
+    "type": "indicator",
+    "description": "The effective weighted-average US tariff rate on Canadian goods; currently a base of 10% on most goods with 25% on autos/steel/aluminium and the threat of further increases above 35% on all goods following the wildfire tariff announcement and USMCA non-renewal."
+  },
+  {
+    "id": "cadusd",
+    "label": "CAD/USD (Canadian Dollar)",
+    "type": "market",
+    "description": "The Canadian dollar exchange rate against the US dollar; a direct barometer of US-Canada trade relations risk, falling to a two-year low on July 17 following Trump's tariff threat and the USMCA sunset."
+  },
+  {
+    "id": "canada_lumber_exports",
+    "label": "Canadian Lumber Exports to US",
+    "type": "indicator",
+    "description": "Canadian softwood lumber export volumes and prices to the US market; already subject to anti-dumping duties and now facing additional tariff exposure under Trump's wildfire cost-attribution threat, with direct pass-through to US housing construction costs."
+  },
+  {
+    "id": "canada_auto_sector",
+    "label": "Canada Auto & Auto Parts Sector",
+    "type": "sector",
+    "description": "The integrated Canada-US automobile and auto parts manufacturing sector, heavily dependent on USMCA's duty-free provisions for cross-border supply chains; directly exposed to Trump's tariff escalation with companies considering redirecting exports to Latin American markets."
+  },
+  {
+    "id": "canadian_wildfire_risk",
+    "label": "Canadian Wildfire Risk & Smoke Transboundary Impact",
+    "type": "indicator",
+    "description": "The scale and frequency of Canadian wildfires and their cross-border air quality impact on the US; a novel non-tariff trade irritant that Trump has converted into a trade policy pretext, with 896 active fires in July 2026 and 100M+ Americans under air quality alerts."
+  },
+  {
+    "id": "us_air_quality_shock",
+    "label": "US Northeast/Midwest Air Quality Shock",
+    "type": "indicator",
+    "description": "The acute degradation of outdoor air quality across 18 US states and DC caused by Canadian wildfire smoke; drives measurable economic costs including healthcare spending spikes (30% increase in respiratory admissions), outdoor activity suppression, and labour productivity losses."
+  },
+  {
+    "id": "brazil_government",
+    "label": "Brazil (Government/President Lula)",
+    "type": "actor",
+    "description": "The Brazilian federal government under President Luiz In\u00e1cio Lula da Silva; subject of USTR Section 301 action on July 16, 2026, and counterparty to US trade negotiations with retaliatory capacity under Brazil's Reciprocity Law and WTO dispute settlement mechanisms."
+  },
+  {
+    "id": "us_brazil_tariff_rate",
+    "label": "US Tariff Rate on Brazilian Imports",
+    "type": "indicator",
+    "description": "The effective weighted-average US tariff rate on Brazilian goods; elevated from 10% (global baseline) to 25% via Section 301 action effective July 22, 2026, with potential addition of 12.5% from a concurrent forced-labour probe bringing total burden to 37.5%."
+  },
+  {
+    "id": "brlusd",
+    "label": "BRL/USD (Brazilian Real)",
+    "type": "market",
+    "description": "The Brazilian real exchange rate against the US dollar; a direct barometer of US-Brazil trade relations risk and Brazilian sovereign/macro risk, with the real weakening sharply on the Section 301 announcement."
+  },
+  {
+    "id": "brazil_ethanol_exports",
+    "label": "Brazilian Ethanol Exports to US",
+    "type": "indicator",
+    "description": "Brazilian sugarcane ethanol export volumes and access to the US market; a core complaint in the USTR Section 301 action (Brazil abruptly withdrew reciprocal ethanol tariff treatment in 2017), with direct implications for US corn ethanol producers and Brazil's agricultural sector."
+  },
+  {
+    "id": "brazil_ag_exports",
+    "label": "Brazil Agricultural Exports (Soy, Beef, Sugar)",
+    "type": "indicator",
+    "description": "Brazil's agricultural export complex to the US and global markets, including soybeans, beef, sugar, and coffee; partially exempted from the July 22 tariff (beef, OJ, coffee exempted) but exposed to retaliatory dynamics and BRL weakness effects on export competitiveness."
+  },
+  {
+    "id": "us_ethanol_market",
+    "label": "US Ethanol Market (Corn Ethanol)",
+    "type": "market",
+    "description": "The US domestic ethanol market dominated by corn-based producers; a beneficiary of Brazil ethanol market access barriers being targeted by Section 301, as open Brazilian market access would have increased competition for US corn ethanol exports."
+  },
+  {
+    "id": "us_audiovisual_ip_risk",
+    "label": "US Audiovisual & Pharma IP Risk in Brazil",
+    "type": "indicator",
+    "description": "The risk that Brazil retaliates against US Section 301 tariffs by invoking its Reciprocity Law to restrict US audiovisual company revenues, suspend pharmaceutical/agricultural patents, or curb dividend/royalty remittances \u2014 targeting US IP and services sectors rather than goods imports."
+  },
+  {
+    "id": "wto_dispute_risk",
+    "label": "WTO Dispute Settlement Risk",
+    "type": "indicator",
+    "description": "The risk of formal WTO dispute settlement proceedings being initiated against US Section 301 tariff actions; Brazil explicitly vowed WTO referral alongside Reciprocity Law measures, with the WTO channel being slower but potentially imposing multilateral legitimacy constraints on US tariff policy."
+  },
+  {
+    "id": "global_trade_fragmentation",
+    "label": "Global Trade Fragmentation Index",
+    "type": "indicator",
+    "description": "A composite indicator of the degree to which global trade is fragmenting into bilateral/regional blocs due to tariffs, sanctions, and trade disputes; elevated by the simultaneous escalation against Canada, Brazil, and ongoing Section 301 probes against China, Mexico, Japan, and the EU."
+  },
+  {
+    "id": "brazil_election_2026",
+    "label": "Brazil Presidential Election 2026",
+    "type": "indicator",
+    "description": "Brazil's October 2026 presidential election between incumbent Lula and Fl\u00e1vio Bolsonaro; the US tariff action has created domestic political complexity as Lula campaigns on sovereignty while Bolsonaro is accused of helping trigger the tariffs via Washington lobbying."
+  },
+  {
+    "id": "red_sea_shipping_risk",
+    "label": "Red Sea / Bab el-Mandeb Shipping Risk",
+    "type": "indicator",
+    "description": "The risk of shipping disruption in the Red Sea and Bab el-Mandeb strait \u2014 the critical alternative routing corridor for Gulf oil exports to Europe via the Suez Canal \u2014 now threatened by Houthi forces allied with Iran as they announce intentions to block traffic in support of Iran's Hormuz campaign."
+  },
+  {
+    "id": "houthi_threat",
+    "label": "Houthi (Yemen) Maritime Threat",
+    "type": "actor",
+    "description": "The Houthi movement in Yemen, an Iranian-aligned proxy force that previously disrupted Red Sea shipping in 2024-25 and is now threatening to reactivate attacks on commercial vessels in the Red Sea and Bab el-Mandeb in coordination with Iran's Hormuz interdiction campaign."
+  },
+  {
+    "id": "hormuz_transit_volume",
+    "label": "Daily Hormuz Ship Transit Count (Kpler)",
+    "type": "indicator",
+    "description": "The daily number of commercial vessel transits through the Strait of Hormuz tracked by Kpler and other maritime intelligence firms; a real-time proxy for Hormuz openness status, having fallen from 100+ pre-war to 8 as of July 17 with significant dark (AIS-off) transit activity."
+  },
+  {
+    "id": "ais_transponder_dark_shipping",
+    "label": "AIS Dark Shipping (Transponder-Off Transits)",
+    "type": "indicator",
+    "description": "The proportion of vessels transiting the Strait of Hormuz with AIS positioning transponders switched off to avoid targeting; a risk intensity indicator that surged following the MOU collapse, making Kpler-tracked transit counts an undercount of actual crossings but also signalling extreme crew risk anxiety."
+  },
+  {
+    "id": "gps_spoofing_hormuz",
+    "label": "GPS Spoofing Intensity (Hormuz / Gulf)",
+    "type": "indicator",
+    "description": "The frequency and severity of GPS spoofing attacks \u2014 electronic warfare that causes ships' transponders to report false positions \u2014 in the Hormuz region; a leading indicator of IRGC electronic warfare escalation that precedes kinetic attacks and degrades the Omani corridor's navigational safety."
+  },
+  {
+    "id": "mojtaba_khamenei",
+    "label": "Supreme Leader Mojtaba Khamenei",
+    "type": "actor",
+    "description": "Mojtaba Khamenei, third Supreme Leader of Iran since March 8 2026 following the assassination of his father Ali Khamenei on Feb 28; a 56-year-old cleric and former Basij commander with IRGC background who holds ultimate constitutional authority over national security but whose grip on IRGC operational command is contested by senior IRGC commanders who opposed his succession."
+  },
+  {
+    "id": "iran_supreme_leader_regime",
+    "label": "Iran Supreme Leader Institution",
+    "type": "indicator",
+    "description": "The institutional authority and legitimacy of Iran's Supreme Leader position; critically weakened by the transition from Ali Khamenei (36-year incumbent) to Mojtaba (son, viewed by many clerics as an illegitimate dynastic succession), creating a structural legitimacy deficit that reduces the Supreme Leader's ability to impose discipline on the IRGC."
+  },
+  {
+    "id": "iran_irgc_civilian_split",
+    "label": "Iran IRGC\u2013Civilian Government Power Split",
+    "type": "indicator",
+    "description": "The degree of divergence between the IRGC's operational preferences and the civilian government's diplomatic posture; a high split value means IRGC tactical actions systematically undermine Pezeshkian's ceasefire commitments, making diplomatic agreements structurally fragile regardless of stated Iranian government intentions."
+  },
+  {
+    "id": "iran_ceasefire_compliance_capacity",
+    "label": "Iran Ceasefire Compliance Capacity",
+    "type": "indicator",
+    "description": "Iran's structural ability to enforce and sustain compliance with ceasefire and MOU commitments across all actors \u2014 including IRGC, proxies (Hezbollah, Houthis, Iraqi militias), and rogue commanders \u2014 distinct from Iran's stated diplomatic willingness; the CNBC article argues this capacity is severely constrained by the IRGC-civilian split."
+  },
+  {
+    "id": "iran_cyberattack_capability",
+    "label": "Iran Cyber Warfare Capability",
+    "type": "indicator",
+    "description": "Iran's offensive cyber capabilities directed at US and allied critical infrastructure; referenced in the CNN August 1 context with a cyberattack on Minnesota infrastructure, representing a lower-escalation-threshold retaliatory tool Iran can deploy without kinetic escalation."
+  },
+  {
+    "id": "yield_30y",
+    "label": "30Y Treasury Yield",
+    "type": "market",
+    "description": "The 30-year US Treasury bond yield \u2014 the benchmark for long-duration US government borrowing costs, mortgage rates, and pension liability discounting; reached 5.31% on August 17 2026, its highest level since 2007, driven by persistent inflation expectations, geopolitical risk premium, and fiscal deficit concerns."
+  },
+  {
+    "id": "fomc_dissent_hawkish_bloc",
+    "label": "FOMC Hawkish Dissent Bloc (Hammack/Kashkari/Logan)",
+    "type": "indicator",
+    "description": "The degree of hawkish dissent within the FOMC measured by the number and identity of policymakers voting for rate hikes against the chair's hold position; the 9-3 vote at the July 2026 meeting (Hammack, Kashkari, Logan dissenting for +25bp) represents the first three-way same-direction dissent since September 2016 and a leading indicator of potential Warsh capitulation to tightening."
+  },
+  {
+    "id": "treasury_buyback_programme",
+    "label": "Treasury Debt Buyback Programme",
+    "type": "indicator",
+    "description": "The US Treasury Department's programme of repurchasing longer-dated government securities to manage yield curve shape and provide relief to the long end; announced as a stepped-up operation in August 2026 in direct response to the 30-year yield reaching 19-year highs."
+  },
+  {
+    "id": "us_retail_spending",
+    "label": "US Retail Consumer Spending",
+    "type": "indicator",
+    "description": "Aggregate US consumer retail spending as measured by retail sales data and reported by major retailers (Walmart, Home Depot, Target, Lowe's); a key real-economy indicator of whether oil/energy inflation is suppressing household discretionary spending."
+  },
+  {
+    "id": "warsh_meeting_schedule_reform",
+    "label": "Warsh FOMC Meeting Schedule Reform Proposal",
+    "type": "indicator",
+    "description": "Fed Chair Warsh's proposal to reduce the annual FOMC meeting cadence from 8 to 6 meetings held roughly every 2 months; if implemented, it would reduce the frequency of Fed policy signals, increase inter-meeting uncertainty, and materially change the structure of market rate expectations."
+  },
+  {
+    "id": "hugging_face",
+    "label": "Hugging Face (acquired by Nvidia)",
+    "type": "actor",
+    "description": "The world's leading open-source AI model hub and collaboration platform with 18M+ developers, 3M+ models, and 200K enterprise customers; acquired by Nvidia for $12.9 billion on September 4 2026, becoming the software ecosystem layer through which Nvidia extends chip demand lock-in beyond hardware."
+  },
+  {
+    "id": "ai_software_ecosystem",
+    "label": "AI Software & Model Ecosystem",
+    "type": "indicator",
+    "description": "The aggregate market structure of AI software frameworks, model hubs, libraries, and developer toolchains sitting above the hardware layer; Nvidia's acquisition of Hugging Face is an attempt to control this layer to sustain chip demand even as hyperscalers develop custom ASICs."
+  },
+  {
+    "id": "hyperscaler_custom_asic_risk",
+    "label": "Hyperscaler Custom ASIC Competition Risk",
+    "type": "indicator",
+    "description": "The risk that Microsoft, Google, Amazon, Meta, and Apple accelerate development of proprietary AI accelerator chips (TPUs, Trainium, Maia, MTIA) to reduce dependence on Nvidia GPUs; the single most cited long-term structural threat to Nvidia's 80-85% AI accelerator market share and the primary motivation for the Hugging Face acquisition."
+  },
+  {
+    "id": "nvidia_circular_financing_risk",
+    "label": "Nvidia Circular Financing Risk",
+    "type": "indicator",
+    "description": "The risk that Nvidia's pattern of investing in or financing AI startups that then purchase Nvidia GPUs creates a dot-com-era vendor-lending circular dynamic where Nvidia's revenue growth is partially self-financed rather than genuinely demand-driven; flagged by analysts and directly addressed by Jensen Huang in Q2 earnings commentary."
+  },
+  {
+    "id": "open_source_ai_ecosystem",
+    "label": "Open-Source AI Model Ecosystem",
+    "type": "indicator",
+    "description": "The network of open-source AI models, datasets, and fine-tuning tools (Llama, Mistral, Falcon, etc.) hosted primarily on Hugging Face; now under Nvidia's ownership, creating a strategic question about whether Nvidia will maintain platform neutrality or tilt model development toward CUDA/Nvidia-optimised architectures."
+  },
+  {
+    "id": "nvidia_groq_assets",
+    "label": "Nvidia-Groq Asset Portfolio ($20B)",
+    "type": "indicator",
+    "description": "Nvidia's $20 billion acquisition of Groq assets (confirmed end of 2025), its largest deal prior to Hugging Face; represents Nvidia's move into inference-optimised AI hardware alongside its training-dominant GPU business, and the template for the Hugging Face software stack acquisition."
+  },
+  {
+    "id": "fed_political_independence_risk",
+    "label": "Fed Political Independence Risk",
+    "type": "indicator",
+    "description": "The risk that the Federal Reserve's monetary policy decisions are materially influenced or constrained by executive branch political pressure \u2014 measured by the frequency and directness of White House public demands for rate changes, and markets' assessment of whether Warsh will maintain policy independence under sustained Trump/Vance pressure."
+  },
+  {
+    "id": "vance_fed_pressure",
+    "label": "Trump Administration Fed Rate Cut Pressure",
+    "type": "indicator",
+    "description": "The aggregate public pressure from the Trump administration (Trump, Vance, Bessent) on the Federal Reserve to cut interest rates, framed around housing affordability and growth; directly contradicts Warsh's stated inflation-fighting mandate and creates a credibility-versus-compliance tension at the Fed."
+  },
+  {
+    "id": "waller_hold_signal",
+    "label": "Fed Governor Waller Rate Hold Signal (Sep 2026)",
+    "type": "indicator",
+    "description": "Fed Governor Christopher Waller's September 3 public signal of inclination to support holding rates at the September 16-17 FOMC meeting if disinflation data continues \u2014 a dovish pivot from his prior open-to-hiking stance, conditioned on the September 11 CPI print, and the proximate cause of the September 3 yield decline."
+  },
+  {
+    "id": "sep_cpi_release",
+    "label": "September 11, 2026 CPI Release",
+    "type": "indicator",
+    "description": "The August 2026 CPI report due September 11, described as 'knife-edge' for the September 16-17 FOMC meeting \u2014 a hot print would likely push Waller and potentially additional FOMC members toward a hike, while a cool print would validate Waller's hold signal and likely cause the 10Y to retreat from multi-year highs."
+  },
+  {
+    "id": "bessent_bond_market_narrative",
+    "label": "Treasury Secretary Bessent Bond Market Framing",
+    "type": "indicator",
+    "description": "Treasury Secretary Scott Bessent's public narrative characterising the US bond market as stable and outperforming global peers since Trump's inauguration \u2014 a political communication strategy that conflicts with the factual 18bp+ rise in the 10Y since inauguration and the 30Y at a 19-year high, creating a credibility gap between Treasury messaging and market reality."
+  },
+  {
+    "id": "trump_trade_ultimatum_fed",
+    "label": "Trump Trade-Ultimatum-as-Fed-Lever",
+    "type": "indicator",
+    "description": "Trump's September 4 threat to halt trade with countries running US trade deficits unless the Federal Reserve cuts interest rates \u2014 a novel policy instrument that weaponises trade policy as coercion on the independent central bank, creating a new causal link between Fed independence risk and global trade fragmentation risk."
+  },
+  {
+    "id": "bls_data_integrity",
+    "label": "BLS Data Integrity & Political Independence",
+    "type": "indicator",
+    "description": "The perceived integrity and political independence of Bureau of Labor Statistics economic data releases; under pressure after Trump fired BLS Commissioner Erika McEntarfer in 2025 and replaced her with a Heritage Foundation appointee (AJ Antoni), creating market uncertainty about whether subsequent data revisions reflect genuine economic conditions or political management."
+  },
+  {
+    "id": "aug_nfp_composition_quality",
+    "label": "August 2026 NFP Compositional Quality",
+    "type": "indicator",
+    "description": "The underlying breadth and quality of the August 162,000 headline NFP print \u2014 62% concentrated in food services and local government education (less economically durable), 98% of gains accruing to women (statistically unusual), and a July revision from -23,000 to +21,000 (a 44,000 swing); a quality indicator that affects how much weight the FOMC places on the headline beat."
+  },
+  {
+    "id": "labour_force_participation",
+    "label": "US Labour Force Participation Rate",
+    "type": "indicator",
+    "description": "The share of the civilian non-institutional population that is either employed or actively seeking work; rose from 61.4% to 61.6% in August 2026 \u2014 the first increase since September 2025 \u2014 signalling genuine labour market strength beyond the headline payroll count and reducing the probability of the Fed treating the beat as a statistical artefact."
+  },
+  {
+    "id": "warsh_lane_separation_doctrine",
+    "label": "Warsh 'Stay in Your Lane' Fed Independence Doctrine",
+    "type": "indicator",
+    "description": "Fed Chair Warsh's explicit public doctrine \u2014 articulated in his September 16 press conference \u2014 that the Fed will 'let people that do trade policy and fiscal policy stay in their lane too', directly rebuffing Trump's trade ultimatum and affirming Fed operational independence; the clearest public signal of Warsh's intention to resist political pressure despite being Trump's appointee."
+  },
+  {
+    "id": "fomc_2026_hike_cycle",
+    "label": "FOMC 2026 Rate Hike Cycle (3.75%\u21924.125%+)",
+    "type": "indicator",
+    "description": "The market and FOMC consensus that the September 2026 25bp hike initiates a new tightening cycle rather than being a one-off adjustment \u2014 evidenced by 12/18 dot plot participants projecting one additional hike by year-end and 4 projecting a further hike to 4.375%, replacing prior rate-cut expectations with a higher-for-longer plateau."
+  },
+  {
+    "id": "fomc_2027_cut_removal",
+    "label": "FOMC 2027 Rate Cut Removal from Dot Plot",
+    "type": "indicator",
+    "description": "The September 2026 SEP's explicit removal of expected 2027 rate cuts from the dot plot \u2014 previously priced by markets and FOMC participants \u2014 replaced with a steady-hold at 4.00%+ through 2027, representing a significant hawkish repricing of the entire forward rate path."
+  },
+  {
+    "id": "trump_warsh_political_relationship",
+    "label": "Trump\u2013Warsh Personal Political Relationship",
+    "type": "indicator",
+    "description": "The state of the personal political alliance between President Trump and Fed Chair Warsh \u2014 a key structural variable in the Fed independence equation, given that Trump selected Warsh, publicly stated he wouldn't have chosen him if he wanted hikes, and then publicly defended him personally (while blaming the 'hostile board') after the unanimous September 2026 hike; a deteriorating relationship would be a leading indicator of potential Warsh replacement or circumvention."
+  },
+  {
+    "id": "hostile_board_narrative",
+    "label": "Trump 'Hostile Fed Board' Delegitimisation Narrative",
+    "type": "indicator",
+    "description": "Trump's post-hike political framing that the September 2026 rate hike was imposed by a 'hostile board' that Warsh 'couldn't overpower' \u2014 a novel tactic of separating the Fed chair from the FOMC board to maintain the Warsh alliance while delegitimising the institution, creating a structural precedent for future attempts to remove or replace hawkish board members."
+  },
+  {
+    "id": "trump_1pct_rate_demand",
+    "label": "Trump '1% or Less' Interest Rate Target",
+    "type": "indicator",
+    "description": "Trump's explicit post-hike public demand \u2014 stated on Truth Social and repeated at a North Carolina rally \u2014 that US interest rates should be '1% or less', a level 275-375+ basis points below current policy rates; a measurable indicator of the gap between executive rate preferences and Fed policy, which widens every time the Fed hikes."
+  },
+  {
+    "id": "democratic_congress_2027",
+    "label": "Democratic-Controlled 120th Congress (2027\u20132029)",
+    "type": "actor",
+    "description": "The 120th US Congress (January 2027 onwards) in which Democrats hold the House (250+ seats) and Senate (54 seats), creating a divided government against Trump for his final two years \u2014 with the power to investigate the executive, block legislation, constrain tariffs via the Trade Reform Act process, and conduct oversight of the Fed, Iran war, and AI infrastructure spending."
+  },
+  {
+    "id": "us_debt_ceiling_risk",
+    "label": "US Debt Ceiling / Fiscal Gridlock Risk",
+    "type": "indicator",
+    "description": "The risk of prolonged negotiations or a breach of the US debt ceiling under divided government (Democratic Congress vs Republican White House), which markets flagged as a primary policy concern post-election, with the next debt ceiling deadline expected in early 2027."
+  },
+  {
+    "id": "musk_regulatory_risk",
+    "label": "Elon Musk Regulatory & Congressional Investigation Risk",
+    "type": "indicator",
+    "description": "The risk of Democratic Congress using its investigatory powers to scrutinise Elon Musk's business relationships with the federal government (SpaceX contracts, Tesla regulatory approvals, DOGE influence), following his high-profile Republican campaign spending in Texas; directly affects SpaceX and Tesla equity."
+  },
+  {
+    "id": "ai_data_centre_regulatory_risk",
+    "label": "AI Data Centre Environmental & Community Regulatory Risk",
+    "type": "indicator",
+    "description": "The risk that Democratic-controlled Congress slows, taxes, or restricts AI data centre construction via environmental regulations, permitting reform reversal, or community impact legislation \u2014 flagged as a primary market concern for AI capex stocks on election night, contributing to Nasdaq futures initial underperformance before the gridlock rally."
   }
 ]

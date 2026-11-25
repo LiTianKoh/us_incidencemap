@@ -22,11 +22,13 @@ export const api = {
   regimeHistory:  ()               => get("/regime/history"),
   regimeAutoTag:  (preserveManual = true) => fetch(`${BASE}/regime/auto-tag?preserve_manual=${preserveManual}`, { method: "POST" }).then(r => r.json()),
 
-  simulate: (node_id, shock_std = 1.0, regime = "all", max_hops = 10) =>
+  nodeSigmas: () => get("/node-sigmas"),
+
+  simulate: (node_id, shock_real = null, shock_std = null, regime = "all", max_hops = 10) =>
     fetch(`${BASE}/simulate`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ node_id, shock_std, regime, max_hops }),
+      body: JSON.stringify({ node_id, shock_real, shock_std, regime, max_hops }),
     }).then(r => r.json()),
   prices:      (id, days = 365) => get(`/prices/${id}?days=${days}`),
   priceWindow: (id, date, before=90, after=90) => get(`/prices/${id}/window?date=${date}&days_before=${before}&days_after=${after}`),

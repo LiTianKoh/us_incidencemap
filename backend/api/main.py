@@ -225,6 +225,13 @@ def regime_history():
 
 # ── Counterfactual simulator ─────────────────────────────────────────────────
 
+@app.get("/node-sigmas")
+def node_sigmas():
+    """Return empirical monthly return σ + unit (bps or %) per node."""
+    from graph.simulator import get_node_sigmas
+    return get_node_sigmas()
+
+
 @app.post("/simulate")
 async def simulate(body: dict):
     """
@@ -239,26 +246,29 @@ async def simulate(body: dict):
     """
     from graph.simulator import simulate_shock
 
-    node_id   = body.get("node_id")
-    shock_std = float(body.get("shock_std", 1.0))
-    regime    = body.get("regime", "all")
-    max_hops  = int(body.get("max_hops", 10))
+    node_id    = body.get("node_id")
+    shock_real = body.get("shock_real")          # preferred: real units (bps or %)
+    shock_std  = body.get("shock_std")           # fallback: σ
+    regime     = body.get("regime", "all")
+    max_hops   = int(body.get("max_hops", 10))
 
     if not node_id:
         raise HTTPException(status_code=400, detail="node_id is required")
+    if shock_real is None and shock_std is None:
+        shock_std = 1.0
 
     try:
-        results = simulate_shock(node_id, shock_std, regime, max_hops)
+        result = simulate_shock(
+            node_id,
+            shock_real = float(shock_real) if shock_real is not None else None,
+            shock_std  = float(shock_std)  if shock_std  is not None else None,
+            regime     = regime,
+            max_hops   = max_hops,
+        )
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
 
-    return {
-        "source":    node_id,
-        "shock_std": shock_std,
-        "regime":    regime,
-        "affected":  len(results),
-        "results":   results,
-    }
+    return result
 
 
 @app.post("/regime/auto-tag")

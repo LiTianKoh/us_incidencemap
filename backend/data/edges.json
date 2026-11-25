@@ -966,5 +966,2625 @@
     "confidence": 2,
     "notes": "A distinct supply-side channel from strait_of_hormuz_status: Hormuz reopening restores transit for ALL Gulf producers, whereas sanctions relief specifically unlocks Iran's own suppressed export capacity (~1.5-2.5mbpd historically under sanctions vs ~3.5-4mbpd potential). Markets reprice on the announcement immediately (lag 0), though physical export ramp-up historically takes 6-12 months (cf. 2015-16 JCPOA relief)",
     "magnitude": null
+  },
+  {
+    "source": "mideast_geopolitical_risk",
+    "target": "defense_sector",
+    "direction": 1,
+    "label": "conflict drives defense procurement and earnings outlook",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Well-established: escalating Middle East conflict boosts defense sector equity valuations via heightened procurement expectations and risk premium; mirror image is de-escalation pressure on sector. This edge was missing from the graph throughout the Iran war arc.",
+    "magnitude": null
+  },
+  {
+    "source": "mideast_geopolitical_risk",
+    "target": "hy_spreads",
+    "direction": 1,
+    "label": "geopolitical risk widens credit spreads via macro uncertainty",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "Sustained geopolitical shock (oil price spike, growth risk, inflation) widens HY spreads through both risk-off channel and macro deterioration; confirmed peace deal compresses spreads as risk-on sentiment returns.",
+    "magnitude": null
+  },
+  {
+    "source": "wti",
+    "target": "fed_rate",
+    "direction": 1,
+    "label": "oil-driven inflation spike delays Fed cuts",
+    "lag_days": 45,
+    "confidence": 2,
+    "notes": "Goldman Sachs and other banks noted during the Iran war that surging energy prices reignited inflation concerns and pushed back Fed rate-cut expectations; the peace deal and oil normalization re-opens the path for easing. A 45-day lag captures the time needed for CPI data to reflect the oil move and for the Fed to signal a policy response.",
+    "magnitude": null
+  },
+  {
+    "source": "iran_nuclear_program",
+    "target": "mideast_geopolitical_risk",
+    "direction": 1,
+    "label": "nuclear advancement heightens regional conflict risk",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Iran's nuclear program is a structural driver of mideast_geopolitical_risk; deal requires enrichment moratorium, but any breakdown of this term (as happened repeatedly in prior JCPOA negotiations) would be the primary reignition catalyst for the risk premium.",
+    "magnitude": null
+  },
+  {
+    "source": "israel_government",
+    "target": "mideast_geopolitical_risk",
+    "direction": 1,
+    "label": "Israeli strikes complicate and risk unravelling peace deal",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Israel conducted missile strikes on Haifa and retaliatory strikes on Lebanon even on June 14 as the deal was being confirmed; Netanyahu declared Israel is not party to the deal and Iran must never obtain nuclear weapons. Israeli military action is the primary upside risk to mideast_geopolitical_risk even after a signed US-Iran accord.",
+    "magnitude": null
+  },
+  {
+    "source": "pakistan_government",
+    "target": "mideast_geopolitical_risk",
+    "direction": -1,
+    "label": "Pakistan mediation reduces conflict risk through diplomatic channel",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Pakistan's PM Sharif confirmed the final text and logistics of the signing; Pakistan served as an indispensable mediator throughout the negotiations when direct US-Iran talks failed, and its active engagement is a meaningful moderating variable on conflict risk.",
+    "magnitude": null
+  },
+  {
+    "source": "ai_capex_cycle",
+    "target": "nvidia_stock",
+    "direction": 1,
+    "label": "hyperscaler capex drives GPU demand and Nvidia revenue",
+    "lag_days": 30,
+    "confidence": 3,
+    "notes": "Nvidia's quarterly revenue of $81.6bn (up 85% YoY) and 147% jump in operating cash flow are directly driven by hyperscaler AI capex commitments; well-established and the primary fundamental driver of NVDA equity.",
+    "magnitude": null
+  },
+  {
+    "source": "ai_capex_cycle",
+    "target": "sec_tech",
+    "direction": 1,
+    "label": "AI buildout lifts tech sector earnings and sentiment",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Hyperscaler spending of $725bn+ in 2026 flows through the entire tech supply chain (chips, cloud, networking, storage); broad tech sector earnings are being revised up on AI-driven revenue growth.",
+    "magnitude": null
+  },
+  {
+    "source": "ai_capex_cycle",
+    "target": "corporate_ig_spreads",
+    "direction": -1,
+    "label": "AI investment-grade debt wave compresses IG spreads via demand",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Nvidia's $25bn offering attracted $85bn in orders (3.4x oversubscribed); combined with Alphabet ($85bn equity + $55bn debt), Amazon ($54bn), Meta ($30bn), the sheer investor demand for high-quality AI-credit paper is compressing IG spreads as a new 'safe yield' asset class. However, the supply wave is also large enough to partially offset this.",
+    "magnitude": null
+  },
+  {
+    "source": "ai_capex_cycle",
+    "target": "yield_10y",
+    "direction": 1,
+    "label": "AI debt supply wave adds duration to Treasury market",
+    "lag_days": 5,
+    "confidence": 2,
+    "notes": "Nvidia's 30-year tranche, Amazon's $54bn+ debt, and the ~$300bn AI-related corporate debt issuance YTD absorbs duration and competes with Treasuries for fixed-income demand. At scale, corporate supply can steepen the yield curve and lift long-end rates. Confidence 2 as the effect is competing with the simultaneous Iran de-escalation rally in Treasuries.",
+    "magnitude": null
+  },
+  {
+    "source": "nvidia_stock",
+    "target": "sec_tech",
+    "direction": 1,
+    "label": "NVDA as tech sector bellwether and largest-weight component",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Nvidia is among the largest-cap components of the Nasdaq/S&P tech sector; its equity performance and guidance moves drive sector-level index returns.",
+    "magnitude": null
+  },
+  {
+    "source": "nvidia_stock",
+    "target": "spx",
+    "direction": 1,
+    "label": "NVDA is a top-5 S&P 500 weight; outsized index impact",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "At current market cap, Nvidia is a top-5 S&P 500 constituent; daily NVDA price moves have a measurable direct effect on SPX index returns independent of broader risk sentiment.",
+    "magnitude": null
+  },
+  {
+    "source": "strait_of_hormuz_status",
+    "target": "global_shipping_risk",
+    "direction": 1,
+    "label": "Hormuz disruption is dominant component of global shipping risk",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "The 107-day blockade trapped ~1,000 ships and ~20,000 seafarers; mine-clearance estimates of up to 6 months, tanker backlog of 118 vessels in Gulf, and ship-captain/insurer caution mean physical normalisation lags the diplomatic announcement by weeks to months. Vance confirmed US expects toll-free Hormuz long-term but Iran's 60-day temporary interpretation creates residual uncertainty.",
+    "magnitude": null
+  },
+  {
+    "source": "global_shipping_risk",
+    "target": "cpi",
+    "direction": 1,
+    "label": "shipping disruption raises freight costs and import prices",
+    "lag_days": 30,
+    "confidence": 2,
+    "notes": "Prolonged Hormuz blockade forced Cape of Good Hope diversions adding ~14 days per voyage; normalisation of shipping routes reduces freight rates and import price pressures on US CPI with a ~30-day lag. The 6-month mine-clearance window means the disinflationary effect is gradual, not immediate.",
+    "magnitude": null
+  },
+  {
+    "source": "global_shipping_risk",
+    "target": "wti",
+    "direction": 1,
+    "label": "shipping risk premium in oil prices",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Distinct from the strait_of_hormuz_status->wti edge: captures the additional insurance, rerouting and war-risk premium components that persist even after a formal deal due to mine threat and captain/insurer caution; this risk premium decays over weeks as safe transits accumulate.",
+    "magnitude": null
+  },
+  {
+    "source": "boj",
+    "target": "boj_policy_rate",
+    "direction": 1,
+    "label": "BoJ hikes policy rate to 1%",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Direct policy action; 25bp hike to 1.0% in 7-1 vote, highest since September 1995. First hike since December 2025 when BoJ raised to 0.75%. Dissentor Asada cited downside risks to output/employment.",
+    "magnitude": null
+  },
+  {
+    "source": "japan_cpi",
+    "target": "boj_policy_rate",
+    "direction": 1,
+    "label": "above-target inflation drives BoJ normalization",
+    "lag_days": 30,
+    "confidence": 3,
+    "notes": "Core CPI approaching and expected to accelerate above 2% target in FY2026 was the stated primary rationale for June hike; energy shock from Iran war and yen weakness are structural drivers of Japan's imported inflation.",
+    "magnitude": null
+  },
+  {
+    "source": "wti",
+    "target": "japan_cpi",
+    "direction": 1,
+    "label": "oil price shock transmits to Japanese imported inflation",
+    "lag_days": 30,
+    "confidence": 3,
+    "notes": "Japan imports nearly all its energy; the Iran-war oil spike was explicitly cited by the BoJ as a primary inflation driver forcing the June hike. Yen weakness amplifies this channel: a weaker yen means energy imports cost more in yen terms.",
+    "magnitude": null
+  },
+  {
+    "source": "usdjpy",
+    "target": "japan_cpi",
+    "direction": 1,
+    "label": "yen weakness amplifies import price inflation",
+    "lag_days": 14,
+    "confidence": 3,
+    "notes": "May trade data showed imports up 12.5% in value terms while falling ~7% in volume, illustrating how yen weakness (averaging \u00a5158.29/$) inflated import costs. Prime Minister Takaichi enacted a \u00a53tr supplementary budget to subsidize household energy bills as a consequence.",
+    "magnitude": null
+  },
+  {
+    "source": "boj_policy_rate",
+    "target": "usdjpy",
+    "direction": -1,
+    "label": "BoJ rate hike narrows US-Japan rate differential, supports yen",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Standard interest rate parity mechanism; a higher BoJ rate reduces the yield spread that makes the yen attractive to borrow/sell for carry. In practice June hike was fully priced (USDJPY unmoved at ~160) but the structural direction of edge is well-established. Confidence 2 because yen remained weak post-hike due to carry trade resilience.",
+    "magnitude": null
+  },
+  {
+    "source": "boj_policy_rate",
+    "target": "yen_carry_trade",
+    "direction": -1,
+    "label": "higher BoJ rates increase yen borrowing costs, reducing carry attractiveness",
+    "lag_days": 1,
+    "confidence": 3,
+    "notes": "Higher yen rates directly raise the cost of the short-yen leg of the carry trade; each BoJ hike since 2024 has been associated with periods of carry trade deleveraging and risk-asset selloffs, though the June 2026 hike was too widely expected to trigger an immediate unwind.",
+    "magnitude": null
+  },
+  {
+    "source": "yen_carry_trade",
+    "target": "bitcoin",
+    "direction": 1,
+    "label": "yen carry unwind triggers simultaneous BTC liquidation",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Crypto analysts have documented that each major BoJ hike since 2024 was followed by sharp BTC corrections within weeks; carry unwinds require simultaneous liquidation of all funded risk positions including crypto. Pattern established in August 2024 carry unwind and repeated in subsequent cycles.",
+    "magnitude": null
+  },
+  {
+    "source": "yen_carry_trade",
+    "target": "spx",
+    "direction": 1,
+    "label": "yen carry unwind forces deleveraging across global equities",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "The August 2024 carry unwind is the canonical recent example: USD/JPY dropping ~10 yen in days caused a ~8% VIX spike and S&P selloff as leveraged positions funded by yen borrowing were simultaneously liquidated. Well-established systemic channel.",
+    "magnitude": null
+  },
+  {
+    "source": "usdjpy",
+    "target": "japan_exports",
+    "direction": 1,
+    "label": "weaker yen inflates yen-denominated export values",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "May exports +17% YoY in value but only +0.5% in volume; the yen averaged \u00a5158.29/$ in May (10% weaker YoY), mechanically inflating yen-denominated export receipts. This is the dominant FX translation effect on Japan's trade statistics.",
+    "magnitude": null
+  },
+  {
+    "source": "ai_capex_cycle",
+    "target": "japan_exports",
+    "direction": 1,
+    "label": "AI infrastructure boom drives Japanese chip and semiconductor machinery exports",
+    "lag_days": 30,
+    "confidence": 3,
+    "notes": "May data: chip exports +61.2% YoY including a surge to China; semiconductor manufacturing equipment (Japan's 'machines that make machines') benefiting directly from hyperscaler AI capex. Japan is dominant in photolithography masks, wafer processing equipment, and specialty materials critical to AI chip production.",
+    "magnitude": null
+  },
+  {
+    "source": "mideast_geopolitical_risk",
+    "target": "japan_cpi",
+    "direction": 1,
+    "label": "Middle East conflict raises Japanese energy import costs",
+    "lag_days": 14,
+    "confidence": 3,
+    "notes": "Japan imports ~90% of its energy; the Iran war Hormuz blockade cut Gulf crude supply, spiking LNG and oil prices that flow directly into Japanese household energy bills and CPI. The BoJ statement explicitly cited the Iran conflict as a material upside inflation risk.",
+    "magnitude": null
+  },
+  {
+    "source": "global_shipping_risk",
+    "target": "japan_exports",
+    "direction": -1,
+    "label": "Hormuz disruption suppressed Japanese exports to Middle East",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "April data showed Japan's Middle East exports down 55.5%; May showed continued drag despite AI chip boom offsetting elsewhere. The Hormuz closure directly blocked Japanese tankers and cargo ships, requiring Cape of Good Hope diversions adding cost and time.",
+    "magnitude": null
+  },
+  {
+    "source": "intel_stock",
+    "target": "sec_tech",
+    "direction": 1,
+    "label": "Intel turnaround lifts semiconductor/tech sector sentiment",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Intel is a top-10 Philadelphia Semiconductor Index (SOX) constituent; its 200%+ YTD move and foundry validation are a material positive for the broader US tech/semiconductor sector narrative. Confidence 2 as Intel's weight has declined since its peak, limiting direct index impact.",
+    "magnitude": null
+  },
+  {
+    "source": "us_semiconductor_policy",
+    "target": "intel_stock",
+    "direction": 1,
+    "label": "CHIPS Act funding and government equity stake anchor Intel foundry viability",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "US government 10% equity stake (Aug 2025), $3B DoD chip contract, and CHIPS Act grants are structural backstops to Intel's foundry turnaround; explicitly cited as major catalysts for INTC's 200%+ YTD rally and Apple/Nvidia's willingness to engage.",
+    "magnitude": null
+  },
+  {
+    "source": "us_semiconductor_policy",
+    "target": "semiconductor_supply_chain",
+    "direction": -1,
+    "label": "domestic fab investment reduces TSMC/Taiwan concentration risk",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Intel 18A Arizona fab, TSMC Arizona fabs (committed by Apple), and CHIPS Act onshoring are all explicitly aimed at reducing the ~90%+ advanced node concentration in Taiwan; Intel's 18A-P progress is a concrete data point on how fast this concentration is diminishing.",
+    "magnitude": null
+  },
+  {
+    "source": "nvidia_stock",
+    "target": "intel_stock",
+    "direction": 1,
+    "label": "Nvidia's $5B Intel investment validates foundry technology and reduces customer risk",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Nvidia's September 2025 $5B investment was a pivotal signal to other potential foundry customers (Apple, AMD, Google) that Intel 18A is credible; directly cited in the article as a key catalyst for INTC's equity re-rating.",
+    "magnitude": null
+  },
+  {
+    "source": "intel_stock",
+    "target": "tsmc_stock",
+    "direction": -1,
+    "label": "Intel foundry success erodes TSMC's monopoly premium",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Each credible Intel foundry milestone (18A yield, Apple engagement, Nvidia investment) reduces TSMC's pricing power and monopoly premium for advanced nodes; confidence 2 as TSMC remains dominant and Apple/Nvidia still use TSMC for leading-edge flagship chips.",
+    "magnitude": null
+  },
+  {
+    "source": "apple_stock",
+    "target": "intel_stock",
+    "direction": 1,
+    "label": "Apple foundry deal is the highest-value customer signal for Intel's turnaround",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Apple is the world's most demanding chip customer and its willingness to qualify Intel 18A-P is the single strongest external validation of Intel foundry's quality; even a partial (low-end chip) deal would de-risk Intel for subsequent customers and drive earnings upside.",
+    "magnitude": null
+  },
+  {
+    "source": "semiconductor_supply_chain",
+    "target": "ai_capex_cycle",
+    "direction": -1,
+    "label": "supply chain concentration risk constrains AI infrastructure buildout pace",
+    "lag_days": 90,
+    "confidence": 2,
+    "notes": "AI capex cycle delivery depends on chip supply; TSMC Taiwan concentration is the single largest constraint on how fast hyperscalers can receive and deploy Nvidia/AMD AI chips. Intel 18A-P success (adding a second leading-edge fab) incrementally reduces this bottleneck with a multi-quarter lag as capacity comes online.",
+    "magnitude": null
+  },
+  {
+    "source": "ai_capex_cycle",
+    "target": "intel_stock",
+    "direction": 1,
+    "label": "AI infrastructure demand creates foundry opportunity for Intel",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "The $725B+ hyperscaler AI capex cycle creates enormous demand for advanced chips at a scale that TSMC alone may not be able to satisfy; this demand environment is a structural tailwind for Intel foundry to win customers who are rationed on TSMC capacity.",
+    "magnitude": null
+  },
+  {
+    "source": "fed_chair_regime",
+    "target": "fed_forward_guidance",
+    "direction": -1,
+    "label": "Warsh drops forward guidance \u2014 deliberate opacity replaces Powell-era transparency",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Warsh explicitly dropped forward guidance at his first meeting, chose not to submit his own dot, and stated markets 'perform best when they react to incoming data.' This is a discrete structural break in Fed communications \u2014 the highest-confidence edge in this event.",
+    "magnitude": null
+  },
+  {
+    "source": "fed_forward_guidance",
+    "target": "yield_2y",
+    "direction": 1,
+    "label": "lower guidance clarity widens short-end yield uncertainty premium",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Reduced forward guidance forces markets to price a wider distribution of Fed outcomes into short-term yields; without anchor from explicit dot-plot signals, the 2Y yield is more volatile and tends to price a risk premium. Confidence 2 as the direction depends on whether opacity is interpreted hawkishly or neutrally.",
+    "magnitude": null
+  },
+  {
+    "source": "fed_dot_plot",
+    "target": "yield_2y",
+    "direction": 1,
+    "label": "hawkish dot plot reprices front-end yields higher",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "The June dot plot's 9-9 split with median pointing to a 25bp hike is the single most direct driver of short-end yield repricing; the 2Y is the most sensitive Treasury maturity to shifts in the expected Fed funds path. Well-established mechanism.",
+    "magnitude": null
+  },
+  {
+    "source": "fed_dot_plot",
+    "target": "spx",
+    "direction": -1,
+    "label": "hawkish dot plot triggers equity risk-off repricing",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Markets sold off sharply after Warsh's press conference as the dot-plot hawkish pivot repriced the discount rate higher for equities; a higher expected terminal rate compresses equity multiples, especially for long-duration growth stocks. CNBC: 'major averages swooning after the meeting.'",
+    "magnitude": null
+  },
+  {
+    "source": "wti",
+    "target": "us_cpi_energy_component",
+    "direction": 1,
+    "label": "oil price spike transmits directly to CPI energy sub-index",
+    "lag_days": 14,
+    "confidence": 3,
+    "notes": "The Iran-war WTI spike from ~$65 to >$115 is the primary driver of US CPI rising to 4.2% YoY in May 2026 \u2014 a 3-year high. The energy component (gasoline, fuel oil, utilities) is the highest-frequency, most direct pass-through from crude prices to CPI. This is the key transmission chain: mideast_geopolitical_risk \u2192 wti \u2192 us_cpi_energy_component \u2192 cpi \u2192 FOMC hawkish pivot.",
+    "magnitude": null
+  },
+  {
+    "source": "us_cpi_energy_component",
+    "target": "cpi",
+    "direction": 1,
+    "label": "energy sub-index is dominant driver of headline CPI surge",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Standard CPI decomposition; the energy component weight (~7-8% of CPI basket) and magnitude of the oil shock (>60% WTI price increase) made energy the dominant contributor to May's 4.2% YoY print. Captures the specific Iran-war-to-monetary-policy transmission that forced Warsh's hawkish dot plot.",
+    "magnitude": null
+  },
+  {
+    "source": "cpi",
+    "target": "fed_dot_plot",
+    "direction": 1,
+    "label": "above-target inflation forces FOMC to revise rate path higher",
+    "lag_days": 30,
+    "confidence": 3,
+    "notes": "The June dot plot's hawkish pivot was explicitly driven by CPI at 4.2% \u2014 a reversal from March's 2-cut projection. This is the canonical dual-mandate mechanism: 50% of FOMC members now expect a hike vs. 0 in March, purely due to the inflation surprise. 30-day lag reflects data release timing.",
+    "magnitude": null
+  },
+  {
+    "source": "fed_chair_regime",
+    "target": "vix",
+    "direction": 1,
+    "label": "Warsh opacity regime structurally raises vol due to greater policy uncertainty",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Dropping forward guidance and adopting Greenspan-style opacity means markets cannot pre-position as confidently around FOMC meetings; this structurally increases implied volatility around each Fed decision. BlackRock's Rick Rieder called the June meeting 'a new era of monetary policy.' Confidence 2 as the effect may be partially offset by reduced VIX from Iran peace deal.",
+    "magnitude": null
+  },
+  {
+    "source": "fed_dot_plot",
+    "target": "housing",
+    "direction": -1,
+    "label": "higher expected Fed rates raise mortgage rates, cooling housing",
+    "lag_days": 14,
+    "confidence": 3,
+    "notes": "Mortgage rates are directly indexed to the 10Y yield and market expectations for the Fed funds rate; a hawkish dot plot repricing makes housing affordability worse and further suppresses transaction volumes and price growth. Well-established via the 2022-23 rate-hiking cycle precedent.",
+    "magnitude": null
+  },
+  {
+    "source": "executive",
+    "target": "fed_chair_regime",
+    "direction": 1,
+    "label": "Trump nominates Warsh as new Fed chair; regime shift from Powell",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "The chair nomination is the direct mechanism by which the executive branch shapes the Fed's policy regime over the medium term; Trump nominated Warsh expecting rate cuts, but the energy shock forced a hawkish outcome. This edge captures the structural influence channel without implying the executive controls day-to-day rates.",
+    "magnitude": null
+  },
+  {
+    "source": "fed_forward_guidance",
+    "target": "corporate_ig_spreads",
+    "direction": 1,
+    "label": "reduced guidance clarity widens IG spreads via rate path uncertainty",
+    "lag_days": 3,
+    "confidence": 2,
+    "notes": "Corporate bond pricing depends on the expected rate path for duration hedging; Warsh's deliberate opacity makes it harder for bond investors to hedge rate risk, which is typically priced as a wider spread premium. Confidence 2 as the effect may be small relative to macro drivers.",
+    "magnitude": null
+  },
+  {
+    "source": "wti",
+    "target": "us_retail_gasoline",
+    "direction": 1,
+    "label": "crude oil price is the primary input to retail gasoline prices",
+    "lag_days": 7,
+    "confidence": 3,
+    "notes": "Well-established pass-through: crude accounts for ~55-60% of retail gasoline price; the Iran-war WTI spike to $115+ drove US retail gas above $5/gallon; WTI falling back toward $85 (post-MOU) drove gas below $4. Standard 7-day lag for refinery/wholesale margin adjustment.",
+    "magnitude": null
+  },
+  {
+    "source": "us_retail_gasoline",
+    "target": "consumer_sent",
+    "direction": -1,
+    "label": "high gas prices directly erode consumer confidence",
+    "lag_days": 7,
+    "confidence": 3,
+    "notes": "Gas prices are the most salient, highest-frequency price signal consumers observe (priced on roadside signs daily); falling below $4 is a significant psychological threshold for US consumers after months above $5. Vance explicitly framed the price decline as the consumer benefit of the deal. University of Michigan surveys show strong inverse correlation.",
+    "magnitude": null
+  },
+  {
+    "source": "us_retail_gasoline",
+    "target": "us_cpi_energy_component",
+    "direction": 1,
+    "label": "retail gasoline is the largest single component of CPI energy sub-index",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Gasoline alone accounts for ~3.5-4% weight in headline CPI; it is the dominant component of us_cpi_energy_component. Falling below $4 is a direct disinflationary impulse that will show up in the next CPI print with near-zero lag (prices are surveyed mid-month).",
+    "magnitude": null
+  },
+  {
+    "source": "iran_oil_sanctions_status",
+    "target": "iran_reconstruction_fund",
+    "direction": -1,
+    "label": "sanctions relief unlocks frozen assets and third-party investment enabling the reconstruction fund",
+    "lag_days": 30,
+    "confidence": 2,
+    "notes": "The $300B reconstruction fund is not directly US-funded but is enabled by sanctions relief (unlocking ~$7B in frozen assets and allowing third-party investment); Vance confirmed this conditionality explicitly. Congressional blocking of sanctions relief would directly prevent fund activation. 30-day lag reflects legal/OFAC process.",
+    "magnitude": null
+  },
+  {
+    "source": "us_iran_deal_ratification_risk",
+    "target": "iran_oil_sanctions_status",
+    "direction": 1,
+    "label": "Congressional blocking of sanctions relief maintains Iran oil export restrictions",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Senators Cassidy, Tillis, and Wicker explicitly threatened to block the sanctions-relief provisions; if Congress acts (e.g. via ITRSHRA enforcement or new legislation), executive-ordered sanctions relief could be overridden, maintaining Iran supply constraints and oil price support.",
+    "magnitude": null
+  },
+  {
+    "source": "congress",
+    "target": "us_iran_deal_ratification_risk",
+    "direction": 1,
+    "label": "Republican Senate opposition raises deal implementation risk",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "The MOU's sanctions-relief and reconstruction-fund terms face bipartisan hawkish Republican opposition in the Senate; Congress has independent legal authority to maintain or re-impose Iran sanctions, making ratification risk a live constraint on the deal's full market impact. Cassidy called it 'the worst foreign policy blunder in decades.'",
+    "magnitude": null
+  },
+  {
+    "source": "mideast_geopolitical_risk",
+    "target": "lng_market",
+    "direction": 1,
+    "label": "Iran war LNG disruption via Qatar Ras Laffan attack and Hormuz closure",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Iran struck Qatar's Ras Laffan LNG complex on March 18 (reducing Qatar LNG output 17%, damage taking 3-5 years to repair), and the Hormuz closure blocked LNG tanker transit, causing Asian LNG spot prices to surge 140%+. This is a permanent structural supply impairment distinct from the oil price channel.",
+    "magnitude": null
+  },
+  {
+    "source": "strait_of_hormuz_status",
+    "target": "lng_market",
+    "direction": 1,
+    "label": "Hormuz closure blocks LNG tanker transit to Asia and Europe",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "LNG tankers from Qatar, UAE, and Oman must transit Hormuz; the 107-day blockade physically prevented LNG deliveries to Asian buyers (Japan, South Korea, China), compounding the Ras Laffan production damage. Reopening allows tanker transit but does not restore damaged production capacity.",
+    "magnitude": null
+  },
+  {
+    "source": "lng_market",
+    "target": "japan_cpi",
+    "direction": 1,
+    "label": "LNG price spike drives Japanese electricity and heating cost inflation",
+    "lag_days": 14,
+    "confidence": 3,
+    "notes": "Japan imports ~97% of its LNG needs; LNG is the primary fuel for Japanese power generation. A 140% LNG spot price spike is the single largest driver of Japan's electricity cost inflation and industrial input costs, feeding directly into japan_cpi and reinforcing the BoJ hike rationale.",
+    "magnitude": null
+  },
+  {
+    "source": "iran_nuclear_program",
+    "target": "us_iran_deal_ratification_risk",
+    "direction": 1,
+    "label": "failure to permanently curb Iran nuclear program is core Republican objection to deal",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Sen. Cassidy's primary objection was 'Iran's nuclear ambitions were not curbed' and Iran 'learned that threatening the Strait of Hormuz works.' The nuclear program disposition (HEU stockpile unresolved per senior administration official) is the structural reason the deal faces ratification risk and is framed as a temporary MOU rather than a permanent treaty.",
+    "magnitude": null
+  },
+  {
+    "source": "us_retail_gasoline",
+    "target": "fed_dot_plot",
+    "direction": -1,
+    "label": "falling gas prices reduce energy CPI, create space for Fed to pivot less hawkish",
+    "lag_days": 45,
+    "confidence": 2,
+    "notes": "Gas below $4 and normalising oil prices are a disinflationary impulse that, if sustained, would reduce CPI toward the Fed's 2% target and reduce the urgency of the hawkish dot plot's implied hike. Kiplinger analysts noted the oil decline 'reduces some urgency' around inflation risks. 45-day lag reflects CPI data release timing and FOMC meeting schedule.",
+    "magnitude": null
+  },
+  {
+    "source": "executive",
+    "target": "intel_stock",
+    "direction": 1,
+    "label": "Trump's social media announcement directly moves INTC equity",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "A single Truth Social post from Trump drove Intel shares up 9-12.5% intraday to an all-time high of $135.48, even before either company confirmed the deal; both companies explicitly declined to comment, and Intel executives reportedly learned of the announcement from the post itself (per Semafor). This is a direct, high-confidence, same-day price-moving channel distinct from the policy-mechanism edge (executive->us_semiconductor_policy->intel_stock) already in the graph.",
+    "magnitude": null
+  },
+  {
+    "source": "apple_stock",
+    "target": "semiconductor_supply_chain",
+    "direction": -1,
+    "label": "Apple's Intel diversification reduces TSMC concentration risk",
+    "lag_days": 365,
+    "confidence": 2,
+    "notes": "Apple CEO Tim Cook acknowledged iPhone 17 production was 'constrained' because TSMC could not produce enough A19 chips to meet demand, as Nvidia has displaced Apple as TSMC's largest customer amid AI-driven capacity competition. The Intel deal is Apple's hedge against this concentration, though analysts note Intel won't displace TSMC for flagship silicon within any reasonable planning window (full-volume production not expected before mid-2027, with Intel's next-gen 14A node not reaching volume until ~2029). Confidence 2 and long lag reflect that this is a multi-year structural shift, not an immediate supply change, and TSMC will retain >90% of Apple's supply.",
+    "magnitude": null
+  },
+  {
+    "source": "ai_capex_cycle",
+    "target": "apple_stock",
+    "direction": -1,
+    "label": "AI chipmaker demand crowds out Apple's TSMC capacity, forcing diversification",
+    "lag_days": 90,
+    "confidence": 2,
+    "notes": "Nvidia and AMD's AI-driven demand for TSMC's leading-edge nodes has displaced Apple as TSMC's largest customer, directly causing the iPhone 17 production constraints Cook cited. This is the underlying structural driver forcing Apple into the Intel deal, representing a negative feedback from the AI boom onto a major non-AI tech bellwether's supply chain.",
+    "magnitude": null
+  },
+  {
+    "source": "us_semiconductor_policy",
+    "target": "apple_stock",
+    "direction": -1,
+    "label": "government pressure on Apple's onshoring carries near-term cost/margin risk",
+    "lag_days": 180,
+    "confidence": 1,
+    "notes": "Trump explicitly framed the deal as government-assisted 'Chips in America' policy, following his criticism that prior administrations 'let Taiwan and others steal our Semiconductor Factories'; politically-brokered, US-based manufacturing typically carries higher near-term unit costs than mature TSMC Taiwan production, a potential margin headwind for Apple. Speculative given deal terms (cost-sharing, subsidies) remain undisclosed.",
+    "magnitude": null
+  },
+  {
+    "source": "ai_capex_cycle",
+    "target": "hbm_memory_market",
+    "direction": 1,
+    "label": "HBM demand driven by AI capex",
+    "lag_days": 60,
+    "confidence": 3,
+    "notes": "Hyperscaler AI infrastructure spend is the primary demand driver for HBM; SK Hynix and Samsung are the dominant suppliers.",
+    "magnitude": null
+  },
+  {
+    "source": "hbm_memory_market",
+    "target": "sk_hynix_stock",
+    "direction": 1,
+    "label": "HBM pricing \u2192 SK Hynix valuation",
+    "lag_days": 5,
+    "confidence": 3,
+    "notes": "SK Hynix derives the majority of its revenue and margin from HBM sales to Nvidia; pricing and allocation shifts flow directly to equity.",
+    "magnitude": null
+  },
+  {
+    "source": "hbm_memory_market",
+    "target": "samsung_stock",
+    "direction": 1,
+    "label": "HBM demand \u2192 Samsung revenue",
+    "lag_days": 5,
+    "confidence": 3,
+    "notes": "Samsung competes directly with SK Hynix in HBM; demand and pricing dynamics equally affect Samsung's semiconductor segment.",
+    "magnitude": null
+  },
+  {
+    "source": "sk_hynix_stock",
+    "target": "kospi_index",
+    "direction": 1,
+    "label": "SK Hynix weight in KOSPI (~25%)",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "SK Hynix and Samsung together constitute roughly half of the KOSPI by market cap; a move in either dominates index performance.",
+    "magnitude": null
+  },
+  {
+    "source": "samsung_stock",
+    "target": "kospi_index",
+    "direction": 1,
+    "label": "Samsung weight in KOSPI (~25%)",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Samsung's equity price is a near-direct input to KOSPI index returns given its dominant weighting.",
+    "magnitude": null
+  },
+  {
+    "source": "nvidia_stock",
+    "target": "sk_hynix_stock",
+    "direction": 1,
+    "label": "Nvidia demand signal for HBM",
+    "lag_days": 1,
+    "confidence": 3,
+    "notes": "Nvidia is the largest customer of SK Hynix HBM; Nvidia guidance and stock moves lead HBM supplier equity as a demand proxy.",
+    "magnitude": null
+  },
+  {
+    "source": "ai_roi_sentiment",
+    "target": "ai_capex_cycle",
+    "direction": 1,
+    "label": "ROI doubt \u2192 capex tapering risk",
+    "lag_days": 90,
+    "confidence": 2,
+    "notes": "If investor pressure mounts around returns on AI spending, hyperscalers may slow or revise capex plans, compressing the demand cycle for chips and memory.",
+    "magnitude": null
+  },
+  {
+    "source": "ai_roi_sentiment",
+    "target": "sec_tech",
+    "direction": 1,
+    "label": "Sentiment re-rating drives tech multiples",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "AI valuation sentiment is the primary driver of P/E multiple expansion or compression across the tech sector; a sentiment reset compresses prices immediately.",
+    "magnitude": null
+  },
+  {
+    "source": "sec_tech",
+    "target": "spx",
+    "direction": 1,
+    "label": "Tech weight ~33% of SPX",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Mag7 alone constitute >33% of S&P 500 weighting; a tech selloff mechanically transmits to SPX regardless of other sector performance.",
+    "magnitude": null
+  },
+  {
+    "source": "hbm_memory_market",
+    "target": "micron_stock",
+    "direction": 1,
+    "label": "Memory cycle \u2192 Micron valuation",
+    "lag_days": 5,
+    "confidence": 3,
+    "notes": "Micron is the primary US-listed DRAM/HBM supplier; HBM pricing and demand directly determine its revenue outlook and equity re-rating.",
+    "magnitude": null
+  },
+  {
+    "source": "micron_stock",
+    "target": "sec_tech",
+    "direction": 1,
+    "label": "Micron earnings as sector catalyst",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "Micron earnings are a closely watched sector event; its HBM guidance serves as a forward indicator for AI memory demand and ripples through broader tech sentiment.",
+    "magnitude": null
+  },
+  {
+    "source": "kospi_index",
+    "target": "sec_tech",
+    "direction": 1,
+    "label": "Asia chip selloff contagion to US tech",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Sharp KOSPI moves in chip bellwethers lead US pre-market sentiment and amplify or trigger intraday moves in US semiconductor and tech stocks.",
+    "magnitude": null
+  },
+  {
+    "source": "real_yield_10y",
+    "target": "ai_roi_sentiment",
+    "direction": -1,
+    "label": "Higher real yields pressure AI ROI narrative",
+    "lag_days": 14,
+    "confidence": 2,
+    "notes": "Rising real yields increase the hurdle rate for long-duration AI capex investments, intensifying scrutiny of whether AI spending will deliver adequate returns.",
+    "magnitude": null
+  },
+  {
+    "source": "iran_oil_sanctions_status",
+    "target": "iran_oil_export_volume",
+    "direction": -1,
+    "label": "Sanctions severity suppresses export volume",
+    "lag_days": 30,
+    "confidence": 3,
+    "notes": "Sanctions severity is the primary binding constraint on Iranian export volumes; easing (lower sanctions severity) directly enables higher export volumes. Pre-war: ~1.5M bpd; under blockade: ~260K bpd; with General License X: estimated rapid ramp back toward 1.5M+ bpd.",
+    "magnitude": null
+  },
+  {
+    "source": "iran_oil_export_volume",
+    "target": "global_oil_supply_glut_risk",
+    "direction": 1,
+    "label": "Iran re-entry adds supply overhang",
+    "lag_days": 14,
+    "confidence": 3,
+    "notes": "Unlocking ~67M barrels of stranded inventory plus resumed production materially increases global supply. Analysts estimate ~140M barrels entering supply chains over the 60-day licence window.",
+    "magnitude": null
+  },
+  {
+    "source": "global_oil_supply_glut_risk",
+    "target": "wti",
+    "direction": -1,
+    "label": "Supply surplus pressures WTI price",
+    "lag_days": 1,
+    "confidence": 3,
+    "notes": "Excess supply expectations are a direct downward force on WTI spot and futures prices; WTI fell 2.7% to $73.82 on General License X announcement, lowest since March.",
+    "magnitude": null
+  },
+  {
+    "source": "global_oil_supply_glut_risk",
+    "target": "brent_crude",
+    "direction": -1,
+    "label": "Supply surplus pressures Brent",
+    "lag_days": 1,
+    "confidence": 3,
+    "notes": "Brent fell 2.8% to $78.29 alongside WTI on the General License X announcement; Brent is the more directly relevant benchmark for Iranian export pricing.",
+    "magnitude": null
+  },
+  {
+    "source": "shadow_fleet_iran_tankers",
+    "target": "iran_oil_export_volume",
+    "direction": 1,
+    "label": "Legitimised fleet accelerates export ramp",
+    "lag_days": 7,
+    "confidence": 2,
+    "notes": "By converting shadow fleet participants into licensed actors, General License X removes the compliance friction and discounting costs that previously constrained Iranian export scale. Chinese state and independent refiners expected to accelerate purchases.",
+    "magnitude": null
+  },
+  {
+    "source": "iran_oil_sanctions_status",
+    "target": "shadow_fleet_iran_tankers",
+    "direction": 1,
+    "label": "Sanctions severity drives shadow trade",
+    "lag_days": 30,
+    "confidence": 3,
+    "notes": "Higher sanctions severity forces Iranian oil trade underground into shadow fleet operations; easing reduces the economic incentive and operational necessity for shadow fleet usage.",
+    "magnitude": null
+  },
+  {
+    "source": "iran_reconstruction_fund",
+    "target": "iran_government",
+    "direction": 1,
+    "label": "Reconstruction fund strengthens regime",
+    "lag_days": 90,
+    "confidence": 2,
+    "notes": "The $300B reconstruction fund tied to sanctions relief and frozen asset unfreezing strengthens the Iranian government's fiscal position and domestic legitimacy, creating incentives for deal compliance.",
+    "magnitude": null
+  },
+  {
+    "source": "iran_oil_export_volume",
+    "target": "sec_energy",
+    "direction": -1,
+    "label": "Iran supply re-entry compresses energy sector margins",
+    "lag_days": 14,
+    "confidence": 2,
+    "notes": "Lower oil prices from Iranian re-entry reduce upstream revenue and E&P margins for energy sector companies; US energy equities typically track WTI with a short lag.",
+    "magnitude": null
+  },
+  {
+    "source": "iran_oil_export_volume",
+    "target": "opec",
+    "direction": -1,
+    "label": "Iran re-entry complicates OPEC+ supply management",
+    "lag_days": 30,
+    "confidence": 2,
+    "notes": "Iran's return to formal export markets adds volumes outside OPEC+ quota coordination (Iran is exempt from cuts as a sanctioned member); this complicates Saudi Arabia's ability to defend a price floor and may force quota adjustments.",
+    "magnitude": null
+  },
+  {
+    "source": "iran_us_ag_trade",
+    "target": "iran_government",
+    "direction": 1,
+    "label": "Ag trade improves Iran food security",
+    "lag_days": 60,
+    "confidence": 1,
+    "notes": "Trump stated Iranian oil revenues are earmarked for US agricultural goods; if materialised, this bilateral trade flow would partially offset Iran's food security concerns and create a new economic interdependence channel.",
+    "magnitude": null
+  },
+  {
+    "source": "irgc",
+    "target": "strait_of_hormuz_status",
+    "direction": -1,
+    "label": "IRGC enforcement closes/restricts strait",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "The IRGC operationally controls Hormuz enforcement \u2014 mine-laying, vessel interdiction, radio threats, and projectile attacks \u2014 independently of Iran's diplomatic positions; IRGC actions are the proximate mechanism by which the strait is opened or closed regardless of MOU text.",
+    "magnitude": null
+  },
+  {
+    "source": "irgc",
+    "target": "mou_implementation_risk",
+    "direction": 1,
+    "label": "IRGC non-compliance raises MOU breakdown risk",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "The IRGC acts semi-autonomously from the Iranian government's diplomatic arm; IRGC attacks on vessels transiting the UN-approved route directly contradict MOU commitments and raise the probability of deal collapse.",
+    "magnitude": null
+  },
+  {
+    "source": "iran_government",
+    "target": "irgc",
+    "direction": 1,
+    "label": "Government direction of IRGC operations",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "While the IRGC has operational independence, it ultimately responds to Supreme Leader-level direction; the ambiguity of whether Ghalibaf's rhetoric and the vessel strike are coordinated signals or rogue actions is the key uncertainty in this event.",
+    "magnitude": null
+  },
+  {
+    "source": "mou_implementation_risk",
+    "target": "iran_oil_sanctions_status",
+    "direction": 1,
+    "label": "MOU breakdown triggers sanctions reimposition",
+    "lag_days": 14,
+    "confidence": 2,
+    "notes": "If the MOU collapses before the August 21 General License X expiry, Treasury could revoke or fail to extend the waiver, rapidly reimposing sanctions and reversing Iranian oil export volume gains; Rubio explicitly stated 'the president has a lot of options including sanctions' if Iran fails to comply.",
+    "magnitude": null
+  },
+  {
+    "source": "mou_implementation_risk",
+    "target": "global_shipping_risk",
+    "direction": 1,
+    "label": "MOU breakdown re-closes Hormuz",
+    "lag_days": 1,
+    "confidence": 3,
+    "notes": "MOU collapse would immediately return Hormuz to contested status; the June 25 cargo ship strike and IMO evacuation pause are early signals of this transmission channel activating even before full breakdown.",
+    "magnitude": null
+  },
+  {
+    "source": "mou_implementation_risk",
+    "target": "wti",
+    "direction": 1,
+    "label": "Deal risk spikes oil price",
+    "lag_days": 1,
+    "confidence": 3,
+    "notes": "Oil price is hypersensitive to MOU implementation signals; the deal breakdown in April sent Brent above $105 (+5% in one session); any credible breakdown signal would sharply reverse the WTI decline from General License X.",
+    "magnitude": null
+  },
+  {
+    "source": "mou_implementation_risk",
+    "target": "vix",
+    "direction": 1,
+    "label": "MOU uncertainty spikes volatility",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "A fragile MOU with active dispute signals and Hormuz incidents elevates tail risk in equity and energy markets, translating into VIX premium and hy_spread widening.",
+    "magnitude": null
+  },
+  {
+    "source": "iran_us_ag_trade",
+    "target": "mou_implementation_risk",
+    "direction": 1,
+    "label": "Asset-use dispute accelerates MOU breakdown risk",
+    "lag_days": 7,
+    "confidence": 2,
+    "notes": "The frozen asset / agricultural goods dispute is a core implementation rift: Iran views the $12B as sovereign assets returned unconditionally; the US frames them as purchasing power for US goods. This gap, if unresolved, could stall or derail the final deal negotiation within the 60-day window.",
+    "magnitude": null
+  },
+  {
+    "source": "imo_hormuz_evacuation",
+    "target": "strait_of_hormuz_status",
+    "direction": 1,
+    "label": "IMO evacuation progress proxies Hormuz safety",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "The IMO evacuation programme's status (active vs paused) is a real-time observable indicator of Hormuz safety and effective openness; its pause on June 25 after the cargo ship strike signals that the strait reopening is incomplete and contested.",
+    "magnitude": null
+  },
+  {
+    "source": "imo_hormuz_evacuation",
+    "target": "global_shipping_risk",
+    "direction": -1,
+    "label": "IMO evacuation completion reduces shipping risk",
+    "lag_days": 7,
+    "confidence": 2,
+    "notes": "Clearing the ~230 stranded tankers inside the Gulf is a prerequisite for normalising global shipping; IMO evacuation progress directly reduces global shipping disruption risk as vessels are released to global trade lanes.",
+    "magnitude": null
+  },
+  {
+    "source": "israel_government",
+    "target": "mou_implementation_risk",
+    "direction": 1,
+    "label": "Israeli Lebanon strikes risk MOU unraveling",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "Israeli strikes in southern Lebanon (killing 5 in 2 days as of June 25) caused Hezbollah to call ceasefire violations; Iran has previously closed the Strait in response to Israeli actions (June 20), making Israeli military activity in Lebanon a live trigger for MOU breakdown.",
+    "magnitude": null
+  },
+  {
+    "source": "mideast_geopolitical_risk",
+    "target": "mou_implementation_risk",
+    "direction": 1,
+    "label": "Regional escalation risk feeds MOU fragility",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "Broader Middle East instability (Lebanon, Hezbollah, IRGC autonomy) creates MOU fragility by providing Iran with political cover to walk back commitments or the IRGC to escalate independently.",
+    "magnitude": null
+  },
+  {
+    "source": "hbm_memory_market",
+    "target": "apple_memory_cost_passthrough",
+    "direction": 1,
+    "label": "HBM/DRAM tightness raises Apple input costs",
+    "lag_days": 30,
+    "confidence": 3,
+    "notes": "Apple explicitly cited the AI-driven memory shortage as the cause of its 15-25% MacBook/iPad price hikes; Micron gross margins surged to 84.9% in Q3 2026, confirming memory pricing power. Counterpoint estimates ~$200 added cost per iPhone device.",
+    "magnitude": null
+  },
+  {
+    "source": "apple_memory_cost_passthrough",
+    "target": "apple_stock",
+    "direction": -1,
+    "label": "Price hike signal margin pressure \u2192 AAPL selloff",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Apple fell 6-6.5% on June 25 after announcing price hikes, as investors interpreted the move as a signal of margin compression, demand risk, and loss of pricing power discipline; AAPL was the primary drag on Nasdaq on the day.",
+    "magnitude": null
+  },
+  {
+    "source": "apple_memory_cost_passthrough",
+    "target": "consumer_electronics_cpi",
+    "direction": 1,
+    "label": "OEM price hikes pass through to CPI",
+    "lag_days": 30,
+    "confidence": 2,
+    "notes": "Apple's price hikes on MacBooks (+15-20%) and iPads (+15-25%) will flow into the consumer electronics CPI sub-index with a 1-2 month lag; historically this component deflates, making the reversal particularly inflationary at the margin.",
+    "magnitude": null
+  },
+  {
+    "source": "consumer_electronics_cpi",
+    "target": "cpi",
+    "direction": 1,
+    "label": "Electronics inflation feeds headline CPI",
+    "lag_days": 30,
+    "confidence": 2,
+    "notes": "Consumer electronics is a weighted component of headline CPI; AI-driven memory cost pass-throughs represent a new structural upward force on this historically deflationary sub-index, complicating the Fed's inflation trajectory.",
+    "magnitude": null
+  },
+  {
+    "source": "consumer_electronics_cpi",
+    "target": "pce",
+    "direction": 1,
+    "label": "Electronics costs feed PCE",
+    "lag_days": 30,
+    "confidence": 2,
+    "notes": "The same AI memory cost pass-through that affects CPI also feeds PCE's goods component; the Fed's preferred inflation gauge will reflect Apple and OEM hardware price hikes over coming months, adding stickiness to already-elevated core PCE.",
+    "magnitude": null
+  },
+  {
+    "source": "micron_stock",
+    "target": "hbm_memory_market",
+    "direction": 1,
+    "label": "Micron earnings reveal HBM pricing power",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Micron's Q3 results (gross margin 84.9%, up from 39% YoY; $50B Q4 revenue guide) are the clearest real-world signal of HBM pricing and demand conditions; the earnings serve as a leading indicator for the HBM market cycle.",
+    "magnitude": null
+  },
+  {
+    "source": "micron_stock",
+    "target": "ai_roi_sentiment",
+    "direction": 1,
+    "label": "Blowout earnings validate AI demand cycle",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Micron's quadrupling of revenue and 16 long-term supply contracts directly rebutted the AI ROI skepticism that drove the June 23 tech selloff; analysts cited the results as 'reinforcing the narrative that capex on AI continues to accelerate'.",
+    "magnitude": null
+  },
+  {
+    "source": "fed_stress_test_result",
+    "target": "bank_dividend_capacity",
+    "direction": 1,
+    "label": "Stress test pass enables payout increases",
+    "lag_days": 1,
+    "confidence": 3,
+    "notes": "All 32 banks passed the 2026 stress test; with stress capital buffers frozen until 2027, banks immediately announced dividend hikes (JPM +10%, GS +11%, MS +15%) and new buyback authorisations, directly increasing capital return flows to shareholders.",
+    "magnitude": null
+  },
+  {
+    "source": "bank_dividend_capacity",
+    "target": "sec_financials",
+    "direction": 1,
+    "label": "Higher dividends lift financials sector",
+    "lag_days": 1,
+    "confidence": 3,
+    "notes": "Dividend increases and buyback authorisations are direct positive catalysts for bank equity valuations; JPM, GS, MS all traded higher after-hours on June 24 following the stress test and payout announcements, lifting the financials sector.",
+    "magnitude": null
+  },
+  {
+    "source": "bank_dividend_capacity",
+    "target": "hy_spreads",
+    "direction": -1,
+    "label": "Healthy banks compress credit spreads",
+    "lag_days": 7,
+    "confidence": 2,
+    "notes": "A clean stress test pass signals systemic banking resilience, reducing tail risk perceptions and compressing HY and IG credit spreads modestly; the frozen SCB and immediate payout authorisations reinforce the 'strong financial system' narrative.",
+    "magnitude": null
+  },
+  {
+    "source": "bank_dividend_capacity",
+    "target": "corporate_ig_spreads",
+    "direction": -1,
+    "label": "Banking health supports IG credit",
+    "lag_days": 7,
+    "confidence": 2,
+    "notes": "Strong stress test results signal lower systemic risk, supporting IG corporate credit markets via the financial intermediation channel; banks' ability to lend without capital constraint reduces IG spread risk premiums.",
+    "magnitude": null
+  },
+  {
+    "source": "fed",
+    "target": "fed_stress_test_result",
+    "direction": 1,
+    "label": "Fed administers and publishes stress tests",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "The Federal Reserve is the sole administrator of annual bank stress tests; its methodology, scenario severity, and capital buffer policy decisions directly determine whether banks pass and what capital return actions are enabled.",
+    "magnitude": null
+  },
+  {
+    "source": "pce",
+    "target": "fed_dot_plot",
+    "direction": 1,
+    "label": "PCE path shapes dot plot rate projections",
+    "lag_days": 45,
+    "confidence": 3,
+    "notes": "May PCE at 4.1% YoY / 3.4% core (highest since Oct 2023) directly informs the Fed's inflation trajectory assumptions; Warsh's first FOMC already raised PCE forecasts to 3.6% headline and 3.3% core for 2026, making in-line PCE a stabiliser rather than a surprise.",
+    "magnitude": null
+  },
+  {
+    "source": "hbm_memory_market",
+    "target": "consumer_sent",
+    "direction": -1,
+    "label": "Memory inflation passes through to consumer goods prices",
+    "lag_days": 60,
+    "confidence": 2,
+    "notes": "Apple's MacBook/iPad price hikes of 15-25% represent the first visible consumer-facing transmission of AI memory inflation; as this spreads across OEMs (Microsoft Xbox also hiked), consumer sentiment is pressured by higher technology product prices.",
+    "magnitude": null
+  },
+  {
+    "source": "oman_government",
+    "target": "strait_of_hormuz_status",
+    "direction": 1,
+    "label": "Omani territorial corridor enables non-Iranian route",
+    "lag_days": 1,
+    "confidence": 3,
+    "notes": "Oman's agreement to host UK/France naval cooperation in its territorial waters formalises the southern Omani-coast corridor as the legally distinct alternative to Iranian-controlled northern lanes; without Omani consent, the alternative route would lack legitimacy and enforcement support.",
+    "magnitude": null
+  },
+  {
+    "source": "multinational_military_mission",
+    "target": "strait_of_hormuz_status",
+    "direction": 1,
+    "label": "Naval escort mission reduces closure risk",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "The 40+ nation naval coalition's presence \u2014 including French minehunters clearing IRGC-laid mines and escort frigates \u2014 materially reduces the probability that IRGC harassment or mine threats can fully close the Omani corridor, providing a floor on strait openness.",
+    "magnitude": null
+  },
+  {
+    "source": "multinational_military_mission",
+    "target": "global_shipping_risk",
+    "direction": -1,
+    "label": "Coalition escort lowers transit risk",
+    "lag_days": 3,
+    "confidence": 2,
+    "notes": "Organised escort and demining operations reduce the risk that commercial vessels face in transiting the strait; Lloyd's List data showed 258 transits in the week of the June 28 IRGC attacks, up from 138 the prior week, suggesting escorts and route management are partially effective.",
+    "magnitude": null
+  },
+  {
+    "source": "multinational_military_mission",
+    "target": "shipping_war_risk_insurance",
+    "direction": -1,
+    "label": "Naval presence reduces war risk premiums",
+    "lag_days": 7,
+    "confidence": 2,
+    "notes": "A credible naval escort and mine-clearing operation reduces the actuarial risk that underwriters must price, compressing war risk premiums and making Hormuz transits economically viable for more commercial operators.",
+    "magnitude": null
+  },
+  {
+    "source": "shipping_war_risk_insurance",
+    "target": "global_shipping_risk",
+    "direction": 1,
+    "label": "High war risk premiums deter transits",
+    "lag_days": 1,
+    "confidence": 3,
+    "notes": "When war risk insurance premiums spike above operators' margin tolerance, vessels divert or anchor rather than transit; this is a key market-based amplifier of geopolitical shipping risk into actual supply disruption \u2014 distinct from physical closure.",
+    "magnitude": null
+  },
+  {
+    "source": "shipping_war_risk_insurance",
+    "target": "wti",
+    "direction": 1,
+    "label": "Transit cost risk embeds oil price premium",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "Elevated war risk insurance premiums add a cost floor to Hormuz-transiting oil that raises effective delivered prices, maintaining a geopolitical risk premium in WTI and Brent even when the strait is physically open.",
+    "magnitude": null
+  },
+  {
+    "source": "hormuz_route_sovereignty_dispute",
+    "target": "mou_implementation_risk",
+    "direction": 1,
+    "label": "Route sovereignty contest is core MOU breakdown risk",
+    "lag_days": 1,
+    "confidence": 3,
+    "notes": "Iran's assertion that all Hormuz traffic must use Iranian-approved lanes (and pay potential fees post-60-day window) directly conflicts with the Western/Omani position; Ghalibaf stated 'traffic in the strait is subject to arrangements determined by Iran' \u2014 this dispute is the single most likely cause of MOU collapse before August 21.",
+    "magnitude": null
+  },
+  {
+    "source": "irgc",
+    "target": "gulf_state_security_risk",
+    "direction": 1,
+    "label": "IRGC strikes on Gulf bases",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "The IRGC's June 28 missile and drone strikes on US bases in Kuwait and Bahrain demonstrate its willingness to attack GCC territory; this directly elevates Gulf state security risk, threatening to draw GCC states into the conflict and destabilise Saudi/UAE/Qatar energy infrastructure.",
+    "magnitude": null
+  },
+  {
+    "source": "gulf_state_security_risk",
+    "target": "wti",
+    "direction": 1,
+    "label": "GCC attacks risk Gulf energy supply",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "IRGC attacks on GCC territory threaten Gulf oil production, refining, and export infrastructure; a sustained campaign against Bahrain, Kuwait, or UAE energy assets would be a direct supply shock to global oil markets, adding a GCC-tail-risk premium to oil prices.",
+    "magnitude": null
+  },
+  {
+    "source": "gulf_state_security_risk",
+    "target": "mideast_geopolitical_risk",
+    "direction": 1,
+    "label": "GCC conflict expands regional risk",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "IRGC strikes on Kuwait and Bahrain widen the conflict beyond the Iran-US-Israel triangle to include GCC states, materially expanding the scope of Middle East geopolitical risk and the number of potential escalation vectors.",
+    "magnitude": null
+  },
+  {
+    "source": "oman_government",
+    "target": "mou_implementation_risk",
+    "direction": -1,
+    "label": "Oman mediation reduces MOU breakdown risk",
+    "lag_days": 3,
+    "confidence": 2,
+    "notes": "Oman is trusted by both Tehran and Washington as a neutral intermediary; its active role in managing the Omani corridor and mediating transit disputes reduces (but does not eliminate) the probability of full MOU breakdown, as it provides a face-saving mechanism for both sides.",
+    "magnitude": null
+  },
+  {
+    "source": "oman_government",
+    "target": "hormuz_route_sovereignty_dispute",
+    "direction": -1,
+    "label": "Oman's coastal authority provides legal basis for alternative route",
+    "lag_days": 1,
+    "confidence": 3,
+    "notes": "Under UNCLOS, Oman has sovereign rights over its territorial waters; vessels transiting the Omani coastal corridor are under Omani jurisdiction, not Iranian, giving the alternative route a legally defensible basis that Iran cannot easily challenge without attacking Omani sovereign territory \u2014 a major escalation threshold.",
+    "magnitude": null
+  },
+  {
+    "source": "irgc",
+    "target": "hormuz_route_sovereignty_dispute",
+    "direction": 1,
+    "label": "IRGC attacks on Omani-corridor vessels escalate dispute",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "The IRGC's attacks on cargo ships using the UN-endorsed Omani corridor (June 25, 27 attacks) directly operationalise the sovereignty dispute; each attack is an assertion that Iran controls even Omani-corridor transits, forcing vessels to choose between Iranian compliance and Western escort protection.",
+    "magnitude": null
+  },
+  {
+    "source": "multinational_military_mission",
+    "target": "defense_sector",
+    "direction": 1,
+    "label": "Naval mission boosts defense procurement",
+    "lag_days": 30,
+    "confidence": 1,
+    "notes": "A 40+ nation coalition naval deployment in the Gulf sustains elevated defense spending and procurement demand for naval assets, mine countermeasure systems, and maritime patrol aircraft \u2014 a modest but real positive signal for the defense and aerospace sector.",
+    "magnitude": null
+  },
+  {
+    "source": "executive",
+    "target": "us_iran_mou_status",
+    "direction": -1,
+    "label": "Trump blockade reinstatement collapses MOU",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Trump's Truth Social announcement on July 13 reinstating the blockade is a unilateral executive action that effectively terminates the operational basis of the June 17 MOU; no Congressional action required \u2014 the president's commander-in-chief authority over naval blockade is the operative mechanism.",
+    "magnitude": null
+  },
+  {
+    "source": "us_iran_mou_status",
+    "target": "iran_oil_sanctions_status",
+    "direction": 1,
+    "label": "MOU collapse re-tightens sanctions trajectory",
+    "lag_days": 7,
+    "confidence": 3,
+    "notes": "MOU collapse reactivates the pathway to reimposing full sanctions; General License X expires August 21 and will not be renewed if the MOU is dead; Iran oil export volume and supply glut risk immediately begin reversing.",
+    "magnitude": null
+  },
+  {
+    "source": "us_iran_mou_status",
+    "target": "global_oil_supply_glut_risk",
+    "direction": -1,
+    "label": "MOU collapse removes Iranian supply",
+    "lag_days": 3,
+    "confidence": 3,
+    "notes": "With the MOU collapsed and blockade reinstated, Iranian oil exports face reimposed constraints; the supply glut risk from General License X reverses, removing the downward oil price pressure that had been suppressing WTI since June 22.",
+    "magnitude": null
+  },
+  {
+    "source": "hormuz_cargo_toll",
+    "target": "hormuz_route_sovereignty_dispute",
+    "direction": 1,
+    "label": "US toll claim mirrors and escalates Iranian toll demand",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "By claiming a 20% cargo toll for US protection services, Trump has ironically adopted the same tolling logic Iran was asserting; this creates a three-way sovereignty dispute (US, Iran, UNCLOS/international law) that makes near-term resolution of the Hormuz governance question structurally harder.",
+    "magnitude": null
+  },
+  {
+    "source": "hormuz_cargo_toll",
+    "target": "shipping_war_risk_insurance",
+    "direction": 1,
+    "label": "Toll uncertainty adds insurance cost layer",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "A US-claimed 20% cargo toll creates legal and financial uncertainty for commercial operators about their total cost of Hormuz transit \u2014 layered on top of war risk premiums \u2014 making the effective cost of transit even higher and further deterring non-critical voyages.",
+    "magnitude": null
+  },
+  {
+    "source": "hormuz_cargo_toll",
+    "target": "global_shipping_risk",
+    "direction": 1,
+    "label": "US toll threat deters transits",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "A 20% cargo levy, even if legally unenforceable, creates compliance uncertainty that discourages vessel operators from transiting Hormuz until the toll's legal status is clarified, effectively reducing transit volume and increasing global shipping disruption risk.",
+    "magnitude": null
+  },
+  {
+    "source": "mideast_geopolitical_risk",
+    "target": "fed_dot_plot",
+    "direction": 1,
+    "label": "Geopolitical oil shock raises Fed rate projection",
+    "lag_days": 30,
+    "confidence": 2,
+    "notes": "Markets repriced to at least one 25bp rate hike by year-end on July 13 (LSEG data) driven by the oil shock's inflation implications; this shift in market pricing anticipates a higher Fed dot plot at the next FOMC meeting as Warsh responds to sustained energy-driven CPI elevation.",
+    "magnitude": null
+  },
+  {
+    "source": "warsh_congressional_testimony",
+    "target": "fed_forward_guidance",
+    "direction": 1,
+    "label": "Congressional testimony updates guidance clarity",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Warsh's first Humphrey-Hawkins testimony is a major guidance event; his response to direct congressional questions about Iran war inflation, rate hike timing, and the Fed's reaction function will be parsed as the clearest signal of the Warsh Fed's policy stance under geopolitical stress.",
+    "magnitude": null
+  },
+  {
+    "source": "june_cpi_release",
+    "target": "fed_dot_plot",
+    "direction": 1,
+    "label": "June CPI outcome calibrates rate hike probability",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "The June CPI release (expected to show cooling from May's 4.1% YoY due to mid-June energy price declines) is the primary data input to FOMC rate expectations for the remainder of 2026; but the July 13 oil price spike means the July CPI will not replicate June's expected cooling, maintaining hike pressure.",
+    "magnitude": null
+  },
+  {
+    "source": "june_cpi_release",
+    "target": "yield_2y",
+    "direction": 1,
+    "label": "CPI surprise drives 2Y repricing",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "The 2Y Treasury yield is the most sensitive part of the curve to near-term Fed rate expectations; a CPI upside surprise would drive the 2Y significantly higher, steepening the yield curve and reinforcing hike expectations.",
+    "magnitude": null
+  },
+  {
+    "source": "gulf_state_security_risk",
+    "target": "oman_government",
+    "direction": -1,
+    "label": "IRGC Oman strikes undermine Omani mediation role",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "Iran's July 13 weekend strikes on Oman (alongside Jordan, Kuwait, Bahrain) represent a direct attack on the key mediator state; this materially weakens Oman's ability to play its neutral intermediary role and risks drawing Oman into the conflict, collapsing the Omani corridor framework.",
+    "magnitude": null
+  },
+  {
+    "source": "sec_energy",
+    "target": "spx",
+    "direction": 1,
+    "label": "Energy sector cushions SPX during oil spikes",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "On July 13, the Dow's fall was cushioned by rising energy stocks boosted by the oil price spike; the energy sector's positive correlation with oil and negative correlation with the rest of the market (via inflation channel) creates a partial natural hedge within SPX during oil shock events.",
+    "magnitude": null
+  },
+  {
+    "source": "canadian_wildfire_risk",
+    "target": "canada_us_tariff_rate",
+    "direction": 1,
+    "label": "Wildfire smoke pretext drives tariff escalation",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "Trump's explicit framing of wildfire smoke as a Canadian liability ('willful negligence') that 'must be added to tariffs' creates a novel environmental-to-trade-policy transmission channel; legally unprecedented but operationally plausible via executive Section 232/301 authority, making the tariff increase politically credible even if legally contested.",
+    "magnitude": null
+  },
+  {
+    "source": "usmca_status",
+    "target": "canada_us_tariff_rate",
+    "direction": 1,
+    "label": "USMCA non-renewal removes duty-free umbrella",
+    "lag_days": 30,
+    "confidence": 3,
+    "notes": "The Trump administration's refusal to renew USMCA in its current form in early July 2026 triggers a 10-year sunset period; while ~80% of Canadian goods remain duty-free in the interim, the non-renewal removes the structural protection that constrained tariff escalation on USMCA-covered goods and signals willingness to renegotiate from a position of tariff threat.",
+    "magnitude": null
+  },
+  {
+    "source": "executive",
+    "target": "usmca_status",
+    "direction": -1,
+    "label": "Trump declines USMCA renewal",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "The Trump administration's decision not to renew USMCA in early July 2026 is a unilateral executive action that activates the agreement's 10-year sunset clause; it removes the certainty premium that USMCA provided to Canadian and Mexican trade-exposed sectors and signals a broader renegotiation intent.",
+    "magnitude": null
+  },
+  {
+    "source": "canada_us_tariff_rate",
+    "target": "cadusd",
+    "direction": -1,
+    "label": "Higher US tariffs weaken Canadian dollar",
+    "lag_days": 1,
+    "confidence": 3,
+    "notes": "US tariff increases on Canadian goods directly reduce Canadian export revenues, current account inflows, and growth expectations, depressing demand for CAD; the Canadian dollar fell to a two-year low on July 17 following Trump's threat \u2014 consistent with the pattern seen during the 2025 tariff escalation episodes.",
+    "magnitude": null
+  },
+  {
+    "source": "canada_us_tariff_rate",
+    "target": "canada_lumber_exports",
+    "direction": -1,
+    "label": "Higher tariffs compress lumber export economics",
+    "lag_days": 7,
+    "confidence": 3,
+    "notes": "Canadian softwood lumber is already subject to US anti-dumping/countervailing duties; any additional wildfire-related tariff increase directly compresses Canadian lumber producers' US market access and export margins, reducing volumes and further disrupting already-tight North American lumber supply chains.",
+    "magnitude": null
+  },
+  {
+    "source": "canada_lumber_exports",
+    "target": "housing",
+    "direction": -1,
+    "label": "Lumber supply disruption raises construction costs",
+    "lag_days": 30,
+    "confidence": 2,
+    "notes": "Canada supplies ~25-30% of US softwood lumber used in housing construction; tariff-driven reductions in Canadian lumber availability raise US framing lumber prices, increasing new home construction costs and reducing housing market affordability and starts activity.",
+    "magnitude": null
+  },
+  {
+    "source": "canada_lumber_exports",
+    "target": "cpi",
+    "direction": 1,
+    "label": "Lumber tariffs feed into CPI via construction costs",
+    "lag_days": 60,
+    "confidence": 2,
+    "notes": "Higher lumber prices flow into CPI via the shelter/housing component (new home prices) and the building materials sub-index; the lag is 2-3 months from tariff to measurable CPI impact as construction contracts adjust.",
+    "magnitude": null
+  },
+  {
+    "source": "canada_us_tariff_rate",
+    "target": "canada_auto_sector",
+    "direction": -1,
+    "label": "Higher tariffs disrupt integrated auto supply chains",
+    "lag_days": 14,
+    "confidence": 3,
+    "notes": "The integrated US-Canada auto sector depends on USMCA's duty-free provisions for just-in-time cross-border parts flows; higher tariffs raise effective input costs on both sides of the border, with Canadian assembly plants considering redirecting exports to Latin America and US OEMs facing higher parts costs.",
+    "magnitude": null
+  },
+  {
+    "source": "canada_auto_sector",
+    "target": "cpi",
+    "direction": 1,
+    "label": "Auto parts tariffs feed into new vehicle CPI",
+    "lag_days": 90,
+    "confidence": 2,
+    "notes": "Higher tariff costs on Canadian auto parts flow through to US new vehicle sticker prices over a 3-6 month lag; this adds an additional CPI pressure channel alongside the energy and electronics inflation already embedded in the June-July 2026 data.",
+    "magnitude": null
+  },
+  {
+    "source": "canadian_wildfire_risk",
+    "target": "us_air_quality_shock",
+    "direction": 1,
+    "label": "Wildfire smoke degrades US air quality",
+    "lag_days": 1,
+    "confidence": 3,
+    "notes": "Canadian wildfire smoke is the direct physical cause of the US air quality emergency; 896 active fires in July 2026 with 100M+ Americans under air quality alerts across 18 states and DC is the largest wildfire smoke event to affect the northeastern US since 2023.",
+    "magnitude": null
+  },
+  {
+    "source": "us_air_quality_shock",
+    "target": "consumer_sent",
+    "direction": -1,
+    "label": "Air quality emergency dampens consumer activity",
+    "lag_days": 7,
+    "confidence": 2,
+    "notes": "Widespread air quality alerts suppress outdoor economic activity (hospitality, recreation, construction, outdoor retail), reduce consumer confidence via health anxiety, and generate measurable healthcare cost spikes (30% respiratory admission increase); the University of Michigan July consumer sentiment reading (due Friday July 18) may reflect this.",
+    "magnitude": null
+  },
+  {
+    "source": "us_air_quality_shock",
+    "target": "gdp",
+    "direction": -1,
+    "label": "Smoke event suppresses labour productivity and outdoor activity",
+    "lag_days": 30,
+    "confidence": 1,
+    "notes": "Speculative but directionally clear: sustained air quality emergencies reduce hours worked in outdoor-exposed sectors (construction, agriculture, logistics), suppress consumer spending in affected regions, and generate healthcare costs; the GDP impact is likely modest and temporary but measurable in Q3 2026 regional data.",
+    "magnitude": null
+  },
+  {
+    "source": "canada_government",
+    "target": "usmca_status",
+    "direction": 1,
+    "label": "Carney government's USMCA renegotiation posture",
+    "lag_days": 14,
+    "confidence": 2,
+    "notes": "PM Carney's response to the tariff threat and USMCA non-renewal will shape the renegotiation dynamic; a conciliatory posture (offering forest management commitments or trade concessions) could partially restore the USMCA framework, while a retaliatory posture (counter-tariffs on US goods) would escalate the trade war.",
+    "magnitude": null
+  },
+  {
+    "source": "canada_us_tariff_rate",
+    "target": "dxy",
+    "direction": 1,
+    "label": "CAD weakness supports DXY",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "CAD is a component of the DXY basket; significant CAD weakness driven by US tariff escalation contributes modestly to DXY strength via the CAD component (CAD weight in DXY is ~9.1%).",
+    "magnitude": null
+  },
+  {
+    "source": "sec_realestate",
+    "target": "housing",
+    "direction": 1,
+    "label": "Real estate sector mirrors housing market conditions",
+    "lag_days": 30,
+    "confidence": 2,
+    "notes": "Rising lumber costs from Canadian tariff escalation raise new construction costs, suppressing housing starts and home builder margins; REITs and home builder equities (in sec_realestate) are direct second-order victims of Canadian lumber supply disruption.",
+    "magnitude": null
+  },
+  {
+    "source": "executive",
+    "target": "us_brazil_tariff_rate",
+    "direction": 1,
+    "label": "Section 301 action imposes 25% Brazil tariff",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "USTR concluded the Section 301 investigation at presidential direction on July 16, imposing 25% tariffs effective July 22 \u2014 a unilateral executive action under Section 301 of the Trade Act of 1974, which does not require Congressional authorisation and was used after the Supreme Court struck down Trump's earlier 50% tariff under separate authority.",
+    "magnitude": null
+  },
+  {
+    "source": "us_brazil_tariff_rate",
+    "target": "brlusd",
+    "direction": 1,
+    "label": "Higher US tariffs weaken Brazilian real",
+    "lag_days": 1,
+    "confidence": 3,
+    "notes": "US tariff escalation on Brazilian goods reduces export revenues, growth expectations, and investor risk appetite for Brazil, weakening BRL demand; the real has previously weakened sharply on Trump tariff announcements against Brazil (USD/BRL rallied from ~5.44 to ~5.63 on an earlier 50% tariff threat), and the July 16 action reprises this pattern.",
+    "magnitude": null
+  },
+  {
+    "source": "us_brazil_tariff_rate",
+    "target": "brazil_ethanol_exports",
+    "direction": -1,
+    "label": "25% tariff reduces Brazilian ethanol export economics",
+    "lag_days": 7,
+    "confidence": 3,
+    "notes": "Ethanol market access is explicitly one of the six Section 301 complaint areas; while the tariff is not specifically on ethanol, the broader trade environment and BRL weakness affect Brazilian ethanol producers' US market economics. The USTR's complaint that Brazil withdrew reciprocal ethanol treatment in 2017 signals US corn ethanol interests are a motivating constituency.",
+    "magnitude": null
+  },
+  {
+    "source": "brazil_ethanol_exports",
+    "target": "us_ethanol_market",
+    "direction": -1,
+    "label": "Brazilian ethanol access constraint benefits US corn ethanol",
+    "lag_days": 30,
+    "confidence": 2,
+    "notes": "Brazil's sugarcane ethanol is the primary global competitor to US corn ethanol; Section 301 action that restricts Brazilian ethanol access to US markets (or retains Brazil's own access barriers) provides a competitive benefit to US corn ethanol producers and the agricultural states that produce them.",
+    "magnitude": null
+  },
+  {
+    "source": "us_brazil_tariff_rate",
+    "target": "global_trade_fragmentation",
+    "direction": 1,
+    "label": "Section 301 escalation adds to fragmentation",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Brazil's 25% tariff joins simultaneous escalations against Canada (wildfire tariff threat + USMCA non-renewal) and ongoing probes against China, Mexico, Japan, and the EU; the aggregate effect is a structural increase in global trade fragmentation that raises supply chain costs and reduces multilateral trade predictability.",
+    "magnitude": null
+  },
+  {
+    "source": "global_trade_fragmentation",
+    "target": "cpi",
+    "direction": 1,
+    "label": "Trade fragmentation raises import prices and supply chain costs",
+    "lag_days": 90,
+    "confidence": 2,
+    "notes": "Higher effective tariff rates across multiple trading partners raise the cost of imported goods and intermediate inputs, passing through to consumer prices over a 2-4 month lag; the simultaneous Canada and Brazil escalations compound this channel alongside the Iran energy shock and AI memory inflation already in the CPI pipeline.",
+    "magnitude": null
+  },
+  {
+    "source": "global_trade_fragmentation",
+    "target": "gdp",
+    "direction": -1,
+    "label": "Fragmentation reduces trade efficiency and growth",
+    "lag_days": 90,
+    "confidence": 2,
+    "notes": "Increasing bilateral tariff disputes reduce the efficiency of global supply chains, raise costs for US firms relying on imported inputs, and suppress export opportunities as trading partners retaliate; the GDP drag is distributed across multiple quarters and most acute in trade-exposed manufacturing sectors.",
+    "magnitude": null
+  },
+  {
+    "source": "brazil_government",
+    "target": "us_audiovisual_ip_risk",
+    "direction": 1,
+    "label": "Brazil Reciprocity Law targets US IP/audiovisual sector",
+    "lag_days": 14,
+    "confidence": 2,
+    "notes": "Brazil's retaliatory options under the Reciprocity Law include restrictions on US audiovisual companies' revenue repatriation, suspension of US pharmaceutical and agricultural patents, and dividend/royalty remittance curbs \u2014 measures explicitly designed to pressure US corporate interests without raising Brazilian consumer prices.",
+    "magnitude": null
+  },
+  {
+    "source": "us_audiovisual_ip_risk",
+    "target": "sec_tech",
+    "direction": -1,
+    "label": "IP/audiovisual restrictions hit US tech and media",
+    "lag_days": 30,
+    "confidence": 2,
+    "notes": "US technology companies (Google, Apple, Meta, Netflix) and pharmaceutical firms operating in Brazil face revenue risk if Brazil invokes patent suspension or audiovisual licensing restrictions under the Reciprocity Law; Brazil is a top-10 revenue market for US tech and streaming platforms.",
+    "magnitude": null
+  },
+  {
+    "source": "brazil_government",
+    "target": "wto_dispute_risk",
+    "direction": 1,
+    "label": "Brazil files WTO dispute settlement",
+    "lag_days": 30,
+    "confidence": 3,
+    "notes": "Lula explicitly vowed to pursue WTO dispute settlement alongside domestic Reciprocity Law measures; Brazil has already invoked WTO mechanisms against prior Trump tariffs and has legal standing given the US has a goods and services trade surplus with Brazil ($424.5B cumulative over 15 years), making the US deficit-justification for Section 301 particularly legally exposed.",
+    "magnitude": null
+  },
+  {
+    "source": "wto_dispute_risk",
+    "target": "global_trade_fragmentation",
+    "direction": 1,
+    "label": "WTO dispute proliferation signals multilateral system stress",
+    "lag_days": 90,
+    "confidence": 2,
+    "notes": "Multiple simultaneous WTO dispute filings against US Section 301 actions (Brazil, and potential future filings from Canada, Mexico, Japan, EU) signal structural stress on the multilateral trading system; even if cases are ultimately resolved, the dispute pipeline increases trade uncertainty and fragmentation risk over a 2-4 year horizon.",
+    "magnitude": null
+  },
+  {
+    "source": "us_brazil_tariff_rate",
+    "target": "brazil_ag_exports",
+    "direction": -1,
+    "label": "25% tariff reduces non-exempt Brazilian ag competitiveness",
+    "lag_days": 14,
+    "confidence": 2,
+    "notes": "While beef, coffee, OJ, and some energy products are exempt, non-exempt Brazilian agricultural and processed food exports face the full 25% tariff from July 22; BRL weakness partially offsets the tariff burden for Brazilian exporters but compresses margins on dollar-denominated contracts.",
+    "magnitude": null
+  },
+  {
+    "source": "brlusd",
+    "target": "dxy",
+    "direction": 1,
+    "label": "BRL weakness supports DXY via EM component",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "While BRL is not a direct DXY component, BRL is a significant EM currency proxy; USD strength against BRL contributes to broad USD appreciation versus EM currencies, supporting DXY through risk-off and dollar demand channels.",
+    "magnitude": null
+  },
+  {
+    "source": "brazil_election_2026",
+    "target": "brazil_government",
+    "direction": 1,
+    "label": "Election pressure shapes Lula's retaliatory posture",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Lula's 45% vs Bolsonaro's 37% polling lead in October 2026 election context means he faces domestic pressure to be seen as strong against US tariffs; this makes a conciliatory resolution less likely in the near term and retaliatory escalation more politically incentivised, shaping the bilateral trade dynamic through Q3 2026.",
+    "magnitude": null
+  },
+  {
+    "source": "executive",
+    "target": "global_trade_fragmentation",
+    "direction": 1,
+    "label": "Section 301 programme expands trade war breadth",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "USTR has announced Section 301 probes into Brazil, China, Mexico, Japan, and the EU simultaneously; Brazil's July 16 finalisation is the first completed action in this broader programme, signalling that Section 301 is now the Trump administration's primary tariff tool following the Supreme Court's February 2026 invalidation of reciprocal tariffs.",
+    "magnitude": null
+  },
+  {
+    "source": "hormuz_transit_volume",
+    "target": "strait_of_hormuz_status",
+    "direction": 1,
+    "label": "Transit volume is primary observable of strait status",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "The daily Kpler transit count is the most observable, real-time proxy for whether the Strait of Hormuz is functionally open or closed; a reading of 8 transits/day vs 100+ pre-war represents a ~92% functional closure even if Trump claims the strait is 'open'.",
+    "magnitude": null
+  },
+  {
+    "source": "ais_transponder_dark_shipping",
+    "target": "hormuz_transit_volume",
+    "direction": -1,
+    "label": "AIS-off behaviour reduces observable transits",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "As crews switch off AIS transponders to avoid IRGC targeting, Kpler's transit count becomes an undercount; however the decision to go dark is itself a risk signal \u2014 it means vessels are crossing but in an uncoordinated, unescorted manner that increases collision and targeting risk.",
+    "magnitude": null
+  },
+  {
+    "source": "irgc",
+    "target": "gps_spoofing_hormuz",
+    "direction": 1,
+    "label": "IRGC deploys electronic warfare in Hormuz",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "GPS spoofing in the Hormuz region is attributed to IRGC electronic warfare units; it causes vessel tracking systems to show false positions, enabling ambushes, undermining convoy coordination, and creating navigational hazards that compound physical attack risks.",
+    "magnitude": null
+  },
+  {
+    "source": "gps_spoofing_hormuz",
+    "target": "shipping_war_risk_insurance",
+    "direction": 1,
+    "label": "GPS spoofing raises navigational risk premium",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "Insurance underwriters explicitly factor GPS spoofing into war risk premium calculations because it increases the probability of vessels navigating into Iranian territorial waters (triggering legal/military exposure) and reduces convoy coordination effectiveness.",
+    "magnitude": null
+  },
+  {
+    "source": "gps_spoofing_hormuz",
+    "target": "ais_transponder_dark_shipping",
+    "direction": 1,
+    "label": "Spoofing drives AIS blackout decisions",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Crews that detect GPS spoofing often respond by switching off AIS to avoid being tracked based on their spoofed (false) position; this creates a feedback loop where IRGC electronic warfare increases dark shipping, which in turn reduces the military coalition's ability to provide effective escort protection.",
+    "magnitude": null
+  },
+  {
+    "source": "houthi_threat",
+    "target": "red_sea_shipping_risk",
+    "direction": 1,
+    "label": "Houthi re-entry threatens Red Sea lanes",
+    "lag_days": 3,
+    "confidence": 2,
+    "notes": "Iran's Houthi allies in Yemen have announced intentions to resume attacks on commercial shipping in the Red Sea and at Bab el-Mandeb in solidarity with Iran's Hormuz interdiction; if executed, this would close the last major alternative routing corridor for Gulf oil reaching Europe and Asia via Suez, compounding the Hormuz disruption.",
+    "magnitude": null
+  },
+  {
+    "source": "red_sea_shipping_risk",
+    "target": "global_shipping_risk",
+    "direction": 1,
+    "label": "Red Sea closure compounds global shipping disruption",
+    "lag_days": 1,
+    "confidence": 3,
+    "notes": "Red Sea / Bab el-Mandeb handles ~12% of global trade including Gulf oil exports to Europe; simultaneous Hormuz closure and Red Sea disruption would force all Gulf oil to route via the Cape of Good Hope, adding 10-14 days of transit time, spiking freight costs, and creating a supply crunch with no viable mitigation route.",
+    "magnitude": null
+  },
+  {
+    "source": "red_sea_shipping_risk",
+    "target": "wti",
+    "direction": 1,
+    "label": "Red Sea closure eliminates alternative route oil premium",
+    "lag_days": 1,
+    "confidence": 3,
+    "notes": "During the prior 2024-25 Houthi campaign, oil routed via the Red Sea received a supply-route premium; with both Hormuz and Red Sea threatened simultaneously, the market's ability to price in alternative routing is eliminated, creating a step-change upward in global oil price risk.",
+    "magnitude": null
+  },
+  {
+    "source": "iran_government",
+    "target": "houthi_threat",
+    "direction": 1,
+    "label": "Iran directs Houthi maritime strategy",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "The Houthi maritime campaign is coordinated with Iranian strategic direction; Iran's escalation of Hormuz interdiction and Houthi announcements of Red Sea entry appear synchronized, suggesting Tehran is deploying its full proxy maritime network to maximise chokepoint pressure on the US and Gulf states.",
+    "magnitude": null
+  },
+  {
+    "source": "hormuz_transit_volume",
+    "target": "lng_market",
+    "direction": 1,
+    "label": "Hormuz transits determine Gulf LNG availability",
+    "lag_days": 1,
+    "confidence": 3,
+    "notes": "No LNG tankers were visible on Kpler tracking transiting Hormuz on July 17; Qatar, Kuwait, and UAE LNG exports have no alternative to Hormuz, meaning the transit volume collapse directly eliminates Gulf LNG supply from global spot markets.",
+    "magnitude": null
+  },
+  {
+    "source": "hormuz_transit_volume",
+    "target": "global_oil_supply_glut_risk",
+    "direction": -1,
+    "label": "Low transits eliminate supply overhang",
+    "lag_days": 1,
+    "confidence": 3,
+    "notes": "The collapse in Hormuz transit volume from 100+/day to 8/day eliminates the supply overhang created by General License X; the supply glut risk indicator fully reverses as Iranian and Gulf oil is once again stranded behind the chokepoint.",
+    "magnitude": null
+  },
+  {
+    "source": "irgc",
+    "target": "hormuz_transit_volume",
+    "direction": -1,
+    "label": "IRGC attacks on vessels deter transits",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Nine ships attacked since July 6; the IRGC's systematic targeting of vessels on the Omani corridor route is the direct mechanism causing the transit volume collapse \u2014 operators rationally reduce transits when attack probability per voyage rises above insurance/cargo-loss tolerance thresholds.",
+    "magnitude": null
+  },
+  {
+    "source": "multinational_military_mission",
+    "target": "hormuz_transit_volume",
+    "direction": 1,
+    "label": "Coalition escort operations support transit volume",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "The US-led multinational naval coalition's escort operations on the Omani corridor are the primary mechanism enabling the residual 8 transits/day; without coalition protection, transit volume would likely approach zero. The coalition's effectiveness is degraded by GPS spoofing, AIS-off decisions, and IRGC mine-laying.",
+    "magnitude": null
+  },
+  {
+    "source": "mojtaba_khamenei",
+    "target": "iran_supreme_leader_regime",
+    "direction": -1,
+    "label": "Dynastic succession weakens Supreme Leader legitimacy",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Mojtaba Khamenei's succession from his father Ali is viewed by significant elements within the clerical establishment as an illegitimate dynastic transfer inconsistent with Iran's constitutional framework; this legitimacy deficit reduces his ability to impose discipline on IRGC commanders who opposed his appointment and reduces the institution's coercive authority over the security apparatus.",
+    "magnitude": null
+  },
+  {
+    "source": "iran_supreme_leader_regime",
+    "target": "iran_irgc_civilian_split",
+    "direction": 1,
+    "label": "Weakened Supreme Leader enables IRGC autonomy",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "A Supreme Leader with contested legitimacy has reduced capacity to impose his preferences on IRGC commanders; the IRGC's reported blocking of Pezeshkian's presidential appointments and security cordon around Mojtaba suggest the IRGC is filling the power vacuum created by the leadership transition, widening the civilian-military split.",
+    "magnitude": null
+  },
+  {
+    "source": "iran_irgc_civilian_split",
+    "target": "iran_ceasefire_compliance_capacity",
+    "direction": -1,
+    "label": "IRGC autonomy degrades ceasefire compliance",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "This is the core structural finding of the CNBC article: when IRGC commanders exercise operational autonomy independent of civilian government direction, ceasefire commitments made by the civilian/diplomatic channel (Ghalibaf, Gharibabadi, Pezeshkian) cannot be enforced on tactical IRGC naval and drone units \u2014 making every ceasefire structurally fragile regardless of Iranian government sincerity.",
+    "magnitude": null
+  },
+  {
+    "source": "iran_ceasefire_compliance_capacity",
+    "target": "mou_implementation_risk",
+    "direction": -1,
+    "label": "Low compliance capacity raises MOU breakdown probability",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Iran's structural inability to enforce IRGC compliance with MOU commitments is the primary mechanism behind MOU implementation risk; the CNBC piece formalises this as a structural (not episodic) constraint, meaning MOU implementation risk remains elevated even if Iran's stated diplomatic intentions are genuine.",
+    "magnitude": null
+  },
+  {
+    "source": "iran_ceasefire_compliance_capacity",
+    "target": "us_iran_mou_status",
+    "direction": 1,
+    "label": "Structural compliance deficit makes MOU collapse recurring",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "The IRGC-civilian split means any future MOU or ceasefire faces the same structural fragility as the June 17 agreement; markets should price in a structurally higher probability of ceasefire collapse in any Iran deal, not treat each breakdown as an idiosyncratic event.",
+    "magnitude": null
+  },
+  {
+    "source": "irgc",
+    "target": "iran_irgc_civilian_split",
+    "direction": 1,
+    "label": "IRGC institutional expansion widens civilian split",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "The IRGC controls missiles, drones, intelligence networks, regional armed partnerships, and \u2014 critically \u2014 proxy relationships with Hezbollah, Houthis, and Iraqi militias; this institutional dominance over all kinetic instruments means civilian government decisions on ceasefire are structurally dependent on IRGC cooperation that is not guaranteed.",
+    "magnitude": null
+  },
+  {
+    "source": "iran_government",
+    "target": "iran_ceasefire_compliance_capacity",
+    "direction": 1,
+    "label": "Civilian government shapes diplomacy but not armed forces",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Pezeshkian's civilian government can negotiate, sign, and publicly commit to ceasefire terms, but \u2014 per Chatham House's Vakil \u2014 'does not command the armed forces'; this structural gap means civilian diplomatic capacity and actual compliance capacity are partially decoupled, creating the appearance of Iranian compliance intent without enforcement ability.",
+    "magnitude": null
+  },
+  {
+    "source": "mojtaba_khamenei",
+    "target": "irgc",
+    "direction": 1,
+    "label": "Supreme Leader nominally directs IRGC but grip contested",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "The IRGC answers directly to the Supreme Leader constitutionally, but IRGC commanders who opposed Mojtaba's succession have partially insulated themselves from his direction; the reported security cordon around Mojtaba by IRGC units suggests a complex relationship where the IRGC controls the Supreme Leader's physical security while also being his nominal subordinates.",
+    "magnitude": null
+  },
+  {
+    "source": "iran_irgc_civilian_split",
+    "target": "hormuz_route_sovereignty_dispute",
+    "direction": 1,
+    "label": "IRGC asserts Hormuz sovereign rights autonomously",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "The Hormuz sovereignty dispute is operationally an IRGC matter \u2014 it is IRGC naval units that enforce route rules, conduct interdictions, and lay mines \u2014 meaning any diplomatic resolution of the sovereignty question requires IRGC implementation that the civilian government cannot guarantee; this makes the dispute structurally harder to resolve than a pure state-to-state negotiation.",
+    "magnitude": null
+  },
+  {
+    "source": "iran_ceasefire_compliance_capacity",
+    "target": "shipping_war_risk_insurance",
+    "direction": -1,
+    "label": "Low compliance capacity keeps insurance premiums elevated",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "Insurance underwriters price war risk based on the probability of vessel attack; Iran's structural inability to enforce IRGC compliance means even a new ceasefire announcement should be priced with a high probability of breakdown, sustaining elevated war risk insurance premiums as a structural floor.",
+    "magnitude": null
+  },
+  {
+    "source": "iran_cyberattack_capability",
+    "target": "mideast_geopolitical_risk",
+    "direction": 1,
+    "label": "Iranian cyber escalation broadens conflict scope",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "Iran's cyberattack on Minnesota critical infrastructure (Aug 1 CNN context) demonstrates a non-kinetic escalation tool that Iran can deploy against US domestic targets without triggering the same military retaliation threshold as Hormuz vessel attacks; this broadens the conflict's risk surface beyond the Gulf and maritime domain.",
+    "magnitude": null
+  },
+  {
+    "source": "iran_cyberattack_capability",
+    "target": "vix",
+    "direction": 1,
+    "label": "Critical infrastructure cyber risk elevates market volatility",
+    "lag_days": 1,
+    "confidence": 1,
+    "notes": "Speculative but directional: successful Iranian cyberattacks on US critical infrastructure (power grids, water, financial systems) would generate tail-risk repricing in equity markets; Trump's downplaying of the Minnesota attack suggests the administration is managing the signal, but the capability demonstration itself raises VIX risk premia.",
+    "magnitude": null
+  },
+  {
+    "source": "pakistan_government",
+    "target": "iran_ceasefire_compliance_capacity",
+    "direction": 1,
+    "label": "Pakistan mediation partially bridges compliance gap",
+    "lag_days": 3,
+    "confidence": 2,
+    "notes": "Pakistan's role as ceasefire mediator (including the April 8 ceasefire and subsequent engagement) involves direct communication with both the Iranian civilian government and \u2014 through backchannel military contacts \u2014 the IRGC command; this gives Pakistan a partial ability to improve compliance capacity by engaging both channels simultaneously, though the IRGC-civilian split ultimately limits its effectiveness.",
+    "magnitude": null
+  },
+  {
+    "source": "wti",
+    "target": "yield_30y",
+    "direction": 1,
+    "label": "Oil-driven inflation expectations lift long-end yields",
+    "lag_days": 3,
+    "confidence": 3,
+    "notes": "WTI near $85 with Brent at $91 sustains elevated inflation expectations at the long end of the yield curve; the 30-year yield's move to a 19-year high is explicitly attributed to 'persistent inflation, particularly with oil prices remaining elevated' \u2014 the geopolitical energy shock is the primary driver of the term premium and breakeven component of the 30Y.",
+    "magnitude": null
+  },
+  {
+    "source": "yield_30y",
+    "target": "housing",
+    "direction": -1,
+    "label": "30Y yield drives mortgage rates and housing affordability",
+    "lag_days": 7,
+    "confidence": 3,
+    "notes": "The 30-year mortgage rate is directly benchmarked to the 30-year Treasury yield; at 5.31% on the 30Y, 30-year fixed mortgage rates are approaching 7.5-8%, severely compressing housing affordability and new home demand in an already constrained housing market.",
+    "magnitude": null
+  },
+  {
+    "source": "yield_30y",
+    "target": "sec_realestate",
+    "direction": -1,
+    "label": "Higher 30Y yield pressures REIT valuations",
+    "lag_days": 1,
+    "confidence": 3,
+    "notes": "REITs are duration-sensitive assets that trade inversely with long-term yields; 5.31% on the 30Y makes REIT dividend yields uncompetitive relative to risk-free long bonds, compressing REIT valuations across commercial and residential categories.",
+    "magnitude": null
+  },
+  {
+    "source": "yield_30y",
+    "target": "hy_spreads",
+    "direction": 1,
+    "label": "Higher risk-free long yield widens HY spread floor",
+    "lag_days": 5,
+    "confidence": 2,
+    "notes": "Rising risk-free yields at the long end raise the absolute cost of HY borrowing even if spreads remain stable; at 30Y over 5%, many HY issuers face total borrowing costs of 9-11%, compressing refinancing capacity and widening effective credit spreads for the most leveraged borrowers.",
+    "magnitude": null
+  },
+  {
+    "source": "fomc_dissent_hawkish_bloc",
+    "target": "fed_dot_plot",
+    "direction": 1,
+    "label": "Three-way dissent signals dot plot moving higher",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Hammack, Kashkari, and Logan's simultaneous dissent for a 25bp hike is the clearest signal yet that the Fed's dot plot will shift toward at least one hike by December 2026; markets moved from pricing a September hike to pricing a December hike on the dovish read of Warsh's press conference, but the dissent size signals the hold is increasingly fragile.",
+    "magnitude": null
+  },
+  {
+    "source": "fomc_dissent_hawkish_bloc",
+    "target": "yield_2y",
+    "direction": 1,
+    "label": "Hawkish dissent reprices near-term Fed expectations",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "The 2Y Treasury yield is the most rate-expectation-sensitive maturity; a three-way FOMC dissent for a hike directly reprices the 2Y higher as markets increase the probability of a December 2026 hike, compressing the yield curve further.",
+    "magnitude": null
+  },
+  {
+    "source": "warsh_meeting_schedule_reform",
+    "target": "fed_forward_guidance",
+    "direction": -1,
+    "label": "Fewer meetings reduce policy signal frequency",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Reducing from 8 to 6 annual FOMC meetings would double the inter-meeting interval from ~6 to ~8 weeks; this reduces the frequency of formal policy signals and projections updates, structurally elevating uncertainty about the Fed's reaction function and increasing the volatility of each remaining meeting.",
+    "magnitude": null
+  },
+  {
+    "source": "treasury_buyback_programme",
+    "target": "yield_30y",
+    "direction": -1,
+    "label": "Treasury buybacks reduce long-end supply pressure",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "The Treasury's announced step-up in longer-dated debt repurchases temporarily reduces net supply at the long end of the curve, providing downward pressure on 30Y yields; the yields 'tumbled Wednesday' following the buyback announcement per the FOMC minutes source, confirming the transmission mechanism.",
+    "magnitude": null
+  },
+  {
+    "source": "us_iran_mou_status",
+    "target": "yield_30y",
+    "direction": 1,
+    "label": "No Iran talks / blockade intact sustains oil inflation risk at long end",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "Trump's August 17 confirmation that no Iran talks are scheduled and the naval blockade remains fully in effect removes the de-escalation scenario that would bring oil prices down and reduce long-end inflation expectations; the blockade-intact baseline sustains the term premium embedded in the 30Y.",
+    "magnitude": null
+  },
+  {
+    "source": "hbm_memory_market",
+    "target": "sec_tech",
+    "direction": -1,
+    "label": "Memory stock selloff leads broad tech weakness",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Western Digital -7%, Sandisk -9%, Marvell -8%, Seagate -9% on August 19 represent a continued rotation out of memory-adjacent chip stocks following the earlier Micron earnings euphoria; the selloff suggests investors are differentiating between AI GPU demand (strong) and broader memory/storage (softening) within the chip complex.",
+    "magnitude": null
+  },
+  {
+    "source": "us_retail_spending",
+    "target": "consumer_sent",
+    "direction": 1,
+    "label": "Retail earnings signal consumer spending health",
+    "lag_days": 7,
+    "confidence": 2,
+    "notes": "Walmart, Home Depot, Lowe's, and Target reporting in the August 18-22 window serve as the primary real-economy read on whether oil/energy inflation is suppressing consumer discretionary spending; their guidance on consumer health directly feeds into consumer sentiment readings.",
+    "magnitude": null
+  },
+  {
+    "source": "us_retail_spending",
+    "target": "fed_dot_plot",
+    "direction": 1,
+    "label": "Strong retail spending reduces urgency of cut, raises hike probability",
+    "lag_days": 30,
+    "confidence": 2,
+    "notes": "If Walmart et al report resilient consumer spending despite elevated oil prices, it removes a key argument against further tightening and supports the hawkish dissenters' case for a December hike; conversely, weak retail data would strengthen Warsh's case for patience.",
+    "magnitude": null
+  },
+  {
+    "source": "hyperscaler_custom_asic_risk",
+    "target": "nvidia_stock",
+    "direction": -1,
+    "label": "Custom ASIC development threatens Nvidia GPU demand",
+    "lag_days": 180,
+    "confidence": 2,
+    "notes": "Microsoft's Maia, Google's TPU v5, Amazon's Trainium 2, and Meta's MTIA are all in production or advanced development; as hyperscalers \u2014 Nvidia's largest customers \u2014 gradually shift workloads to custom silicon, Nvidia's addressable market shrinks at the margin; the timeline is 2-4 years but the risk is being actively priced by sophisticated investors.",
+    "magnitude": null
+  },
+  {
+    "source": "hugging_face",
+    "target": "ai_software_ecosystem",
+    "direction": 1,
+    "label": "Hugging Face is the primary open-source AI model distribution layer",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "With 18M developers and 3M+ models, Hugging Face is the dominant distribution and discovery layer for AI models globally; its acquisition by Nvidia effectively gives Nvidia ownership of the primary open-source AI software ecosystem, analogous to Microsoft's GitHub acquisition for software development.",
+    "magnitude": null
+  },
+  {
+    "source": "ai_software_ecosystem",
+    "target": "hyperscaler_custom_asic_risk",
+    "direction": -1,
+    "label": "Nvidia ecosystem control reduces custom ASIC switching value",
+    "lag_days": 90,
+    "confidence": 2,
+    "notes": "If Nvidia controls the dominant model hub and increasingly optimises models for CUDA/Nvidia architectures, the software switching cost of moving to custom ASICs increases \u2014 models may run less efficiently on non-Nvidia hardware \u2014 reducing the economic value of custom ASIC investments and slowing hyperscaler defection from Nvidia's ecosystem.",
+    "magnitude": null
+  },
+  {
+    "source": "nvidia_stock",
+    "target": "ai_capex_cycle",
+    "direction": 1,
+    "label": "Nvidia revenue is the leading indicator of AI capex",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Nvidia's $96.2B Q2 revenue and $108B Q3 guidance are the most direct observable signal of the AI capex cycle's current pace; supply-constrained guidance (demand exceeds what TSMC can manufacture) confirms the AI infrastructure buildout remains supply-limited rather than demand-limited \u2014 the most bullish possible signal for the capex cycle's durability.",
+    "magnitude": null
+  },
+  {
+    "source": "ai_capex_cycle",
+    "target": "tsmc_stock",
+    "direction": 1,
+    "label": "AI capex demand drives TSMC GPU wafer orders",
+    "lag_days": 30,
+    "confidence": 3,
+    "notes": "TSMC is the sole manufacturer of Nvidia's Blackwell Ultra GPUs; Nvidia's supply-constrained $108B Q3 guidance with Huang stating 'demand is running meaningfully higher' implies TSMC is at or near its advanced node capacity limit, directly supporting TSMC revenue and stock.",
+    "magnitude": null
+  },
+  {
+    "source": "nvidia_circular_financing_risk",
+    "target": "ai_roi_sentiment",
+    "direction": -1,
+    "label": "Circular financing concern weakens AI demand authenticity narrative",
+    "lag_days": 30,
+    "confidence": 2,
+    "notes": "If Nvidia is partially financing its own customers' GPU purchases via investment and lending arrangements, it creates doubt about whether AI capex demand is genuinely end-market-driven or artificially sustained by Nvidia's balance sheet; this directly undermines the AI ROI sentiment node that was already contested after the June 23 selloff.",
+    "magnitude": null
+  },
+  {
+    "source": "open_source_ai_ecosystem",
+    "target": "ai_software_ecosystem",
+    "direction": 1,
+    "label": "Open-source models are the primary driver of Hugging Face platform value",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "The open-source model ecosystem (Llama 3, Mistral, Falcon, Qwen) hosted on Hugging Face is what creates the platform's 18M developer user base; Nvidia's ability to sustain this community while maintaining platform neutrality (not favoring CUDA-optimised models) is the key post-acquisition strategic tension.",
+    "magnitude": null
+  },
+  {
+    "source": "hugging_face",
+    "target": "open_source_ai_ecosystem",
+    "direction": 1,
+    "label": "Hugging Face is the infrastructure of open-source AI",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Hugging Face hosts 3M+ models and serves as the primary distribution, versioning, and collaboration platform for open-source AI; its neutrality and openness has been the source of its developer adoption \u2014 Nvidia's promise to keep it 'an open platform for the entire AI ecosystem' will be tested against its commercial incentives.",
+    "magnitude": null
+  },
+  {
+    "source": "nvidia_groq_assets",
+    "target": "ai_software_ecosystem",
+    "direction": 1,
+    "label": "Groq inference + Hugging Face models = vertically integrated AI stack",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Nvidia's Groq acquisition (inference hardware) plus Hugging Face (model distribution) creates a vertically integrated position across training hardware (GPUs), inference hardware (Groq), and model ecosystem (Hugging Face) \u2014 analogous to Apple's hardware-software-services integration; this vertical integration reduces the ability of competitors to compete at individual stack layers.",
+    "magnitude": null
+  },
+  {
+    "source": "executive",
+    "target": "fed_political_independence_risk",
+    "direction": 1,
+    "label": "White House public rate demands elevate independence risk",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Vance's September 3 public statement calling for Fed rate cuts \u2014 'it would be nice to have some help from the Federal Reserve' \u2014 is the most explicit VP-level Fed pressure since Trump's first term; coming directly after Warsh hinted at a possible hike, this creates a visible public conflict between the White House and the Fed chair that markets must price as a risk to Fed credibility and independence.",
+    "magnitude": null
+  },
+  {
+    "source": "vance_fed_pressure",
+    "target": "fed_political_independence_risk",
+    "direction": 1,
+    "label": "Sustained political pressure raises independence risk",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "The Trump administration's sustained multi-voice campaign (Trump: 'US should have the lowest interest rate in the world'; Vance: rate cuts 'proper and responsible'; Bessent: bond market 'stable') creates a coordinated narrative environment that systematically pressures Warsh's independence; the more sustained and public the pressure, the higher the market risk premium on Fed credibility.",
+    "magnitude": null
+  },
+  {
+    "source": "fed_political_independence_risk",
+    "target": "yield_10y",
+    "direction": 1,
+    "label": "Independence risk raises term premium on Treasuries",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "If markets price a non-trivial probability that the Fed will capitulate to political pressure and cut rates while inflation remains above target, the term premium on Treasuries rises to compensate for the inflation risk; this creates a paradox where political pressure for rate cuts actually raises long-term yields \u2014 exactly the opposite of the White House's housing affordability objective.",
+    "magnitude": null
+  },
+  {
+    "source": "fed_political_independence_risk",
+    "target": "xauusd",
+    "direction": 1,
+    "label": "Fed independence erosion boosts gold as inflation hedge",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "Gold benefits from any scenario where the Fed's ability to maintain its anti-inflation mandate is credibly threatened; political pressure for premature rate cuts while CPI remains above 3% is a classic gold-positive signal, as it raises the probability of sustained above-target inflation that erodes real bond returns.",
+    "magnitude": null
+  },
+  {
+    "source": "fed_political_independence_risk",
+    "target": "dxy",
+    "direction": -1,
+    "label": "Independence erosion weakens USD via inflation credibility channel",
+    "lag_days": 3,
+    "confidence": 2,
+    "notes": "Foreign investor confidence in US Treasuries and the USD is partially a function of Fed credibility; perceptions that the Fed is politically captured reduce demand for USD-denominated assets, weakening the dollar; conversely, Waller's hold signal on September 3 (reducing immediate hike probability) sent yields lower and briefly weakened the DXY.",
+    "magnitude": null
+  },
+  {
+    "source": "waller_hold_signal",
+    "target": "yield_10y",
+    "direction": -1,
+    "label": "Hold signal reduces near-term hike expectations, lowers yields",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Waller's September 3 Reuters interview signal \u2014 'inclined to support holding' if disinflation continues \u2014 caused immediate yield declines across the curve, with the 10Y retreating from its near-3-year high of 4.8% toward 4.76%; the mechanism is straightforward: lower probability of a September hike \u2192 lower short-term rate expectations \u2192 lower 2Y and 10Y yields.",
+    "magnitude": null
+  },
+  {
+    "source": "waller_hold_signal",
+    "target": "fomc_dissent_hawkish_bloc",
+    "direction": -1,
+    "label": "Waller hold signal partially offsets dissent bloc hawkishness",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Waller's public inclination toward holding counterbalances the Hammack/Kashkari/Logan dissent bloc; if Waller (a Board member) signals hold while three regional presidents favour a hike, the September meeting is directionally a 9-3 or 10-2 hold \u2014 but Waller explicitly conditioned his signal on the September 11 CPI print, leaving the outcome genuinely open.",
+    "magnitude": null
+  },
+  {
+    "source": "sep_cpi_release",
+    "target": "fed_dot_plot",
+    "direction": 1,
+    "label": "September CPI is the knife-edge input to September FOMC",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Waller explicitly stated the September 16-17 FOMC meeting 'is going to be knife edge and it's going to come down to how the CPI data prints' on September 11; a hot CPI would push Waller toward a hike and potentially shift the dot plot higher for 2026, while a cool print validates the hold and keeps the dot plot stable.",
+    "magnitude": null
+  },
+  {
+    "source": "sep_cpi_release",
+    "target": "yield_10y",
+    "direction": 1,
+    "label": "Hot September CPI would spike yields toward 4.8%+",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Given the knife-edge framing, a CPI upside surprise on September 11 would immediately reprice hike probability higher and push the 10Y back toward and above its near-3-year high of 4.8%; the market's positioning ahead of the print was explicitly conditional on this binary outcome.",
+    "magnitude": null
+  },
+  {
+    "source": "vance_fed_pressure",
+    "target": "housing",
+    "direction": 1,
+    "label": "Rate cut demand framed around housing affordability",
+    "lag_days": 0,
+    "confidence": 1,
+    "notes": "Speculative/aspirational: Vance explicitly framed the rate cut demand around housing affordability ('Americans to be able to afford a home'); if the political pressure actually caused the Fed to cut, the direct transmission would be lower mortgage rates \u2192 improved housing affordability \u2192 housing market recovery; at confidence-1 because the channel is aspirational rather than operative given current Fed independence.",
+    "magnitude": null
+  },
+  {
+    "source": "bessent_bond_market_narrative",
+    "target": "fed_political_independence_risk",
+    "direction": 1,
+    "label": "Bessent's misleading stability claims undermine Treasury credibility",
+    "lag_days": 3,
+    "confidence": 2,
+    "notes": "Bessent's claim at G20 that the 10Y is 'flat since Trump came in' when it is actually up 18bps (by Bessent's own starting point selection) creates a credibility gap in Treasury communication that sophisticated investors discount; CNBC explicitly noted his claims 'skirt the truth or defy reason', raising the risk premium on Treasury communication and compounding Fed independence concerns.",
+    "magnitude": null
+  },
+  {
+    "source": "fed_chair_regime",
+    "target": "fed_political_independence_risk",
+    "direction": 1,
+    "label": "Warsh's Trump-selection provenance elevates independence risk baseline",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Warsh was explicitly Trump's 'handpicked Fed chair' \u2014 multiple CNBC sources emphasise this \u2014 which structurally elevates the market's prior probability that he might eventually accommodate political pressure; this makes every Warsh public statement interpreted through both a monetary policy lens AND an independence-signal lens, raising the volatility of his communications.",
+    "magnitude": null
+  },
+  {
+    "source": "nfp",
+    "target": "fed_dot_plot",
+    "direction": 1,
+    "label": "Strong NFP raises Fed rate projection and hike probability",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "The August 162,000 NFP print (vs 55,000 consensus) directly increased the CME FedWatch implied probability of a September hike from ~33% (post-Waller) to 60% in a single session; a strong labour market reading removes a key argument for the Fed to hold and supports the hawkish dissent bloc's case for a 25bp hike at the September 16-17 meeting.",
+    "magnitude": null
+  },
+  {
+    "source": "nfp",
+    "target": "yield_2y",
+    "direction": 1,
+    "label": "Strong payrolls spike short-end yields via hike repricing",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "The 2-year Treasury yield is the most sensitive maturity to near-term Fed rate expectations; the August NFP beat sent the 2Y to 4.4%, a 19-month high, as markets repriced from a 33% September hike probability to 60% in a single session \u2014 the largest single-session 2Y move since the June 2023 CPI print.",
+    "magnitude": null
+  },
+  {
+    "source": "trump_trade_ultimatum_fed",
+    "target": "fed_political_independence_risk",
+    "direction": 1,
+    "label": "Trade ultimatum escalates Fed independence threat to new level",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Trump's threat to use trade policy as a coercive lever against the Federal Reserve \u2014 'Lower the rate or I'll stop trading with countries with which we have a deficit' \u2014 represents a qualitative escalation beyond verbal pressure; it creates a new causal link between Fed independence risk and trade policy risk, and is the most direct threat to Fed operational independence since the first Trump term.",
+    "magnitude": null
+  },
+  {
+    "source": "trump_trade_ultimatum_fed",
+    "target": "global_trade_fragmentation",
+    "direction": 1,
+    "label": "Fed-trade ultimatum extends trade fragmentation risk to monetary policy channel",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "If the ultimatum is taken at face value, it threatens to halt trade with all countries running US trade deficits \u2014 which would include the EU, China, Japan, Germany, Vietnam, Ireland, and others simultaneously \u2014 representing a potential trade disruption order of magnitude larger than the Canada and Brazil Section 301 actions already in the graph.",
+    "magnitude": null
+  },
+  {
+    "source": "trump_trade_ultimatum_fed",
+    "target": "yield_10y",
+    "direction": -1,
+    "label": "Trade war threat partially offsets yield spike via growth-risk channel",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Trump's own trade war ultimatum paradoxically partially rallied Treasuries after the initial yield spike, as markets priced the growth destruction of a sweeping trade halt as a recession risk that would force the Fed to eventually cut \u2014 creating a self-contradicting dynamic where the ultimatum aimed at pressuring the Fed to cut rates actually created the growth risk scenario that might force a cut.",
+    "magnitude": null
+  },
+  {
+    "source": "bls_data_integrity",
+    "target": "nfp",
+    "direction": 1,
+    "label": "BLS integrity affects market weight placed on NFP data",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Following the firing of BLS Commissioner McEntarfer in 2025 and replacement with Heritage Foundation's AJ Antoni, some market participants apply a credibility discount to BLS payroll data; the August revision from -23,000 to +21,000 (a 44,000 swing on the prior month) and the composition quality issues (62% in food/government, 98% female) increased this discount, though FOMC members are unlikely to ignore the headline officially.",
+    "magnitude": null
+  },
+  {
+    "source": "aug_nfp_composition_quality",
+    "target": "fomc_dissent_hawkish_bloc",
+    "direction": -1,
+    "label": "Narrow NFP composition reduces dissent bloc certainty about hike",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Despite the strong headline, Hammack/Kashkari/Logan's hawkish dissent may be moderated by the narrow compositional base (food services + local government education = 62% of gains); FOMC members who noted this in their deliberations may treat the beat as less durable than a broad-based hiring surge, making the knife-edge September decision even more genuinely uncertain.",
+    "magnitude": null
+  },
+  {
+    "source": "labour_force_participation",
+    "target": "nfp",
+    "direction": 1,
+    "label": "Rising participation validates headline NFP strength",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "The participation rate's rise from 61.4% to 61.6% (first increase since September 2025) and the household survey employment gain of 569,000 alongside 683,000 entering the labour force validate the headline beat as genuine demand-driven hiring rather than a statistical artefact; this increases the probability that the FOMC treats the data as a legitimate hike signal.",
+    "magnitude": null
+  },
+  {
+    "source": "nfp",
+    "target": "consumer_sent",
+    "direction": 1,
+    "label": "Strong jobs data supports consumer confidence",
+    "lag_days": 7,
+    "confidence": 2,
+    "notes": "A 162,000 NFP print with falling initial claims and rising participation supports consumer income expectations and job security sentiment; however, the simultaneous yield spike (higher mortgage rates) and Trump trade ultimatum (uncertainty) partially offset the direct positive sentiment effect.",
+    "magnitude": null
+  },
+  {
+    "source": "sep_cpi_release",
+    "target": "fomc_dissent_hawkish_bloc",
+    "direction": 1,
+    "label": "Hot September CPI would convert dissent bloc into majority",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Waller explicitly conditioned his hold signal on the September 11 CPI; if it prints hot (above 3.5% core), the dissent bloc's hawkish case becomes the consensus case \u2014 Warsh himself would likely shift from hold to hike, making the September 16-17 FOMC a genuine tightening decision rather than a hold-with-dissent.",
+    "magnitude": null
+  },
+  {
+    "source": "trump_trade_ultimatum_fed",
+    "target": "vance_fed_pressure",
+    "direction": 1,
+    "label": "Ultimatum represents peak escalation of administration's Fed pressure campaign",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "The September 4 Truth Social ultimatum represents the most aggressive single act in the Trump administration's ongoing Fed pressure campaign; it escalates from Vance's 'it would be nice to have help' (September 3) to a direct threat with named consequences within 24 hours, suggesting a coordinated escalation strategy in response to the jobs report.",
+    "magnitude": null
+  },
+  {
+    "source": "fomc_2027_cut_removal",
+    "target": "yield_10y",
+    "direction": 1,
+    "label": "Removal of 2027 cut expectations lifts 10Y via forward rate channel",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "The elimination of 2027 rate cuts from the dot plot shifts the entire expected future rate path higher, raising the average expected short rate over the 10Y horizon and therefore lifting the 10Y yield through the expectations component (in addition to the term premium already elevated by geopolitical risk).",
+    "magnitude": null
+  },
+  {
+    "source": "fomc_2026_hike_cycle",
+    "target": "housing",
+    "direction": -1,
+    "label": "Hike cycle raises mortgage rates, further suppresses housing",
+    "lag_days": 14,
+    "confidence": 3,
+    "notes": "A 25bp hike to 4.00% with one more projected before year-end raises the 30-year fixed mortgage rate (already above 7.5% with the 30Y Treasury at 5.31%) toward 8.0%+, materially worsening housing affordability \u2014 the precise opposite of the White House's stated housing affordability objective behind Vance's rate cut demand.",
+    "magnitude": null
+  },
+  {
+    "source": "warsh_lane_separation_doctrine",
+    "target": "fed_political_independence_risk",
+    "direction": -1,
+    "label": "Warsh's lane doctrine signals resistance to political capture",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Warsh's explicit public statement \u2014 'We'll let people that do trade policy and fiscal policy stay in their lane too' \u2014 is a direct rebuttal of Trump's trade ultimatum and the strongest public assertion of Fed independence since Warsh's appointment; it reduces (but does not eliminate) the market's probability of future Fed capitulation to political pressure, lowering the independence risk premium.",
+    "magnitude": null
+  },
+  {
+    "source": "warsh_lane_separation_doctrine",
+    "target": "vance_fed_pressure",
+    "direction": -1,
+    "label": "Lane doctrine directly rebuffs Vance/Trump rate cut demands",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "By publicly demarcating trade and fiscal policy as outside the Fed's lane \u2014 and implicitly outside the executive's lane into the Fed's \u2014 Warsh drew the clearest possible line against the Vance/Trump pressure campaign; the unanimous hike decision, executed despite Trump's ultimatum, is the operational demonstration of the doctrine.",
+    "magnitude": null
+  },
+  {
+    "source": "strait_of_hormuz_status",
+    "target": "fed_rate",
+    "direction": 0,
+    "label": "Warsh explicitly decouples Hormuz oil shock from Fed rate tool",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Warsh stated the Fed 'can't affect individual prices' with reference to Hormuz oil shock \u2014 explicitly decoupling the monetary policy tool from the geopolitical supply shock that is a primary driver of current inflation; this is the most important statement about the Fed's reaction function under energy supply shocks and means the Hormuz\u2192CPI\u2192Fed rate chain is NOT the operative transmission mechanism Warsh is targeting.",
+    "magnitude": null
+  },
+  {
+    "source": "fomc_2026_hike_cycle",
+    "target": "hy_spreads",
+    "direction": 1,
+    "label": "Tightening cycle widens HY spreads via refinancing stress",
+    "lag_days": 14,
+    "confidence": 2,
+    "notes": "A rate hike cycle that lifts the policy rate to 4.00-4.375% materially increases refinancing costs for high-yield issuers; with the 10Y also elevated, total borrowing costs for HY names approach 10-12%, creating a wave of refinancing stress and covenant pressure for the most leveraged borrowers \u2014 widening HY spreads at the margin.",
+    "magnitude": null
+  },
+  {
+    "source": "fomc_2026_hike_cycle",
+    "target": "bitcoin",
+    "direction": -1,
+    "label": "Rate hike cycle reduces risk appetite and elevates BTC discount rate",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "Bitcoin dropped immediately following the rate hike decision (cited in CoinGape's live blog) as higher rates reduce risk appetite for non-yielding speculative assets and elevate the discount rate applied to future crypto adoption scenarios; the Hammack/Kashkari/Logan prior dissents had already been priced, making the unanimous nature of the hike a marginal negative surprise for crypto.",
+    "magnitude": null
+  },
+  {
+    "source": "fed_dot_plot",
+    "target": "fomc_2026_hike_cycle",
+    "direction": 1,
+    "label": "Dot plot confirms cycle with 12/18 projecting one more hike",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "The September SEP dot plot with 12/18 officials projecting a further hike to 4.125% by December and 4 projecting 4.375% removes any ambiguity about whether September was a one-off: the FOMC has formally signalled a tightening cycle is underway, not a single insurance hike, fundamentally repricing the forward rate path.",
+    "magnitude": null
+  },
+  {
+    "source": "fomc_2027_cut_removal",
+    "target": "sec_realestate",
+    "direction": -1,
+    "label": "Removal of 2027 cut expectations crushes REIT DCF valuations",
+    "lag_days": 1,
+    "confidence": 3,
+    "notes": "REITs are valued on long-duration DCF models that are highly sensitive to the entire expected rate path; removing 2027 rate cuts from the dot plot extends the high-rate environment for an additional year, compressing REIT valuations by raising the discount rate applied to 2027+ cash flows \u2014 a step-change negative for the real estate sector.",
+    "magnitude": null
+  },
+  {
+    "source": "hostile_board_narrative",
+    "target": "fed_political_independence_risk",
+    "direction": 1,
+    "label": "Board delegitimisation escalates independence threat beyond chair-level",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Trump's strategy of blaming the 'hostile board' while defending Warsh personally is a more sophisticated and dangerous threat to Fed independence than direct criticism of the chair: it creates political cover for executive action targeting individual FOMC board members (recess appointments of compliant replacements, pressure campaigns on regional Fed presidents) without requiring Trump to fire the chair himself.",
+    "magnitude": null
+  },
+  {
+    "source": "trump_warsh_political_relationship",
+    "target": "fed_political_independence_risk",
+    "direction": -1,
+    "label": "Intact Trump-Warsh relationship partially offsets independence risk",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "As long as Trump publicly defends Warsh personally (framing him as trying to resist the board), the probability of Warsh dismissal or circumvention is lower; the Trump-Warsh alliance is a partial buffer against the most extreme Fed independence scenarios (chair firing, executive override), even while the hostile-board narrative escalates institutional risk.",
+    "magnitude": null
+  },
+  {
+    "source": "trump_1pct_rate_demand",
+    "target": "vance_fed_pressure",
+    "direction": 1,
+    "label": "1% rate demand anchors and escalates political pressure campaign",
+    "lag_days": 0,
+    "confidence": 3,
+    "notes": "Trump's explicit '1% or less' target \u2014 stated publicly twice in one evening \u2014 gives the political pressure campaign a quantifiable anchor: any Fed rate above 1% is now 'wrong' by Trump's stated standard; this creates a persistent, measurable gap that will be publicly cited as long as rates remain at 4%+, sustaining the pressure campaign indefinitely.",
+    "magnitude": null
+  },
+  {
+    "source": "trump_1pct_rate_demand",
+    "target": "fed_political_independence_risk",
+    "direction": 1,
+    "label": "Extreme rate target widens credibility gap and independence risk",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "A publicly stated executive target of '1% or less' when the Fed has just hiked to 4.00% and projects further hikes to 4.125%+ represents a 300bp+ policy gap; the wider this gap, the greater the political pressure and the more institutional damage that accumulates to Fed credibility if any future rate cuts occur while inflation remains above 2%.",
+    "magnitude": null
+  },
+  {
+    "source": "warsh_lane_separation_doctrine",
+    "target": "trump_warsh_political_relationship",
+    "direction": -1,
+    "label": "Lane doctrine creates tension in Trump-Warsh alliance",
+    "lag_days": 1,
+    "confidence": 2,
+    "notes": "Warsh's explicit 'stay in your lane' rebuke of executive interference, combined with the unanimous hike against Trump's wishes, creates latent tension in the Trump-Warsh relationship despite Trump's public defense; the relationship's durability will be tested by each subsequent data-driven hike that contradicts Trump's 1% target.",
+    "magnitude": null
+  },
+  {
+    "source": "hostile_board_narrative",
+    "target": "fomc_dissent_hawkish_bloc",
+    "direction": -1,
+    "label": "Hostile board narrative targets former dissenters turned unanimous hikers",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "The 'hostile board' members Trump is implicitly targeting are precisely the prior hawkish dissenters (Hammack, Kashkari, Logan) who voted for the hike \u2014 now unanimous alongside Warsh; Trump's narrative attempts to separate Warsh from these members, but in practice they all voted the same way, making the 'hostile board' framing factually inconsistent with the unanimous vote.",
+    "magnitude": null
+  },
+  {
+    "source": "trump_warsh_political_relationship",
+    "target": "fomc_2026_hike_cycle",
+    "direction": -1,
+    "label": "Intact Trump-Warsh relationship creates political ceiling on hike cycle",
+    "lag_days": 30,
+    "confidence": 1,
+    "notes": "Speculative: if Warsh wants to preserve his political capital with Trump, there may be an informal ceiling on how many additional hikes he's willing to execute against the president's explicit wishes; the Trump-Warsh relationship's health may therefore function as a soft constraint on the hike cycle depth, even if not on individual hike decisions.",
+    "magnitude": null
+  },
+  {
+    "source": "democratic_congress_2027",
+    "target": "global_trade_fragmentation",
+    "direction": -1,
+    "label": "Democratic Congress constrains executive tariff authority",
+    "lag_days": 60,
+    "confidence": 2,
+    "notes": "A Democratic-controlled Congress can pass Trade Reform Act legislation to reclaim tariff authority from the executive, hold hearings that name and shame trading partner retaliation costs, and use budget reconciliation to repeal specific tariff schedules; while Trump has veto power, the threat alone may moderate further tariff escalation and could lead to negotiated tariff rollbacks on Canada and Brazil as Democrats pressure deals.",
+    "magnitude": null
+  },
+  {
+    "source": "democratic_congress_2027",
+    "target": "us_iran_mou_status",
+    "direction": 1,
+    "label": "Democratic Congress pressures Iran war de-escalation",
+    "lag_days": 30,
+    "confidence": 2,
+    "notes": "Democrats ran on ending the Iran war and flipped seats largely due to voter rejection of Iran war costs (inflation, gasoline prices, military casualties); a Democratic Congress can use appropriations, War Powers Resolution notifications, and investigations to constrain Iran war military options and pressure the executive toward negotiations \u2014 the bond market priced some Iran de-escalation probability on election night with Brent falling.",
+    "magnitude": null
+  },
+  {
+    "source": "democratic_congress_2027",
+    "target": "us_debt_ceiling_risk",
+    "direction": 1,
+    "label": "Divided government elevates debt ceiling standoff probability",
+    "lag_days": 60,
+    "confidence": 3,
+    "notes": "With Democrats controlling Congress and Trump in the White House, the debt ceiling becomes a leverage instrument for both sides; Democrats may use it to extract concessions on Iran war appropriations or tariff rollbacks, while Trump may threaten executive action \u2014 the market flagged fiscal gridlock as a primary risk on election night, partially offsetting the tariff-reduction positive.",
+    "magnitude": null
+  },
+  {
+    "source": "democratic_congress_2027",
+    "target": "fed_political_independence_risk",
+    "direction": -1,
+    "label": "Democratic Congress as institutional buffer for Fed independence",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "A Democratic Senate with 54 seats can block Trump's recess appointments of compliant Fed board members (the primary escalation pathway of the hostile board narrative) and pass legislation protecting Fed independence; this reduces the probability of the hostile board delegitimisation strategy succeeding and partially reduces fed_political_independence_risk.",
+    "magnitude": null
+  },
+  {
+    "source": "democratic_congress_2027",
+    "target": "ai_data_centre_regulatory_risk",
+    "direction": 1,
+    "label": "Democratic Congress scrutinises AI data centre environmental impact",
+    "lag_days": 30,
+    "confidence": 2,
+    "notes": "Environmental and community backlash against AI data centres was explicitly cited as a key Democratic issue in multiple swing districts; a Democratic Congress can hold hearings on data centre water usage, power grid impact, and community displacement, and pass legislation tightening environmental review \u2014 creating regulatory uncertainty for hyperscaler capex plans.",
+    "magnitude": null
+  },
+  {
+    "source": "ai_data_centre_regulatory_risk",
+    "target": "ai_capex_cycle",
+    "direction": -1,
+    "label": "Data centre regulatory risk constrains AI infrastructure buildout",
+    "lag_days": 90,
+    "confidence": 1,
+    "notes": "Speculative but directionally clear: if Democratic Congress successfully passes AI data centre regulation (permitting requirements, environmental impact reviews, power grid studies), hyperscaler construction timelines lengthen and capex certainty declines, reducing the AI infrastructure capex cycle's growth rate \u2014 the scenario that caused Nasdaq futures to initially underperform on election night before the gridlock rally took hold.",
+    "magnitude": null
+  },
+  {
+    "source": "musk_regulatory_risk",
+    "target": "spacex_stock",
+    "direction": -1,
+    "label": "Congressional investigations risk SpaceX federal contract scrutiny",
+    "lag_days": 14,
+    "confidence": 2,
+    "notes": "SpaceX's business depends heavily on NASA, DOD, and NOAA federal contracts; Democratic committee investigations into the Musk-Trump relationship and potential conflicts of interest in government contracting could create regulatory and reputational risk for SpaceX's contract pipeline, contributing to the 4.8% SpaceX drop on November 4.",
+    "magnitude": null
+  },
+  {
+    "source": "brent_crude",
+    "target": "consumer_sent",
+    "direction": -1,
+    "label": "Brent de-escalation expectations lift consumer sentiment",
+    "lag_days": 14,
+    "confidence": 2,
+    "notes": "Brent fell on election night as markets priced Democratic pressure for Iran war de-escalation; lower oil price expectations reduce the gasoline price burden on consumers that Walmart explicitly identified as driving trade-offs, potentially improving consumer sentiment readings in the weeks following the election.",
+    "magnitude": null
+  },
+  {
+    "source": "democratic_congress_2027",
+    "target": "hostile_board_narrative",
+    "direction": -1,
+    "label": "Democratic Senate blocks recess appointments to Fed board",
+    "lag_days": 0,
+    "confidence": 2,
+    "notes": "Trump's hostile board narrative derives its threat from the possibility of replacing hawkish FOMC board members with compliant appointees via recess appointments; a Democratic Senate controlling the confirmation process and preventing prolonged recesses removes the primary mechanism by which the hostile board strategy could be operationalised.",
+    "magnitude": null
+  },
+  {
+    "source": "consumer_sent",
+    "target": "spx",
+    "direction": 1,
+    "label": "Improving consumer sentiment post-election boosts equities",
+    "lag_days": 14,
+    "confidence": 2,
+    "notes": "The historical pattern of post-midterm equity rallies (S&P +14.1% average over 6 months post-midterm since 1970) is partly driven by consumer and business sentiment improvements as policy uncertainty clears; the November 4 Dow +1,524 point move is consistent with this pattern, amplified by the specific oil/tariff de-escalation pricing.",
+    "magnitude": null
   }
 ]
