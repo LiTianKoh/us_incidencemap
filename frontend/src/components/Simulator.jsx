@@ -37,7 +37,7 @@ export default function Simulator({ nodes, edges, onSimResult, currentRegime }) 
       .finally(() => setLoadingSig(false))
   }, [])
 
-  const sortedNodes = [...nodes].sort((a, b) => a.label.localeCompare(b.label))
+  const sortedNodes = [...nodes].sort((a, b) => (a.label ?? a.id).localeCompare(b.label ?? b.id))
 
   // Derived values for the selected node
   const nodeData  = sigmas[sourceId]

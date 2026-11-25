@@ -904,5 +904,11 @@
     "label": "AI Data Centre Environmental & Community Regulatory Risk",
     "type": "indicator",
     "description": "The risk that Democratic-controlled Congress slows, taxes, or restricts AI data centre construction via environmental regulations, permitting reform reversal, or community impact legislation \u2014 flagged as a primary market concern for AI capex stocks on election night, contributing to Nasdaq futures initial underperformance before the gridlock rally."
+  },
+  {
+    "id": "spacex_stock",
+    "label": "SpaceX stock",
+    "type": "market",
+    "description": "SpaceX equity. Exposed to federal contract (NASA, DOD, NOAA) scrutiny risk tied to the Musk-Trump relationship."
   }
 ]
