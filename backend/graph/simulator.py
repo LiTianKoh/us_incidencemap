@@ -14,7 +14,10 @@ Shock input:
   % for everything else) and converts to shock_std internally using the
   node's empirical monthly return σ.
 
-Returns a list of ImpactResult dicts sorted by |impact| descending.
+Units: the shock is converted to a decimal monthly-style return on the source
+(bps nodes via the current level), then multiplied through the betas, so
+`impact` / `impact_pct` are real returns of each node, not σ-multiples.
+Each result reports fallback_hops: edges on its path with no empirical beta.
 """
 
 from collections import defaultdict
@@ -58,77 +61,64 @@ class ImpactResult:
     confidence: float
     n_hops:     int
     via:        str
+    fallback_hops: int = 0
 
 
 def _load_node_sigmas() -> dict:
     """
-    Compute monthly return σ for every node with data in DuckDB.
-    Uses monthly returns (consistent with enrichment.py).
-    Returns dict: {node_id: {"sigma": float, "unit": "bps"|"%"}}
+    Per-node monthly-return statistics from DuckDB (same return definition
+    enrichment.py uses to estimate betas: month-end pct_change).
+
+    Returns {node_id: {
+        "sigma":     σ in the node's display unit (bps of level change for
+                     rate nodes at the current level; % for everything else),
+        "unit":      "bps" | "%",
+        "sigma_ret": σ of monthly return as a decimal (what betas operate on),
+        "level":     latest level (used to convert bps <-> relative change),
+    }}
     """
-    conn = get_conn()
-
-    # Price nodes
-    price_rows = conn.execute("""
-        SELECT node_id, date, close
-        FROM prices
-        ORDER BY node_id, date
-    """).fetchdf()
-
-    # Macro nodes
-    macro_rows = conn.execute("""
-        SELECT series_id, date, value as close
-        FROM macro
-        ORDER BY series_id, date
-    """).fetchdf()
-
-    conn.close()
-
     import pandas as pd
 
-    # FRED series → node_id reverse map
+    conn = get_conn()
+    price_rows = conn.execute(
+        "SELECT node_id, date, close FROM prices ORDER BY node_id, date"
+    ).fetchdf()
+    macro_rows = conn.execute(
+        "SELECT series_id, date, value AS close FROM macro ORDER BY series_id, date"
+    ).fetchdf()
+    conn.close()
+
     FRED_REVERSE = {
-        "FEDFUNDS": "fed_rate",
-        "CPIAUCSL": "cpi",
-        "PCEPI":    "pce",
-        "PAYEMS":   "nfp",
-        "UNRATE":   "unemployment",
-        "GDP":      "gdp",
+        "FEDFUNDS": "fed_rate", "CPIAUCSL": "cpi", "PCEPI": "pce",
+        "PAYEMS": "nfp", "UNRATE": "unemployment", "GDP": "gdp",
     }
 
     sigmas = {}
 
-    # Price series
-    for node_id, group in price_rows.groupby("node_id"):
-        series = pd.to_datetime(group["date"]).pipe(
-            lambda d: group.set_index(d)["close"]
-        ).resample("ME").last().ffill().pct_change().dropna()
-        if len(series) >= 12:
-            unit = "bps" if node_id in BPS_NODES else "%"
-            raw_sigma = float(series.std())
-            # Convert: pct_change gives decimal fractions → multiply to get units
-            sigma_in_units = raw_sigma * 10000 if unit == "bps" else raw_sigma * 100
-            sigmas[node_id] = {
-                "sigma": round(sigma_in_units, 4),
-                "unit":  unit,
-            }
+    def _add(node_id, group):
+        idx = pd.to_datetime(group["date"])
+        raw = group.set_index(idx)["close"]
+        monthly = raw.resample("ME").last().ffill()
+        rets = monthly.pct_change().dropna()
+        if len(rets) < 12:
+            return
+        unit      = "bps" if node_id in BPS_NODES else "%"
+        sigma_ret = float(rets.std())
+        level     = float(monthly.iloc[-1])
+        display   = sigma_ret * level * 100 if unit == "bps" else sigma_ret * 100
+        sigmas[node_id] = {
+            "sigma":     round(display, 4),
+            "unit":      unit,
+            "sigma_ret": sigma_ret,
+            "level":     level,
+        }
 
-    # Macro series
+    for node_id, group in price_rows.groupby("node_id"):
+        _add(node_id, group)
     for series_id, group in macro_rows.groupby("series_id"):
         node_id = FRED_REVERSE.get(series_id)
-        if not node_id:
-            continue
-        series = pd.to_datetime(group["date"]).pipe(
-            lambda d: group.set_index(d)["close"]
-        ).resample("ME").last().ffill().pct_change().dropna()
-        if len(series) >= 12:
-            unit = "bps" if node_id in BPS_NODES else "%"
-            raw_sigma = float(series.std())
-            sigma_in_units = raw_sigma * 10000 if unit == "bps" else raw_sigma * 100
-            sigmas[node_id] = {
-                "sigma": round(sigma_in_units, 4),
-                "unit":  unit,
-            }
+        if node_id:
+            _add(node_id, group)
 
     return sigmas
 
@@ -206,19 +196,28 @@ def simulate_shock(
     if node_id not in nodes:
         raise ValueError(f"Unknown node: '{node_id}'")
 
-    # Resolve shock to σ
-    node_sigma_data = sigmas.get(node_id)
-    unit = node_sigma_data["unit"] if node_sigma_data else "%"
-    sigma_val = node_sigma_data["sigma"] if node_sigma_data else None
+    # Resolve the shock to a decimal return on the source node.
+    # All propagation below happens in return space, because that is the
+    # space the betas were estimated in (monthly pct_change on both sides).
+    nd        = sigmas.get(node_id)
+    unit      = nd["unit"] if nd else "%"
+    sigma_val = nd["sigma"] if nd else None
 
-    if shock_real is not None and sigma_val:
-        shock_in_std = shock_real / sigma_val
-    elif shock_std is not None:
-        shock_in_std = shock_std
-        # Back-calculate shock_real for metadata
-        shock_real = shock_in_std * sigma_val if sigma_val else None
+    def _real_to_ret(x):
+        if unit == "bps" and nd and nd["level"]:
+            return (x / 100.0) / nd["level"]      # bps -> relative change of level
+        return x / 100.0                           # % -> decimal
+
+    if shock_real is not None:
+        start_ret = _real_to_ret(shock_real)
+    elif shock_std is not None and nd:
+        start_ret = shock_std * nd["sigma_ret"]
+        shock_real = (start_ret * nd["level"] * 100.0) if unit == "bps" else start_ret * 100.0
     else:
-        shock_in_std = 1.0
+        start_ret = nd["sigma_ret"] if nd else 0.01   # default: 1σ
+        shock_real = None
+
+    shock_in_std = (start_ret / nd["sigma_ret"]) if nd and nd["sigma_ret"] else None
 
     # Build adjacency
     adjacency = defaultdict(list)
@@ -226,11 +225,11 @@ def simulate_shock(
         adjacency[edge["source"]].append(edge)
 
     # BFS
-    queue = [(node_id, shock_in_std, 0, [node_id], [])]
+    queue = [(node_id, start_ret, 0, [node_id], [], 0)]
     best  = {}
 
     while queue:
-        curr, impact, lag, path, confidences = queue.pop(0)
+        curr, impact, lag, path, confidences, n_fb = queue.pop(0)
 
         if len(path) - 1 >= max_hops:
             continue
@@ -245,9 +244,11 @@ def simulate_shock(
             if key in betas:
                 beta     = betas[key]["beta"]
                 edge_lag = betas[key]["lag_days"]
+                fb       = 0
             else:
                 beta     = FALLBACK_BETA * edge.get("direction", 1)
                 edge_lag = edge.get("lag_days", 5)
+                fb       = 1
 
             new_impact = impact * beta * DAMPEN_PER_HOP
             new_lag    = lag + edge_lag
@@ -267,19 +268,20 @@ def simulate_shock(
                 confidence = round(sum(new_conf) / len(new_conf), 2),
                 n_hops     = len(new_path) - 1,
                 via        = curr,
+                fallback_hops = n_fb + fb,
             )
 
             if nxt not in best or abs(new_impact) > abs(best[nxt].impact):
                 best[nxt] = result
 
-            queue.append((nxt, new_impact, new_lag, new_path, new_conf))
+            queue.append((nxt, new_impact, new_lag, new_path, new_conf, n_fb + fb))
 
     results = sorted(best.values(), key=lambda r: abs(r.impact), reverse=True)
 
     return {
         "source":     node_id,
         "shock_real": round(shock_real, 4) if shock_real is not None else None,
-        "shock_std":  round(shock_in_std, 4),
+        "shock_std":  round(shock_in_std, 4) if shock_in_std is not None else None,
         "unit":       unit,
         "sigma":      sigma_val,
         "regime":     regime,
@@ -289,7 +291,9 @@ def simulate_shock(
                 "node_id":    r.node_id,
                 "label":      r.label,
                 "impact":     r.impact,
-                "impact_pct": round(r.impact * 100, 3),
+                "impact_pct": round(r.impact * 100, 3),   # true % return of the node
+                "fallback_hops": r.fallback_hops,
+                "empirical":     r.fallback_hops == 0,
                 "lag_days":   r.lag_days,
                 "path":       r.path,
                 "confidence": r.confidence,
@@ -308,3 +312,4 @@ if __name__ == "__main__":
     for r in result["results"][:10]:
         print(f"  {r['label']:25} {r['impact_pct']:+.2f}%  "
               f"lag={r['lag_days']}d  hops={r['n_hops']}  via={r['via']}")
+        

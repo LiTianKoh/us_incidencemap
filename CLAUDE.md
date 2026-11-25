@@ -1,121 +1,75 @@
-# Causal Map — US Market
+# INCIDENCE — Causal Map of the US Financial Market
 
 ## What this is
-A causal diagram tool mapping relationships between US market actors,
-indicators, sectors, and events. Supports path tracing, event replay,
-empirical edge enrichment, and AI-assisted event ingestion.
+A causal diagram tool linking US market actors, indicators, sectors and events.
+Supports path tracing, event replay, empirical edge enrichment (daily + monthly,
+per regime), regime detection, AI-assisted event ingestion, and a counterfactual
+shock simulator.
+
+The graph is open-ended: nodes and edges are added continuously through AI
+ingestion as markets evolve. **Do not hard-code node/edge/event counts in docs or
+code** — read them from `GET /summary` or the JSON files.
 
 ## Stack
 - Backend: Python 3.11, FastAPI, NetworkX, DuckDB, pandas, yfinance, fredapi
 - Frontend: React (Vite), Cytoscape.js, TailwindCSS v3, Recharts
-- Data: JSON seed files in backend/data/, price/macro data in DuckDB
+- Data: JSON seed files in backend/data/ (the source of truth for the graph),
+  price/macro/edge-stat tables in DuckDB
 
-## Project structure
-causal-map/
-  backend/
-    data/
-      nodes.json            # 37 nodes: actors, markets, indicators, sectors
-      edges.json            # 83 edges with direction, lag_days, confidence
-      events.json           # 8+ historical events (growing via AI ingestion)
-      db.py                 # DuckDB connection, init_db()
-      ingest.py             # yfinance (16+ tickers) + FRED (6 series) ingestion
-      market_data.duckdb    # 25 years price + macro data
-    graph/
-      __init__.py
-      loader.py             # loads JSON into NetworkX DiGraph
-      queries.py            # get_all_nodes, get_all_edges, find_paths,
-                            # get_neighbours, get_most_connected_nodes,
-                            # get_events, get_event (reads from disk each time)
-      enrichment.py         # compute_edge_magnitude, enrich_all_edges
-    api/
-      __init__.py
-      main.py               # FastAPI app with all endpoints
-    validate_data.py
-    test_graph.py
-    venv/
-  frontend/
-    src/
-      api/client.js         # all fetch wrappers incl. updateNode, updateEdge,
-                            # commitEvent, priceWindow
-      components/
-        GraphCanvas.jsx     # Cytoscape.js, colour by type, edge hover labels,
-                            # position persistence in localStorage,
-                            # reset view + auto-layout buttons
-        NodeInspector.jsx   # node detail + edit, EdgeRow expand/edit,
-                            # MiniChart for market nodes
-        MiniChart.jsx       # Recharts price chart, 1Y/3Y/5Y/All periods
-        PathFinder.jsx      # path finder with lag/direction/confidence
-        EventPanel.jsx      # events list, affected node highlight,
-                            # price charts around event date
-        AIIngestion.jsx     # 2-step: copy context → paste JSON → review → commit
-      App.jsx               # 4-tab sidebar: inspector/paths/events/ai
-      main.jsx
-      index.css
-    tailwind.config.js
-    postcss.config.js
-    vite.config.js
-    package.json
+## Structure
+backend/
+  data/    nodes.json, edges.json, events.json, db.py, ingest.py, market_data.duckdb
+  graph/   loader, queries, enrichment (edge stats), regimes, regime_tagger, simulator
+  api/     main.py (FastAPI)
+frontend/src/
+  api/client.js            fetch wrappers for every endpoint
+  App.jsx                  5-tab sidebar: inspector / paths / events / ai / sim
+  components/              GraphCanvas, NodeInspector, PathFinder, EventPanel,
+                           AIIngestion, Simulator, MiniChart
+docs/                      logo + screenshots; README.md, UserGuide.md at root
+start.sh / start.ps1       one-terminal launchers (Mac/Linux, Windows)
 
-## API endpoints (all working, backend on port 8000)
-GET  /                                              # health check
-GET  /summary                                       # node/edge counts
-GET  /nodes                                         # all nodes
-GET  /nodes/{node_id}                               # single node
-GET  /nodes/{node_id}/neighbours                    # upstream + downstream
-GET  /edges                                         # all edges
-GET  /paths?source=X&target=Y&max_paths=5           # path finder
-GET  /events                                        # all events
-GET  /events/{event_id}                             # single event
-GET  /graph?min_confidence=1                        # Cytoscape.js format
-GET  /edge-stats                                    # empirical edge stats
-GET  /edge-stats/{source}/{target}                  # stats for specific edge
-GET  /prices/{node_id}?days=365                     # price history
-GET  /prices/{node_id}/window?date=X&days_before=90&days_after=90
-PATCH /nodes/{node_id}                              # update node label/description
-PATCH /edges/{source}/{target}                      # update edge label/notes/direction/confidence/lag
-GET  /ai/context                                    # export graph context for Claude chat
-POST /ai/commit-event                               # commit AI proposal to JSON files
+## Schemas
+- Node: { id, label, type, description } — type: actor | market | indicator | sector
+- Edge: { source, target, direction (1/-1), label, lag_days, confidence (1-3),
+          magnitude, notes, regimes[] } — empty/missing regimes = active in all
+- Event: { id, label, date, type, description, affected_nodes, primary_direction }
+- DuckDB: prices, macro, edge_stats (PK source, target, lag_days, freq, regime)
 
-## Node schema
-{ id, label, type, description }
-Types: actor | market | indicator | sector
+## Core concepts
+- Regimes (from FEDFUNDS + VIX): zirp, hiking, easing, risk_off (priority), normal.
+  Auto-tagger tags an edge to a regime when regime R² >= 1.25x the 'all' baseline
+  and n >= 20.
+- Simulator: BFS from the shocked node; at each hop return *= beta * 0.8
+  (dampening is a heuristic, not measured). Betas are regime-aware, falling back to
+  'all', then direction x 0.10 (reported per result as `fallback_hops`).
+  Shocks are entered in natural units (bps for fed_rate/yield_10y/yield_2y, % for the
+  rest), converted to a decimal return on the source (bps via current level), and
+  propagated in return space — the space the betas were estimated in. Output
+  `impact_pct` is a real % return per node. σ is for display only.
+- Positions persist in localStorage; new nodes are placed near neighbours, never a
+  full re-layout.
 
-## Edge schema
-{ source, target, direction, label, lag_days, confidence, magnitude, notes }
-- direction: 1 (positive) or -1 (negative)
-- lag_days: how long the causal effect takes
-- confidence: 1 (low) | 2 (moderate) | 3 (high/empirical)
-
-## Event schema
-{ id, label, date, type, description, affected_nodes, primary_direction }
-
-## Run commands
-- Backend: cd backend && source venv/bin/activate && uvicorn api.main:app --reload
-- Frontend: cd frontend && npm run dev
+## Run
+- One terminal: ./start.sh (or .\start.ps1 on Windows)
+- Backend only: cd backend && source venv/bin/activate && uvicorn api.main:app --reload
+- Frontend only: cd frontend && npm run dev
 - Re-ingest data: cd backend && python -m data.ingest
 - Re-enrich edges: cd backend && python -m graph.enrichment
-- Validate data: cd backend && python validate_data.py
+- Validate: cd backend && python validate_data.py
+- Endpoint list: open http://localhost:8000/docs (don't duplicate it here)
 
-## Node type colours
-- actor:     blue   (#3B82F6)
-- market:    green  (#10B981)
-- indicator: amber  (#F59E0B)
-- sector:    purple (#8B5CF6)
+## Known issues / data caveats
+- yield_2y is sourced from ^IRX (13-week T-bill), not a true 2-year yield. Replace
+  with FRED DGS2 before trusting rate-curve results.
+- Most edges lack empirical betas and use the fallback; the simulator's reach and
+  confidence are limited until enrichment coverage grows.
+- fed_rate σ is inflated by ZIRP-era relative changes near zero.
 
-## Known issues to fix later
-- Node/edge label updates not reflected immediately in Cytoscape canvas
-  (requires surgical Cytoscape re-render fix, not blocking)
-
-## Completed phases
-- Phase 1: Data model + seed data
-- Phase 2: Graph engine (NetworkX + path finder)
-- Phase 3: FastAPI backend
-- Phase 4: React + Cytoscape.js frontend
-- Phase 5: Empirical enrichment (DuckDB, yfinance, FRED, edge stats)
-- Phase 5+: Event overlay, AI ingestion, node/edge editing, 83 edges
-
-## Next phases
-1. Edge magnitude display in NodeInspector (r, beta from edge_stats)
-2. Monthly correlation enrichment (better R² than daily)
-3. Regime layer (tag edges active only in ZIRP/hiking/risk-off regimes)
-4. Counterfactual simulator (toggle event, propagate via betas)
+## Planned (not started)
+- AI tab: edit buttons on each parsed node/edge/section before commit
+- Events tab: chronological sort / filter
+- Expandable, resizable left panel
+- Buy-side risk-desk layer: holdings -> node mapping, portfolio shock P&L with
+  causal-path attribution, walk-forward beta validation and simulator backtest,
+  multi-shock and reverse stress tests
