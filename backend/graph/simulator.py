@@ -89,7 +89,7 @@ def _load_node_sigmas() -> dict:
     conn.close()
 
     FRED_REVERSE = {
-        "FEDFUNDS": "fed_rate", "CPIAUCSL": "cpi", "PCEPI": "pce",
+        "FEDFUNDS": "fed_rate", "DGS2": "yield_2y", "CPIAUCSL": "cpi", "PCEPI": "pce",
         "PAYEMS": "nfp", "UNRATE": "unemployment", "GDP": "gdp",
     }
 

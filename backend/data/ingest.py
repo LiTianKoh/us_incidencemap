@@ -21,7 +21,6 @@ YFINANCE_MAP = {
     "xauusd":         "GC=F",
     "wti":            "CL=F",
     "dxy":            "DX-Y.NYB",
-    "yield_2y":       "^IRX",
     "yield_10y":      "^TNX",
     "eurusd":         "EURUSD=X",
     "gbpusd":         "GBPUSD=X",
@@ -37,6 +36,7 @@ YFINANCE_MAP = {
 # node_id → FRED series ID
 FRED_MAP = {
     "fed_rate":     "FEDFUNDS",
+    "yield_2y":     "DGS2",      # true 2Y Treasury (was ^IRX, a 13-week bill)
     "cpi":          "CPIAUCSL",
     "pce":          "PCEPI",
     "nfp":          "PAYEMS",
@@ -106,6 +106,9 @@ def ingest_macro() -> None:
             df["date"] = pd.to_datetime(df["date"]).dt.date
 
             conn.execute("DELETE FROM macro WHERE series_id = ?", [series_id])
+            # Drop any stale price-table rows for this node (e.g. old ^IRX
+            # yield_2y data) — prices take precedence over macro in enrichment.
+            conn.execute("DELETE FROM prices WHERE node_id = ?", [node_id])
             conn.execute(
                 "INSERT INTO macro SELECT series_id, date, value FROM df"
             )
