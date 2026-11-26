@@ -40,13 +40,20 @@ start.sh / start.ps1       one-terminal launchers (Mac/Linux, Windows)
 - Regimes (from FEDFUNDS + VIX): zirp, hiking, easing, risk_off (priority), normal.
   Auto-tagger tags an edge to a regime when regime R² >= 1.25x the 'all' baseline
   and n >= 20.
-- Simulator: BFS from the shocked node; at each hop return *= beta * 0.8
-  (dampening is a heuristic, not measured). Betas are regime-aware, falling back to
-  'all', then direction x 0.10 (reported per result as `fallback_hops`).
-  Shocks are entered in natural units (bps for fed_rate/yield_10y/yield_2y, % for the
-  rest), converted to a decimal return on the source (bps via current level), and
-  propagated in return space — the space the betas were estimated in. Output
-  `impact_pct` is a real % return per node. σ is for display only.
+- Edge stats (enrichment.py): monthly + daily OLS per regime. Rate nodes
+  (fed_rate, yield_10y, yield_2y) use level changes in percentage points; every
+  other node uses % change — percent-changes of a yield near 0% are meaningless.
+  Monthly lag = round(lag_days/21) months (0 = same-month), stored as ~days.
+  edge_stats PK is (source, target, lag_days, freq, regime); db.init_db() rebuilds
+  an older table with the legacy 3-column PK (which made each regime overwrite the
+  last). After any change to enrichment, run `python -m graph.enrichment`.
+- Simulator: BFS from the shocked node; at each hop change *= beta * 0.8
+  (dampening is a heuristic, not measured). Shocks are entered in natural units
+  (bps for rate nodes, % for the rest) and propagated in the same native units the
+  betas were estimated in. Only monthly betas are used, and a beta must pass a
+  quality gate (R2 >= 0.02, n >= 20, sign agrees with the edge direction), else the
+  flagged fallback (direction x 0.10) is used. Each result reports its own unit
+  (% or bps), `fallback_hops` and `empirical`; the UI shows "est." for fallbacks.
 - Positions persist in localStorage; new nodes are placed near neighbours, never a
   full re-layout.
 
@@ -60,11 +67,11 @@ start.sh / start.ps1       one-terminal launchers (Mac/Linux, Windows)
 - Endpoint list: open http://localhost:8000/docs (don't duplicate it here)
 
 ## Known issues / data caveats
-- yield_2y is sourced from ^IRX (13-week T-bill), not a true 2-year yield. Replace
-  with FRED DGS2 before trusting rate-curve results.
-- Most edges lack empirical betas and use the fallback; the simulator's reach and
-  confidence are limited until enrichment coverage grows.
-- fed_rate σ is inflated by ZIRP-era relative changes near zero.
+- yield_2y now comes from FRED DGS2 (ingest.py); re-run ingest, then enrichment.
+- Most edges still lack empirical betas (an edge needs price/macro data on BOTH
+  ends) and use the flagged fallback; coverage is the main limit on reach.
+- The 0.10 fallback beta is unit-naive for rate nodes (percentage points); treat
+  "est." results as placeholders, not forecasts.
 
 ## Planned (not started)
 - AI tab: edit buttons on each parsed node/edge/section before commit

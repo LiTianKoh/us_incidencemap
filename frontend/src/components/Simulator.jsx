@@ -279,8 +279,16 @@ export default function Simulator({ nodes, edges, onSimResult, currentRegime }) 
                       <span className={`text-xs font-mono font-medium ${
                         r.impact > 0 ? "text-emerald-400" : "text-red-400"
                       }`}>
-                        {r.impact > 0 ? "+" : ""}{r.impact_pct.toFixed(2)}%
+                        {r.impact > 0 ? "+" : ""}{r.impact_pct.toFixed(2)}{r.unit === "bps" ? " bps" : "%"}
                       </span>
+                      {r.empirical === false && (
+                        <span
+                          className="text-amber-500 text-xs"
+                          title={`${r.fallback_hops} edge(s) on this path have no usable empirical beta — a default guess was used`}
+                        >
+                          est.
+                        </span>
+                      )}
                       <span className="text-slate-500 text-xs">{r.lag_days}d</span>
                       <span className="text-slate-600 text-xs">{expanded === i ? "▲" : "▼"}</span>
                     </div>

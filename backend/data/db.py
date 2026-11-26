@@ -9,6 +9,48 @@ def get_conn() -> duckdb.DuckDBPyConnection:
     return duckdb.connect(str(DB_PATH))
 
 
+EDGE_STATS_PK = ["source", "target", "lag_days", "freq", "regime"]
+
+EDGE_STATS_DDL = """
+    CREATE TABLE edge_stats (
+        source       VARCHAR,
+        target       VARCHAR,
+        lag_days     INTEGER,
+        freq         VARCHAR DEFAULT 'daily',
+        regime       VARCHAR DEFAULT 'all',
+        correlation  DOUBLE,
+        beta         DOUBLE,
+        r_squared    DOUBLE,
+        n_obs        INTEGER,
+        computed_at  TIMESTAMP DEFAULT current_timestamp,
+        PRIMARY KEY (source, target, lag_days, freq, regime)
+    )
+"""
+
+
+def _ensure_edge_stats(conn) -> None:
+    """
+    Create edge_stats with the current schema. If an older table exists whose
+    primary key is (source, target, lag_days) — columns added later via ALTER
+    cannot change a PK — drop and recreate it. Rows are derived data, so
+    `python -m graph.enrichment` simply repopulates it. Without this, each
+    freq/regime run overwrote the previous one.
+    """
+    exists = conn.execute(
+        "SELECT count(*) FROM information_schema.tables WHERE table_name = 'edge_stats'"
+    ).fetchone()[0]
+    if exists:
+        pk = conn.execute(
+            "SELECT constraint_column_names FROM duckdb_constraints() "
+            "WHERE table_name = 'edge_stats' AND constraint_type = 'PRIMARY KEY'"
+        ).fetchone()
+        if pk and list(pk[0]) == EDGE_STATS_PK:
+            return
+        print("edge_stats has an outdated primary key — rebuilding (re-run enrichment).")
+        conn.execute("DROP TABLE edge_stats")
+    conn.execute(EDGE_STATS_DDL)
+
+
 def init_db() -> None:
     """Create tables if they don't exist."""
     conn = get_conn()
@@ -28,31 +70,7 @@ def init_db() -> None:
             PRIMARY KEY (series_id, date)
         )
     """)
-    conn.execute("""
-        CREATE TABLE IF NOT EXISTS edge_stats (
-            source       VARCHAR,
-            target       VARCHAR,
-            lag_days     INTEGER,
-            freq         VARCHAR DEFAULT 'daily',
-            regime       VARCHAR DEFAULT 'all',
-            correlation  DOUBLE,
-            beta         DOUBLE,
-            r_squared    DOUBLE,
-            n_obs        INTEGER,
-            computed_at  TIMESTAMP DEFAULT current_timestamp,
-            PRIMARY KEY (source, target, lag_days, freq, regime)
-        )
-    """)
-    # Migrations: add new columns to existing table if not present
-    for col, ddl in [
-        ("freq",   "ALTER TABLE edge_stats ADD COLUMN freq   VARCHAR DEFAULT 'daily'"),
-        ("regime", "ALTER TABLE edge_stats ADD COLUMN regime VARCHAR DEFAULT 'all'"),
-    ]:
-        try:
-            conn.execute(ddl)
-            print(f"Migrated edge_stats: added {col} column")
-        except Exception:
-            pass  # Column already exists
+    _ensure_edge_stats(conn)
     conn.close()
     print("DB initialised at", DB_PATH)
 

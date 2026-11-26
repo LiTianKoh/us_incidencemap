@@ -14,9 +14,12 @@ Shock input:
   % for everything else) and converts to shock_std internally using the
   node's empirical monthly return σ.
 
-Units: the shock is converted to a decimal monthly-style return on the source
-(bps nodes via the current level), then multiplied through the betas, so
-`impact` / `impact_pct` are real returns of each node, not σ-multiples.
+Units: the shock is converted to the source's native change (decimal return, or
+percentage points for rate nodes), then multiplied through the betas, which were
+estimated in the same native units. `impact_pct` is therefore in each node's own
+unit: % for ordinary nodes, bps for rate nodes (see each result's "unit").
+Betas must pass a quality gate (R2, n, sign vs edge direction) or the flagged
+fallback is used.
 Each result reports fallback_hops: edges on its path with no empirical beta.
 """
 
@@ -26,6 +29,7 @@ from pathlib import Path
 import json
 
 from data.db import get_conn
+from graph.enrichment import RATE_NODES
 
 DAMPEN_PER_HOP = 0.8
 FALLBACK_BETA  = 0.10
@@ -33,7 +37,12 @@ MAX_HOPS       = 10
 MIN_IMPACT     = 0.001
 
 # Nodes measured in basis points — everything else in %
-BPS_NODES = {"fed_rate", "yield_10y", "yield_2y"}
+BPS_NODES = RATE_NODES
+
+# An empirical beta is only trusted if it clears these bars AND its sign agrees
+# with the edge direction; otherwise the flagged fallback guess is used.
+MIN_BETA_R2 = 0.02
+MIN_BETA_N  = 20
 
 # Reference examples shown in the UI per unit type
 UNIT_EXAMPLES = {
@@ -73,7 +82,8 @@ def _load_node_sigmas() -> dict:
         "sigma":     σ in the node's display unit (bps of level change for
                      rate nodes at the current level; % for everything else),
         "unit":      "bps" | "%",
-        "sigma_ret": σ of monthly return as a decimal (what betas operate on),
+        "sigma_native": σ of monthly change in native units (decimal return, or
+                     percentage points for rate nodes) — what betas operate on,
         "level":     latest level (used to convert bps <-> relative change),
     }}
     """
@@ -99,18 +109,16 @@ def _load_node_sigmas() -> dict:
         idx = pd.to_datetime(group["date"])
         raw = group.set_index(idx)["close"]
         monthly = raw.resample("ME").last().ffill()
-        rets = monthly.pct_change().dropna()
-        if len(rets) < 12:
+        is_rate = node_id in BPS_NODES
+        chg = (monthly.diff() if is_rate else monthly.pct_change()).dropna()
+        if len(chg) < 12:
             return
-        unit      = "bps" if node_id in BPS_NODES else "%"
-        sigma_ret = float(rets.std())
-        level     = float(monthly.iloc[-1])
-        display   = sigma_ret * level * 100 if unit == "bps" else sigma_ret * 100
+        sigma_native = float(chg.std())          # pp for rate nodes, decimal return otherwise
         sigmas[node_id] = {
-            "sigma":     round(display, 4),
-            "unit":      unit,
-            "sigma_ret": sigma_ret,
-            "level":     level,
+            "sigma":        round(sigma_native * 100, 4),   # bps or %
+            "unit":         "bps" if is_rate else "%",
+            "sigma_native": sigma_native,
+            "level":        float(monthly.iloc[-1]),
         }
 
     for node_id, group in price_rows.groupby("node_id"):
@@ -132,16 +140,19 @@ def get_node_sigmas() -> dict:
     return sigmas
 
 
-def _load_betas(regime: str) -> dict:
+def _load_betas(regime: str, directions: dict) -> dict:
     """
-    Load best beta per (source, target) from edge_stats.
-    Prefers given regime; falls back to 'all'.
+    Best usable monthly beta per (source, target).
+    Candidates: the requested regime first, then 'all'; within each, highest R².
+    A candidate is usable only if R² >= MIN_BETA_R2, n >= MIN_BETA_N and its sign
+    matches the edge's stated direction. Monthly only, so betas share the return
+    definition used for sigma and the shock conversion.
     """
     conn = get_conn()
     rows = conn.execute("""
-        SELECT source, target, regime, beta, lag_days, r_squared
+        SELECT source, target, regime, beta, lag_days, r_squared, n_obs
         FROM edge_stats
-        WHERE regime IN (?, 'all')
+        WHERE freq = 'monthly' AND regime IN (?, 'all')
         ORDER BY
             CASE WHEN regime = ? THEN 0 ELSE 1 END,
             r_squared DESC
@@ -151,12 +162,19 @@ def _load_betas(regime: str) -> dict:
     betas = {}
     for _, row in rows.iterrows():
         key = (row["source"], row["target"])
-        if key not in betas:
-            betas[key] = {
-                "beta":     float(row["beta"]),
-                "lag_days": int(row["lag_days"]),
-                "regime":   row["regime"],
-            }
+        if key in betas:
+            continue
+        beta = float(row["beta"])
+        want = directions.get(key)
+        if float(row["r_squared"]) < MIN_BETA_R2 or int(row["n_obs"]) < MIN_BETA_N:
+            continue
+        if want is not None and beta * want <= 0:
+            continue
+        betas[key] = {
+            "beta":     beta,
+            "lag_days": int(row["lag_days"]),
+            "regime":   row["regime"],
+        }
     return betas
 
 
@@ -190,34 +208,32 @@ def simulate_shock(
     """
     edges  = _load_edges()
     nodes  = _load_nodes()
-    betas  = _load_betas(regime)
+    directions = {(e["source"], e["target"]): e.get("direction") for e in edges}
+    betas  = _load_betas(regime, directions)
     sigmas = _load_node_sigmas()
 
     if node_id not in nodes:
         raise ValueError(f"Unknown node: '{node_id}'")
 
-    # Resolve the shock to a decimal return on the source node.
-    # All propagation below happens in return space, because that is the
-    # space the betas were estimated in (monthly pct_change on both sides).
+    # Resolve the shock to a change in the source's NATIVE units: a decimal
+    # return for ordinary nodes, percentage points for rate nodes. Betas were
+    # estimated in these units, so propagation stays unit-consistent.
+    # (bps / 100 = pp ; % / 100 = decimal — the same arithmetic.)
     nd        = sigmas.get(node_id)
     unit      = nd["unit"] if nd else "%"
     sigma_val = nd["sigma"] if nd else None
 
-    def _real_to_ret(x):
-        if unit == "bps" and nd and nd["level"]:
-            return (x / 100.0) / nd["level"]      # bps -> relative change of level
-        return x / 100.0                           # % -> decimal
-
     if shock_real is not None:
-        start_ret = _real_to_ret(shock_real)
+        start = shock_real / 100.0
     elif shock_std is not None and nd:
-        start_ret = shock_std * nd["sigma_ret"]
-        shock_real = (start_ret * nd["level"] * 100.0) if unit == "bps" else start_ret * 100.0
+        start = shock_std * nd["sigma_native"]
+        shock_real = start * 100.0
     else:
-        start_ret = nd["sigma_ret"] if nd else 0.01   # default: 1σ
+        start = nd["sigma_native"] if nd else 0.01   # default: 1σ
         shock_real = None
 
-    shock_in_std = (start_ret / nd["sigma_ret"]) if nd and nd["sigma_ret"] else None
+    shock_in_std = (start / nd["sigma_native"]) if nd and nd["sigma_native"] else None
+    start_ret = start
 
     # Build adjacency
     adjacency = defaultdict(list)
@@ -291,7 +307,8 @@ def simulate_shock(
                 "node_id":    r.node_id,
                 "label":      r.label,
                 "impact":     r.impact,
-                "impact_pct": round(r.impact * 100, 3),   # true % return of the node
+                "impact_pct": round(r.impact * 100, 3),   # in the node's own unit: % or bps (see "unit")
+                "unit":          "bps" if r.node_id in BPS_NODES else "%",
                 "fallback_hops": r.fallback_hops,
                 "empirical":     r.fallback_hops == 0,
                 "lag_days":   r.lag_days,

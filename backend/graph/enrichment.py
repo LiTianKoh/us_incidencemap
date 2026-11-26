@@ -3,6 +3,18 @@ import pandas as pd
 from data.db import get_conn
 
 
+# Rate nodes are quoted in % points. Percent-changes of a yield near 0% explode
+# (0.05 -> 0.10 is +100%), so these are modelled on level changes (pp) instead.
+RATE_NODES = {"fed_rate", "yield_10y", "yield_2y"}
+
+
+def _changes(series: pd.Series, node_id: str, rule: str) -> pd.Series:
+    """Resample then convert to changes: pp diff for rate nodes, else pct_change."""
+    s = series.resample(rule).last().ffill()
+    out = s.diff() if node_id in RATE_NODES else s.pct_change()
+    return out.dropna()
+
+
 def _load_series(node_id: str) -> pd.Series | None:
     """
     Load a time series for a node from DuckDB.
@@ -59,9 +71,9 @@ def compute_edge_magnitude(
     Estimate the empirical relationship between source and target at both
     daily and monthly frequency. Returns a list of stat dicts (0-2 entries).
 
-    Daily:   resample to business day, pct_change, shift by lag_days
+    Daily:   resample to business day, change (pct, or pp for rate nodes), shift by lag_days
     Monthly: resample to month-end, pct_change, shift by lag_months
-             (lag_months = max(1, round(lag_days / 21)))
+             (lag_months = round(lag_days / 21)   # 0 = same-month (contemporaneous))
 
     If regime_filter is provided (a DatetimeIndex of month-end dates),
     only months overlapping those dates are included in the regression.
@@ -76,8 +88,8 @@ def compute_edge_magnitude(
     MIN_OBS = 30
 
     # ── Daily ────────────────────────────────────────────────────────────────
-    src_d = src.resample("B").last().ffill().pct_change().dropna()
-    tgt_d = tgt.resample("B").last().ffill().pct_change().dropna()
+    src_d = _changes(src, source_id, "B")
+    tgt_d = _changes(tgt, target_id, "B")
 
     combined_d = pd.concat([src_d, tgt_d], axis=1, join="inner").dropna()
     combined_d.columns = ["source", "target"]
@@ -105,8 +117,8 @@ def compute_edge_magnitude(
             })
 
     # ── Monthly ──────────────────────────────────────────────────────────────
-    src_m = src.resample("ME").last().ffill().pct_change().dropna()
-    tgt_m = tgt.resample("ME").last().ffill().pct_change().dropna()
+    src_m = _changes(src, source_id, "ME")
+    tgt_m = _changes(tgt, target_id, "ME")
 
     combined_m = pd.concat([src_m, tgt_m], axis=1, join="inner").dropna()
     combined_m.columns = ["source", "target"]
@@ -116,7 +128,7 @@ def compute_edge_magnitude(
         mask = combined_m.index.to_period("M").isin(regime_months)
         combined_m = combined_m[mask]
 
-    lag_months = max(1, round(lag_days / 21))
+    lag_months = round(lag_days / 21)   # 0 = same-month (contemporaneous)
 
     if len(combined_m) >= MIN_OBS:
         combined_m = combined_m.copy()
@@ -129,7 +141,7 @@ def compute_edge_magnitude(
             )
             results.append({
                 "source": source_id, "target": target_id,
-                "lag_days": lag_months,
+                "lag_days": lag_months * 21,   # stored in (approx.) days
                 "freq": "monthly",
                 "regime": regime_label,
                 **stats,
@@ -154,8 +166,14 @@ def enrich_all_edges() -> list[dict]:
     # Pre-compute regime date sets once
     regime_dates = {r: dates_for_regime(r) for r in REGIMES}
 
+    from data.db import init_db
+    init_db()   # rebuilds edge_stats if it still has the old (source,target,lag_days) PK
+
     conn = get_conn()
     results = []
+
+    # Full recompute: lag/unit conventions changed, so old rows must not linger
+    conn.execute("DELETE FROM edge_stats")
 
     # Runs: full history first, then each regime
     runs = [("all", None)] + [(r, regime_dates[r]) for r in REGIMES]
