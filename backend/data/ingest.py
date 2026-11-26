@@ -31,6 +31,23 @@ YFINANCE_MAP = {
     "sec_utilities":  "XLU",
     "sec_realestate": "XLRE",
     "hy_spreads":     "HYG",
+    # ── Coverage expansion: nodes that exist in the graph but had no data ──
+    "bitcoin":        "BTC-USD",
+    "ethereum":       "ETH-USD",
+    "coinbase_stock": "COIN",
+    "nvidia_stock":   "NVDA",
+    "intel_stock":    "INTC",
+    "tsmc_stock":     "TSM",
+    "apple_stock":    "AAPL",
+    "micron_stock":   "MU",
+    "samsung_stock":  "005930.KS",
+    "sk_hynix_stock": "000660.KS",
+    "kospi_index":    "^KS11",
+    "brent_crude":    "BZ=F",
+    "cadusd":         "CADUSD=X",
+    "brlusd":         "BRLUSD=X",
+    "defense_sector": "ITA",
+    "yield_30y":      "^TYX",
 }
 
 # node_id → FRED series ID
@@ -42,6 +59,14 @@ FRED_MAP = {
     "nfp":          "PAYEMS",
     "unemployment": "UNRATE",
     "gdp":          "GDP",
+    # ── Coverage expansion ──
+    "real_yield_10y":             "DFII10",         # 10Y TIPS yield, %
+    "yield_curve":                "T10Y2Y",         # 10Y-2Y spread, pp
+    "consumer_sent":              "UMCSENT",        # U. Michigan sentiment
+    "housing":                    "HOUST",          # housing starts
+    "us_retail_spending":         "RSAFS",          # retail sales
+    "us_retail_gasoline":         "GASREGW",        # regular gasoline, weekly
+    "labour_force_participation": "CIVPART",
 }
 
 START_DATE = "2000-01-01"

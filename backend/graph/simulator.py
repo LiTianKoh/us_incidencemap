@@ -98,10 +98,8 @@ def _load_node_sigmas() -> dict:
     ).fetchdf()
     conn.close()
 
-    FRED_REVERSE = {
-        "FEDFUNDS": "fed_rate", "DGS2": "yield_2y", "CPIAUCSL": "cpi", "PCEPI": "pce",
-        "PAYEMS": "nfp", "UNRATE": "unemployment", "GDP": "gdp",
-    }
+    from data.ingest import FRED_MAP          # node_id -> FRED series
+    FRED_REVERSE = {series: node for node, series in FRED_MAP.items()}
 
     sigmas = {}
 

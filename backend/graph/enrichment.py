@@ -3,9 +3,12 @@ import pandas as pd
 from data.db import get_conn
 
 
-# Rate nodes are quoted in % points. Percent-changes of a yield near 0% explode
+# Rate/spread nodes are quoted in % points. Percent-changes of a yield near 0% explode
 # (0.05 -> 0.10 is +100%), so these are modelled on level changes (pp) instead.
-RATE_NODES = {"fed_rate", "yield_10y", "yield_2y"}
+RATE_NODES = {
+    "fed_rate", "yield_10y", "yield_2y", "yield_30y",
+    "real_yield_10y", "yield_curve",
+}
 
 
 def _changes(series: pd.Series, node_id: str, rule: str) -> pd.Series:

@@ -63,6 +63,7 @@ start.sh / start.ps1       one-terminal launchers (Mac/Linux, Windows)
 - Frontend only: cd frontend && npm run dev
 - Re-ingest data: cd backend && python -m data.ingest
 - Re-enrich edges: cd backend && python -m graph.enrichment
+- Coverage report: cd backend && python -m graph.coverage
 - Validate: cd backend && python validate_data.py
 - Endpoint list: open http://localhost:8000/docs (don't duplicate it here)
 
@@ -70,6 +71,11 @@ start.sh / start.ps1       one-terminal launchers (Mac/Linux, Windows)
 - yield_2y now comes from FRED DGS2 (ingest.py); re-run ingest, then enrichment.
 - Most edges still lack empirical betas (an edge needs price/macro data on BOTH
   ends) and use the flagged fallback; coverage is the main limit on reach.
+- hy_spreads is the HYG ETF *price*, which moves opposite to spreads; edges written
+  as "spreads up -> X" get a contradicting sign and are rejected by the gate. Needs
+  a true spread series (FRED ICE BofA series may have only a few years of history).
+- fed_rate is a sparse step series (flat most months), so linear monthly betas
+  from it are weak; policy *surprises* would model it better than level changes.
 - The 0.10 fallback beta is unit-naive for rate nodes (percentage points); treat
   "est." results as placeholders, not forecasts.
 
