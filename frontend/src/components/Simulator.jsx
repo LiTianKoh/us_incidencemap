@@ -289,6 +289,14 @@ export default function Simulator({ nodes, edges, onSimResult, currentRegime }) 
                           est.
                         </span>
                       )}
+                      {r.reliability === "chained" && (
+                        <span
+                          className="text-sky-400 text-xs"
+                          title="Chained through 2+ measured edges. Walk-forward tests show multi-hop chains have no demonstrated out-of-sample skill — treat as indicative direction only."
+                        >
+                          chain
+                        </span>
+                      )}
                       <span className="text-slate-500 text-xs">{r.lag_days}d</span>
                       <span className="text-slate-600 text-xs">{expanded === i ? "▲" : "▼"}</span>
                     </div>

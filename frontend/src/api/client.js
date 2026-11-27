@@ -56,4 +56,13 @@ export const api = {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body)
   }).then(r => r.json()),
+  // Backtest results (null if the backtest hasn't been run yet)
+  backtest: () => fetch(`${BASE}/backtest`).then(r => (r.ok ? r.json() : null)),
+
+  runBacktest: () => fetch(`${BASE}/backtest/run`, { method: "POST" })
+    .then(async r => {
+      const data = await r.json()
+      if (!r.ok) throw new Error(data.detail ?? "Backtest failed")
+      return data
+    }),
 }

@@ -20,6 +20,9 @@ estimated in the same native units. `impact_pct` is therefore in each node's own
 unit: % for ordinary nodes, bps for rate nodes (see each result's "unit").
 Betas must pass a quality gate (R2, n, sign vs edge direction) or the flagged
 fallback is used.
+Each result carries a `reliability` tier (direct / chained / guess). DAMPEN_PER_HOP
+is a heuristic: walk-forward tests on multi-hop chains found no out-of-sample skill
+for any damping value (0.8^(h-1), 1.0 or fitted), so it is not tuned.
 Each result reports fallback_hops: edges on its path with no empirical beta.
 """
 
@@ -312,6 +315,12 @@ def simulate_shock(
                 "unit":          "bps" if r.node_id in BPS_NODES else "%",
                 "fallback_hops": r.fallback_hops,
                 "empirical":     r.fallback_hops == 0,
+                # direct: one measured edge (backtest-supported);
+                # chained: 2+ measured edges — walk-forward tests show no
+                #          out-of-sample skill, so treat as indicative only;
+                # guess: at least one edge uses the default fallback.
+                "reliability":   ("guess" if r.fallback_hops else
+                                  "direct" if r.n_hops == 1 else "chained"),
                 "lag_days":   r.lag_days,
                 "path":       r.path,
                 "confidence": r.confidence,
@@ -330,4 +339,3 @@ if __name__ == "__main__":
     for r in result["results"][:10]:
         print(f"  {r['label']:25} {r['impact_pct']:+.2f}%  "
               f"lag={r['lag_days']}d  hops={r['n_hops']}  via={r['via']}")
-        

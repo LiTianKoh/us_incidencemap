@@ -274,6 +274,14 @@ def backtest_episode(name: str, source: str, start: str, end: str) -> dict:
             "path": r["path"],
         })
 
+    # Every node the simulator reached (including ones with no price data to score)
+    scored_ids = {r["node"] for r in rows}
+    affected = [{
+        "node": r["node_id"], "n_hops": r["n_hops"], "path": r["path"],
+        "predicted": round(float(r["impact"]) * 100, 3), "unit": r["unit"],
+        "empirical": r["empirical"], "scored": r["node_id"] in scored_ids,
+    } for r in sim["results"]]
+
     scored = [r for r in rows if r["sign_hit"] is not None]
     emp    = [r for r in scored if r["empirical"]]
 
@@ -293,6 +301,7 @@ def backtest_episode(name: str, source: str, start: str, end: str) -> dict:
         "name": name, "source": source, "window": f"{start} to {end}",
         "betas_through": str(cutoff.date()),
         "source_move": round(shock_real, 2), "unit": unit,
+        "n_affected": len(affected), "affected": affected,
         "n_scored": len(scored), "n_empirical": len(emp),
         "hit_rate_all": rate(scored), "hit_rate_empirical": rate(emp),
         "by_hop": by_hop,

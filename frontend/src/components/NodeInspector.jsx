@@ -18,7 +18,13 @@ const HAS_PRICES = new Set([
   "bitcoin","ethereum","coinbase_stock"
 ])
 
-function EdgeRow({ label, edge, nodeLabel, source, target, currentRegime, onEdit }) {
+const VERDICT_STYLE = {
+  validated: "bg-emerald-900 text-emerald-300",
+  weak:      "bg-amber-900 text-amber-300",
+  fails:     "bg-red-900 text-red-300",
+}
+
+function EdgeRow({ label, edge, nodeLabel, source, target, currentRegime, onEdit, bt }) {
   const [expanded,     setExpanded]     = useState(false)
   const [stats,        setStats]        = useState(null)   // displayed row or false
   const [allRows,      setAllRows]      = useState(null)   // all fetched rows
@@ -79,6 +85,14 @@ function EdgeRow({ label, edge, nodeLabel, source, target, currentRegime, onEdit
             {DIRECTION_LABEL[String(edge.direction)]}
           </span>
           <span className="text-slate-500 text-xs">{edge.lag_days}d</span>
+          {bt && (
+            <span
+              className={`text-xs px-1.5 py-0.5 rounded font-medium ${VERDICT_STYLE[bt.verdict] ?? ""}`}
+              title={`Out-of-sample: R² ${bt.oos_r2} · hit rate ${Math.round(bt.hit_rate * 100)}% · ${bt.n_oos} months`}
+            >
+              {bt.verdict === "validated" ? "✓ valid" : bt.verdict}
+            </span>
+          )}
           <button
             onClick={handleExpand}
             className="text-slate-400 hover:text-white text-xs px-1
@@ -106,6 +120,23 @@ function EdgeRow({ label, edge, nodeLabel, source, target, currentRegime, onEdit
           </div>
           {edge.notes && (
             <p className="text-slate-400 text-xs leading-relaxed">{edge.notes}</p>
+          )}
+
+          {/* Out-of-sample validation (from the walk-forward backtest) */}
+          {bt && (
+            <div className="bg-slate-800 rounded px-2 py-1.5 space-y-0.5">
+              <div className="flex items-center justify-between">
+                <span className="text-slate-500 text-xs">out-of-sample</span>
+                <span className={`text-xs px-1.5 py-0.5 rounded font-medium ${VERDICT_STYLE[bt.verdict] ?? ""}`}>
+                  {bt.verdict}
+                </span>
+              </div>
+              <p className="text-slate-400 text-xs">
+                R² {bt.oos_r2} · hit {Math.round(bt.hit_rate * 100)}% (z {bt.hit_z}) · {bt.n_oos} months
+                {" · "}beta flipped sign {bt.beta_flips}×
+                {!bt.sign_ok && <span className="text-red-400"> · sign contradicts stated direction</span>}
+              </p>
+            </div>
           )}
 
           {/* Empirical stats */}
@@ -173,7 +204,7 @@ function EdgeRow({ label, edge, nodeLabel, source, target, currentRegime, onEdit
   )
 }
 
-export default function NodeInspector({ node, neighbours, onClose, onNodeUpdated, currentRegime, pushUndo, onRefresh }) {
+export default function NodeInspector({ node, neighbours, onClose, onNodeUpdated, currentRegime, pushUndo, onRefresh, validation }) {
   const [editing,     setEditing]     = useState(false)
   const [editLabel,   setEditLabel]   = useState("")
   const [editDesc,    setEditDesc]    = useState("")
@@ -476,6 +507,7 @@ export default function NodeInspector({ node, neighbours, onClose, onNodeUpdated
                     source={n.id}
                     target={node.id}
                     currentRegime={currentRegime}
+                    bt={validation?.[`${n.id}__${node.id}`]}
                     onEdit={() => startEditEdge(n, true)}
                   />
                 ))}
@@ -497,6 +529,7 @@ export default function NodeInspector({ node, neighbours, onClose, onNodeUpdated
                     source={node.id}
                     target={n.id}
                     currentRegime={currentRegime}
+                    bt={validation?.[`${node.id}__${n.id}`]}
                     onEdit={() => startEditEdge(n, false)}
                   />
                 ))}

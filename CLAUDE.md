@@ -27,9 +27,9 @@ backend/
 frontend/src/
   api/client.js            fetch wrappers for every endpoint
   useUndo.js               shared undo/redo history hook
-  App.jsx                  6-tab sidebar: inspector / paths / events / ai / sim / portfolio
+  App.jsx                  7-tab sidebar: inspector / paths / events / ai / sim / portfolio / validation
   components/              GraphCanvas, NodeInspector, PathFinder, EventPanel,
-                           AIIngestion, Simulator, Portfolio, MiniChart,
+                           AIIngestion, Simulator, Portfolio, Validation, MiniChart,
                            TabBar (scrollable tabs with arrows)
 docs/                      logo + screenshots; README.md, UserGuide.md at root
 start.sh / start.ps1       one-terminal launchers (Mac/Linux, Windows)
@@ -53,7 +53,9 @@ start.sh / start.ps1       one-terminal launchers (Mac/Linux, Windows)
   an older table with the legacy 3-column PK (which made each regime overwrite the
   last). After any change to enrichment, run `python -m graph.enrichment`.
 - Simulator: BFS from the shocked node; at each hop change *= beta * 0.8
-  (dampening is a heuristic, not measured). Shocks are entered in natural units
+  (dampening is a heuristic; tested and NOT tunable — multi-hop chains show no
+  out-of-sample skill for any damping value. Results carry reliability: direct /
+  chained (UI "chain" tag, indicative only) / guess ("est.")). Shocks are entered in natural units
   (bps for rate nodes, % for the rest) and propagated in the same native units the
   betas were estimated in. Only monthly betas are used, and a beta must pass a
   quality gate (R2 >= 0.02, n >= 20, sign agrees with the edge direction), else the
@@ -76,6 +78,8 @@ start.sh / start.ps1       one-terminal launchers (Mac/Linux, Windows)
   validated / weak / fails. Episode-level: replays Lehman, 2018 Q4, COVID, 2022
   hikes/long-end surge and SVB through the full simulator using only betas known
   before each episode. Source shocks are the realised source move over the window.
+  The Validation tab shows the results (run/re-run button, edge table, episode
+  replays; clicking an episode card highlights every affected node on the graph) and the Inspector shows a validated/weak/fails badge on each edge.
 - Sidebar: drag the handle to resize (width saved in localStorage, double-click to
   reset); the tab strip scrolls with ‹ › arrows when tabs overflow.
 - Positions persist in localStorage. With nothing saved (first run / Auto-layout) a
@@ -90,7 +94,7 @@ start.sh / start.ps1       one-terminal launchers (Mac/Linux, Windows)
 - Re-enrich edges: cd backend && python -m graph.enrichment
 - Coverage report: cd backend && python -m graph.coverage
 - Walk-forward backtest: cd backend && python -m graph.backtest  (writes
-  data/backtest_results.json, served at GET /backtest)
+  data/backtest_results.json, served at GET /backtest; POST /backtest/run re-runs it)
 - Validate: cd backend && python validate_data.py
 - Endpoint list: open http://localhost:8000/docs (don't duplicate it here)
 
@@ -114,6 +118,5 @@ start.sh / start.ps1       one-terminal launchers (Mac/Linux, Windows)
   close), an as-of date / staleness warning on the badge, incremental refresh (button
   + on backend start), optional hysteresis around the VIX threshold. Caveat: the
   backtest shows regime-matched betas do not yet beat all-history betas out of sample.
-- Risk-desk layer, remaining: Validation tab in the UI (backtest results + a
-  'validated' badge per edge), multi-shock scenarios, reverse stress tests, path-level P&L attribution
+- Risk-desk layer, remaining: multi-shock scenarios, reverse stress tests, path-level P&L attribution
   (portfolio shock P&L itself is built)

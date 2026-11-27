@@ -284,6 +284,13 @@ def backtest_results():
         return _json.load(f)
 
 
+@app.post("/backtest/run")
+def backtest_run():
+    """Re-run the walk-forward backtest (takes ~10-30 s) and save/return the results."""
+    from graph.backtest import run_all
+    return run_all(write=True)
+
+
 @app.get("/portfolio/ticker-map")
 def portfolio_ticker_map():
     from graph.portfolio import load_ticker_map

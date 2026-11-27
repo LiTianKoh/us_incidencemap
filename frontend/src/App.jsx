@@ -1,8 +1,9 @@
 import AIIngestion from "./components/AIIngestion"
 import Simulator from "./components/Simulator"
 import Portfolio from "./components/Portfolio"
+import Validation from "./components/Validation"
 import EventPanel from "./components/EventPanel"
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useMemo } from "react"
 import TabBar from "./components/TabBar"
 import { useUndo } from "./useUndo"
 import { api } from "./api/client"
@@ -95,6 +96,15 @@ export default function App() {
     window.addEventListener("pointerup", up)
   }
 
+  // Backtest results: per-edge validation badges + the Validation tab
+  const [backtest, setBacktest] = useState(null)
+  useEffect(() => { api.backtest().then(setBacktest).catch(() => {}) }, [])
+  const validationByEdge = useMemo(() => {
+    const m = {}
+    backtest?.edges?.forEach((e) => { m[`${e.source}__${e.target}`] = e })
+    return m
+  }, [backtest])
+
   // Load graph on mount
   useEffect(() => {
     async function load() {
@@ -184,7 +194,7 @@ export default function App() {
 
         {/* Panel tabs — scrollable, with arrows when they overflow */}
         <TabBar
-          tabs={["inspector", "paths", "events", "ai", "sim", "portfolio"]}
+          tabs={["inspector", "paths", "events", "ai", "sim", "portfolio", "validation"]}
           active={activePanel}
           onChange={setActivePanel}
         />
@@ -199,6 +209,7 @@ export default function App() {
               currentRegime={currentRegime?.regime}
               pushUndo={pushUndo}
               onRefresh={refreshData}
+              validation={validationByEdge}
               onNodeUpdated={(updatedNode) => {
                 // If updatedNode is passed, update selected node immediately
                 if (updatedNode) {
@@ -268,6 +279,13 @@ export default function App() {
                 })
                 setActivePanel("events")
               }}
+            />
+          )}
+          {activePanel === "validation" && (
+            <Validation
+              backtest={backtest}
+              onRun={async () => setBacktest(await api.runBacktest())}
+              onHighlight={(path) => setHighlightedPath(path)}
             />
           )}
           {activePanel === "portfolio" && (
