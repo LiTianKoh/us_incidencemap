@@ -271,6 +271,19 @@ async def simulate(body: dict):
     return result
 
 
+@app.get("/backtest")
+def backtest_results():
+    """Cached results of `python -m graph.backtest` (run it to refresh)."""
+    import json as _json
+    from graph.backtest import RESULT_PATH
+    if not RESULT_PATH.exists():
+        raise HTTPException(
+            status_code=404,
+            detail="No backtest results yet — run: cd backend && python -m graph.backtest")
+    with open(RESULT_PATH) as f:
+        return _json.load(f)
+
+
 @app.get("/portfolio/ticker-map")
 def portfolio_ticker_map():
     from graph.portfolio import load_ticker_map

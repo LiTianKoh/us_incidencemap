@@ -194,6 +194,7 @@ def simulate_shock(
     shock_std:  float = None,   # shock in σ (fallback if shock_real not given)
     regime:     str   = "all",
     max_hops:   int   = MAX_HOPS,
+    betas:      dict  = None,   # inject point-in-time betas (backtesting)
 ) -> dict:
     """
     Propagate a shock from node_id.
@@ -207,7 +208,9 @@ def simulate_shock(
     edges  = _load_edges()
     nodes  = _load_nodes()
     directions = {(e["source"], e["target"]): e.get("direction") for e in edges}
-    betas  = _load_betas(regime, directions)
+    # `betas` may be injected (e.g. point-in-time betas for backtesting)
+    if betas is None:
+        betas = _load_betas(regime, directions)
     sigmas = _load_node_sigmas()
 
     if node_id not in nodes:

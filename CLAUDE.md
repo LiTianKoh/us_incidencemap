@@ -21,7 +21,8 @@ backend/
   data/    nodes.json, edges.json, events.json, ticker_map.json (ticker -> node),
            db.py, ingest.py, market_data.duckdb
   graph/   loader, queries, enrichment (edge stats), regimes, regime_tagger,
-           simulator, portfolio (holdings shock P&L), coverage (report)
+           simulator, portfolio (holdings shock P&L), coverage (report),
+           backtest (walk-forward validation)
   api/     main.py (FastAPI)
 frontend/src/
   api/client.js            fetch wrappers for every endpoint
@@ -67,7 +68,14 @@ start.sh / start.ps1       one-terminal launchers (Mac/Linux, Windows)
 - Undo/redo (useUndo.js, ⌘/Ctrl+Z, Shift+⌘/Ctrl+Z, header buttons): node moves,
   Auto-layout (runs in place, no reload) and node/edge edits (label, description,
   notes, direction, confidence, lag, regimes — undo PATCHes the old values back).
-  Not covered: colour edits, AI-ingestion commits. History is per session.
+  Not covered: colour edits and AI-ingestion commits. History is per session.
+- Backtest (backtest.py): everything point-in-time — a month is predicted only from
+  betas fitted on strictly earlier months (min 60 training months). Edge-level:
+  out-of-sample R² vs. the expanding mean, sign hit rate (z vs. coin flip), beta
+  sign flips, sign vs. stated direction, regime-matched-beta lift; verdict
+  validated / weak / fails. Episode-level: replays Lehman, 2018 Q4, COVID, 2022
+  hikes/long-end surge and SVB through the full simulator using only betas known
+  before each episode. Source shocks are the realised source move over the window.
 - Sidebar: drag the handle to resize (width saved in localStorage, double-click to
   reset); the tab strip scrolls with ‹ › arrows when tabs overflow.
 - Positions persist in localStorage. With nothing saved (first run / Auto-layout) a
@@ -81,6 +89,8 @@ start.sh / start.ps1       one-terminal launchers (Mac/Linux, Windows)
 - Re-ingest data: cd backend && python -m data.ingest
 - Re-enrich edges: cd backend && python -m graph.enrichment
 - Coverage report: cd backend && python -m graph.coverage
+- Walk-forward backtest: cd backend && python -m graph.backtest  (writes
+  data/backtest_results.json, served at GET /backtest)
 - Validate: cd backend && python validate_data.py
 - Endpoint list: open http://localhost:8000/docs (don't duplicate it here)
 
@@ -99,6 +109,11 @@ start.sh / start.ps1       one-terminal launchers (Mac/Linux, Windows)
 ## Planned (not started)
 - AI tab: edit buttons on each parsed node/edge/section before commit
 - Events tab: chronological sort / filter
-- Risk-desk layer, remaining: walk-forward beta validation and simulator backtest,
-  multi-shock scenarios, reverse stress tests, path-level P&L attribution
+- Regime monitor (tentative): the regime is rule-based on FEDFUNDS + VIX only (no
+  news). Add a daily 'nowcast' (latest VIX + DFF, labelled provisional until month
+  close), an as-of date / staleness warning on the badge, incremental refresh (button
+  + on backend start), optional hysteresis around the VIX threshold. Caveat: the
+  backtest shows regime-matched betas do not yet beat all-history betas out of sample.
+- Risk-desk layer, remaining: Validation tab in the UI (backtest results + a
+  'validated' badge per edge), multi-shock scenarios, reverse stress tests, path-level P&L attribution
   (portfolio shock P&L itself is built)
