@@ -271,6 +271,41 @@ async def simulate(body: dict):
     return result
 
 
+@app.get("/portfolio/ticker-map")
+def portfolio_ticker_map():
+    from graph.portfolio import load_ticker_map
+    return load_ticker_map()
+
+
+@app.post("/portfolio/shock")
+async def portfolio_shock_endpoint(body: dict):
+    """
+    Body: { holdings: [{ticker, value, node?, duration?}], node_id,
+            shock_real | shock_std, regime?, max_hops? }
+    """
+    from graph.portfolio import portfolio_shock
+
+    holdings = body.get("holdings") or []
+    node_id  = body.get("node_id")
+    if not node_id:
+        raise HTTPException(status_code=400, detail="node_id is required")
+    if not holdings:
+        raise HTTPException(status_code=400, detail="holdings is empty")
+    sr, ss = body.get("shock_real"), body.get("shock_std")
+    if sr is None and ss is None:
+        raise HTTPException(status_code=400, detail="shock_real or shock_std is required")
+    try:
+        return portfolio_shock(
+            holdings, node_id,
+            shock_real = float(sr) if sr is not None else None,
+            shock_std  = float(ss) if ss is not None else None,
+            regime     = body.get("regime", "all"),
+            max_hops   = int(body.get("max_hops", 10)),
+        )
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+
 @app.post("/regime/auto-tag")
 def regime_auto_tag(preserve_manual: bool = True):
     """Auto-tag edges.json with active regimes based on R² lift from edge_stats."""

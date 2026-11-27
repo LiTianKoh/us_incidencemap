@@ -173,7 +173,7 @@ function EdgeRow({ label, edge, nodeLabel, source, target, currentRegime, onEdit
   )
 }
 
-export default function NodeInspector({ node, neighbours, onClose, onNodeUpdated, currentRegime }) {
+export default function NodeInspector({ node, neighbours, onClose, onNodeUpdated, currentRegime, pushUndo, onRefresh }) {
   const [editing,     setEditing]     = useState(false)
   const [editLabel,   setEditLabel]   = useState("")
   const [editDesc,    setEditDesc]    = useState("")
@@ -206,6 +206,19 @@ export default function NodeInspector({ node, neighbours, onClose, onNodeUpdated
         description: editDesc,
       })
       if (updated.detail) throw new Error(updated.detail)
+
+      const nodeId = node.id
+      const before = { label: node.label, description: node.description ?? "" }
+      const after  = { label: editLabel,  description: editDesc }
+      if (before.label !== after.label || before.description !== after.description) {
+        const apply = (body) => async () => {
+          const r = await api.updateNode(nodeId, body)
+          if (r.detail) throw new Error(r.detail)
+          await onRefresh?.()
+        }
+        pushUndo?.({ label: `Edited “${before.label}”`, undo: apply(before), redo: apply(after) })
+      }
+
       onNodeUpdated?.({ ...node, label: editLabel, description: editDesc })
       setEditing(false)
     } catch (e) {
@@ -219,7 +232,17 @@ export default function NodeInspector({ node, neighbours, onClose, onNodeUpdated
     const edge = n.edge
     const source = isUpstream ? n.id : node.id
     const target = isUpstream ? node.id : n.id
-    setEditingEdge({ source, target, neighbourLabel: n.label })
+    setEditingEdge({
+      source, target, neighbourLabel: n.label,
+      before: {                       // snapshot for undo
+        label:      edge.label ?? "",
+        notes:      edge.notes ?? "",
+        direction:  edge.direction ?? 1,
+        confidence: edge.confidence ?? 2,
+        lag_days:   edge.lag_days ?? 0,
+        regimes:    edge.regimes ?? [],
+      },
+    })
     setEdgeLabel(edge.label ?? "")
     setEdgeNotes(edge.notes ?? "")
     setEdgeDir(edge.direction ?? 1)
@@ -233,16 +256,26 @@ export default function NodeInspector({ node, neighbours, onClose, onNodeUpdated
     setSavingEdge(true)
     setEdgeSaveErr(null)
     try {
-      const updated = await api.updateEdge(
-        editingEdge.source, editingEdge.target, {
-          label:      edgeLabel,
-          notes:      edgeNotes,
-          direction:  edgeDir,
-          confidence: edgeConf,
-          lag_days:   edgeLag,
-          regimes:    edgeRegimes,
-        })
+      const after = {
+        label:      edgeLabel,
+        notes:      edgeNotes,
+        direction:  edgeDir,
+        confidence: edgeConf,
+        lag_days:   edgeLag,
+        regimes:    edgeRegimes,
+      }
+      const { source: eSrc, target: eTgt, before } = editingEdge
+      const updated = await api.updateEdge(eSrc, eTgt, after)
       if (updated.detail) throw new Error(updated.detail)
+
+      if (before && JSON.stringify(before) !== JSON.stringify(after)) {
+        const apply = (body) => async () => {
+          const r = await api.updateEdge(eSrc, eTgt, body)
+          if (r.detail) throw new Error(r.detail)
+          await onRefresh?.()
+        }
+        pushUndo?.({ label: `Edited edge ${eSrc} → ${eTgt}`, undo: apply(before), redo: apply(after) })
+      }
       onNodeUpdated?.(null)
       setEditingEdge(null)
     } catch (e) {

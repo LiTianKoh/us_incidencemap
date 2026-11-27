@@ -125,12 +125,34 @@ function computeNodePositions(nodeList, edgeList, savedPositions) {
   return positions
 }
 
+const POS_KEY = "causal-map-positions"
+
+function readSavedPositions() {
+  try { return JSON.parse(localStorage.getItem(POS_KEY) ?? "{}") } catch { return {} }
+}
+
+/** Move nodes to the given {id: {x, y}} positions and persist them (merged). */
+function applyPositions(cy, map) {
+  if (!cy) return
+  cy.batch(() => {
+    cy.nodes().forEach(n => {
+      const p = map[n.data("id")]
+      if (p) n.position({ x: p.x, y: p.y })
+    })
+  })
+  try {
+    localStorage.setItem(POS_KEY, JSON.stringify({ ...readSavedPositions(), ...map }))
+  } catch { /* ignore */ }
+}
+
 export default function GraphCanvas({
   graphData, nodes, selectedNode, onNodeClick, onBackgroundClick,
-  highlightedPath, currentRegime
+  highlightedPath, currentRegime, pushUndo
 }) {
   const containerRef = useRef(null)
   const cyRef        = useRef(null)
+  const pushUndoRef  = useRef(pushUndo)
+  pushUndoRef.current = pushUndo
 
   const [colours,     setColours]     = useState(loadColours)
   const [nodeColours, setNodeColours] = useState(loadNodeColours)
@@ -278,10 +300,17 @@ export default function GraphCanvas({
       savedPositions
     )
 
+    // Nothing saved for any current node (first run, new browser, or after
+    // "Auto-layout" cleared storage): run one real force-directed layout instead
+    // of staging every node on the diagonal, then persist the result.
+    const freshStart = !graphData.elements.nodes.some(n => savedPositions[n.data.id])
+
     const newNodeIds = new Set(
-      graphData.elements.nodes
-        .filter(n => !savedPositions[n.data.id])
-        .map(n => n.data.id)
+      freshStart
+        ? []
+        : graphData.elements.nodes
+            .filter(n => !savedPositions[n.data.id])
+            .map(n => n.data.id)
     )
 
     const elements = {
@@ -291,7 +320,7 @@ export default function GraphCanvas({
           : (n.classes ?? "")
         return {
           ...n,
-          position: computedPositions[n.data.id],
+          position: freshStart ? undefined : computedPositions[n.data.id],
           // Tag newly-placed nodes so they can be styled distinctly
           classes: newNodeIds.has(n.data.id)
             ? `${existingClasses} newly-placed`.trim()
@@ -308,11 +337,23 @@ export default function GraphCanvas({
       // Every node now has an explicit position — always preset.
       // cose is never run automatically, so existing node positions
       // are never disturbed by newly-added nodes.
-      layout: { name: "preset" },
+      layout: freshStart
+        ? { name: "cose", animate: false, randomize: true,
+            nodeRepulsion: 8000, idealEdgeLength: 120, padding: 40 }
+        : { name: "preset" },
       userZoomingEnabled:  true,
       userPanningEnabled:  true,
       boxSelectionEnabled: false,
     })
+
+    if (freshStart) {
+      const saveAll = () => {
+        const all = {}
+        cy.nodes().forEach(n => { all[n.data("id")] = { ...n.position() } })
+        try { localStorage.setItem("causal-map-positions", JSON.stringify(all)) } catch { /* ignore */ }
+      }
+      saveAll()   // animate:false layout has already finished inside the constructor
+    }
 
     // Persist positions for any newly-placed nodes immediately, so a
     // reload doesn't re-trigger placement (and won't touch existing entries)
@@ -323,6 +364,12 @@ export default function GraphCanvas({
       })
       localStorage.setItem("causal-map-positions", JSON.stringify(merged))
     }
+
+    // Remember where a node was when picked up, so a move can be undone
+    let grabbed = null
+    cy.on("grab", "node", (evt) => {
+      grabbed = { id: evt.target.data("id"), pos: { ...evt.target.position() } }
+    })
 
     // Save only the dragged node's position — never touch others
     cy.on("dragfree", "node", (evt) => {
@@ -335,6 +382,21 @@ export default function GraphCanvas({
       localStorage.setItem("causal-map-positions", JSON.stringify(current))
       // Once manually placed, it's no longer "newly-placed"
       node.removeClass("newly-placed")
+
+      // Record the move for undo (ignore taps / sub-pixel jitter)
+      const id = node.data("id")
+      if (grabbed && grabbed.id === id) {
+        const before = grabbed.pos
+        const after  = { ...node.position() }
+        grabbed = null
+        if (Math.hypot(after.x - before.x, after.y - before.y) > 1) {
+          pushUndoRef.current?.({
+            label: `Moved ${node.data("label") ?? id}`,
+            undo:  () => applyPositions(cyRef.current, { [id]: before }),
+            redo:  () => applyPositions(cyRef.current, { [id]: after }),
+          })
+        }
+      }
     })
 
     cy.on("tap", "node", (evt) => {
@@ -411,7 +473,37 @@ export default function GraphCanvas({
   }, [graphData])
 
   function resetView()      { cyRef.current?.fit(undefined, 40) }
-  function clearPositions() { localStorage.removeItem("causal-map-positions"); window.location.reload() }
+  // Re-run the force layout in place (no page reload) so it can be undone
+  function autoLayout() {
+    const cy = cyRef.current
+    if (!cy) return
+    const snapshot = () => {
+      const m = {}
+      cy.nodes().forEach(n => { m[n.data("id")] = { ...n.position() } })
+      return m
+    }
+    const before = snapshot()
+    cy.layout({ name: "cose", animate: false, randomize: true,
+                nodeRepulsion: 8000, idealEdgeLength: 120, padding: 40 }).run()
+    cy.nodes().removeClass("newly-placed")
+    const after = snapshot()
+    try { localStorage.setItem(POS_KEY, JSON.stringify(after)) } catch { /* ignore */ }
+    cy.fit(undefined, 40)
+    pushUndoRef.current?.({
+      label: "Auto-layout",
+      undo:  () => applyPositions(cyRef.current, before),
+      redo:  () => applyPositions(cyRef.current, after),
+    })
+  }
+
+  // Keep Cytoscape's canvas in sync when the sidebar is resized
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el || typeof ResizeObserver === "undefined") return
+    const ro = new ResizeObserver(() => cyRef.current?.resize())
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
 
   function updateTypeColour(type, hex) {
     setColours(prev => ({ ...prev, [type]: hex }))
@@ -458,7 +550,8 @@ export default function GraphCanvas({
 
       {/* Bottom-right controls */}
       <div className="absolute bottom-4 right-4 flex gap-2">
-        <button onClick={clearPositions}
+        <button onClick={autoLayout}
+          title="Re-run the layout (undo with ⌘/Ctrl+Z)"
           className="bg-slate-700 hover:bg-slate-600 text-slate-400 hover:text-white
                      rounded-lg px-3 py-2 text-xs transition-colors border border-slate-600 shadow-lg">
           ↺ Auto-layout

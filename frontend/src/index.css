@@ -8,3 +8,7 @@ body {
   color: #f1f5f9;
   font-family: 'Inter', system-ui, sans-serif;
 }
+
+/* Hide scrollbars on the sidebar tab strip (it scrolls via arrows / swipe) */
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }

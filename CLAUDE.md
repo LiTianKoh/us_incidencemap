@@ -18,14 +18,18 @@ code** — read them from `GET /summary` or the JSON files.
 
 ## Structure
 backend/
-  data/    nodes.json, edges.json, events.json, db.py, ingest.py, market_data.duckdb
-  graph/   loader, queries, enrichment (edge stats), regimes, regime_tagger, simulator
+  data/    nodes.json, edges.json, events.json, ticker_map.json (ticker -> node),
+           db.py, ingest.py, market_data.duckdb
+  graph/   loader, queries, enrichment (edge stats), regimes, regime_tagger,
+           simulator, portfolio (holdings shock P&L), coverage (report)
   api/     main.py (FastAPI)
 frontend/src/
   api/client.js            fetch wrappers for every endpoint
-  App.jsx                  5-tab sidebar: inspector / paths / events / ai / sim
+  useUndo.js               shared undo/redo history hook
+  App.jsx                  6-tab sidebar: inspector / paths / events / ai / sim / portfolio
   components/              GraphCanvas, NodeInspector, PathFinder, EventPanel,
-                           AIIngestion, Simulator, MiniChart
+                           AIIngestion, Simulator, Portfolio, MiniChart,
+                           TabBar (scrollable tabs with arrows)
 docs/                      logo + screenshots; README.md, UserGuide.md at root
 start.sh / start.ps1       one-terminal launchers (Mac/Linux, Windows)
 
@@ -54,8 +58,21 @@ start.sh / start.ps1       one-terminal launchers (Mac/Linux, Windows)
   quality gate (R2 >= 0.02, n >= 20, sign agrees with the edge direction), else the
   flagged fallback (direction x 0.10) is used. Each result reports its own unit
   (% or bps), `fallback_hops` and `empirical`; the UI shows "est." for fallbacks.
-- Positions persist in localStorage; new nodes are placed near neighbours, never a
-  full re-layout.
+- Portfolio shock (portfolio.py): holdings (ticker, value) map to nodes via
+  data/ticker_map.json or an explicit node override. Equity-like holdings take the
+  node's simulated return; bond holdings carry a duration (P&L% = -duration x yield
+  change). Each line reports its causal path and whether it is empirical; est_share
+  is the share of gross P&L resting on guessed betas. Unmapped holdings and holdings
+  with no modelled path are reported, never dropped ("no path" is not "safe").
+- Undo/redo (useUndo.js, ⌘/Ctrl+Z, Shift+⌘/Ctrl+Z, header buttons): node moves,
+  Auto-layout (runs in place, no reload) and node/edge edits (label, description,
+  notes, direction, confidence, lag, regimes — undo PATCHes the old values back).
+  Not covered: colour edits, AI-ingestion commits. History is per session.
+- Sidebar: drag the handle to resize (width saved in localStorage, double-click to
+  reset); the tab strip scrolls with ‹ › arrows when tabs overflow.
+- Positions persist in localStorage. With nothing saved (first run / Auto-layout) a
+  one-off force-directed layout runs and is saved; afterwards new nodes are placed
+  near neighbours and existing positions are never re-laid-out.
 
 ## Run
 - One terminal: ./start.sh (or .\start.ps1 on Windows)
@@ -82,7 +99,6 @@ start.sh / start.ps1       one-terminal launchers (Mac/Linux, Windows)
 ## Planned (not started)
 - AI tab: edit buttons on each parsed node/edge/section before commit
 - Events tab: chronological sort / filter
-- Expandable, resizable left panel
-- Buy-side risk-desk layer: holdings -> node mapping, portfolio shock P&L with
-  causal-path attribution, walk-forward beta validation and simulator backtest,
-  multi-shock and reverse stress tests
+- Risk-desk layer, remaining: walk-forward beta validation and simulator backtest,
+  multi-shock scenarios, reverse stress tests, path-level P&L attribution
+  (portfolio shock P&L itself is built)
