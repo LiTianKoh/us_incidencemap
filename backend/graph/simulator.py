@@ -332,6 +332,91 @@ def simulate_shock(
     }
 
 
+def simulate_scenario(
+    shocks:   list,             # [{"node_id", "shock_real"|"shock_std"}, ...] applied together
+    regime:   str = "all",
+    max_hops: int = MAX_HOPS,
+    betas:    dict = None,
+) -> dict:
+    """
+    Several simultaneous shocks. Betas are linear, so each shock is propagated on
+    its own and the effects are ADDED per node (superposition). Every node reports
+    its per-shock contributions, so a combined move can be traced back to its causes.
+
+    Each shock is an extra, independent move: if you shock oil +10% and the Fed +50bps
+    and the Fed also moves oil in the graph, oil's total = your +10% plus the Fed's
+    modelled effect. `linked_shocks` lists any shock source that another shock reaches,
+    so that overlap is visible rather than hidden.
+    """
+    if not shocks:
+        raise ValueError("at least one shock is required")
+    edges = _load_edges()
+    directions = {(e["source"], e["target"]): e.get("direction") for e in edges}
+    if betas is None:
+        betas = _load_betas(regime, directions)
+    nodes = _load_nodes()
+
+    sims, seen = [], set()
+    for sh in shocks:
+        nid = sh.get("node_id")
+        if nid in seen:
+            raise ValueError(f"Duplicate shock on '{nid}' — combine them into one")
+        seen.add(nid)
+        sims.append(simulate_shock(nid, shock_real=sh.get("shock_real"),
+                                   shock_std=sh.get("shock_std"),
+                                   regime=regime, max_hops=max_hops, betas=betas))
+
+    contribs = defaultdict(list)       # node_id -> [contribution, ...]
+    linked = []
+    for sim in sims:
+        src = sim["source"]
+        if sim["shock_real"] is not None:   # the shock itself, on its own node
+            own = sim["shock_real"] / 100.0
+            contribs[src].append({"source": src, "impact": own, "path": [src], "n_hops": 0,
+                                  "empirical": True, "fallback_hops": 0, "lag_days": 0})
+        for r in sim["results"]:
+            contribs[r["node_id"]].append({
+                "source": src, "impact": r["impact"], "path": r["path"],
+                "n_hops": r["n_hops"], "empirical": r["empirical"],
+                "fallback_hops": r["fallback_hops"], "lag_days": r["lag_days"]})
+            if r["node_id"] in seen and r["node_id"] != src:
+                linked.append({"from": src, "to": r["node_id"]})
+
+    results = []
+    for nid, cs in contribs.items():
+        total = sum(c["impact"] for c in cs)
+        dom = max(cs, key=lambda c: abs(c["impact"]))
+        fb = max(c["fallback_hops"] for c in cs)
+        results.append({
+            "node_id":    nid,
+            "label":      nodes.get(nid, {}).get("label", nid),
+            "impact":     round(total, 6),
+            "impact_pct": round(total * 100, 3),
+            "unit":       "bps" if nid in BPS_NODES else "%",
+            "empirical":  all(c["empirical"] for c in cs),
+            "fallback_hops": fb,
+            "reliability": ("guess" if any(c["fallback_hops"] for c in cs) else
+                            "direct" if dom["n_hops"] <= 1 else "chained"),
+            "lag_days":   max(c["lag_days"] for c in cs),
+            "path":       dom["path"],
+            "n_hops":     dom["n_hops"],
+            "via":        dom["path"][-2] if len(dom["path"]) > 1 else nid,
+            "confidence": 1,
+            "contributions": [
+                {"source": c["source"], "impact_pct": round(c["impact"] * 100, 3),
+                 "n_hops": c["n_hops"], "path": c["path"], "empirical": c["empirical"]}
+                for c in sorted(cs, key=lambda c: -abs(c["impact"]))],
+        })
+    results.sort(key=lambda r: abs(r["impact"]), reverse=True)
+
+    return {
+        "shocks": [{"node_id": x["source"], "shock_real": x["shock_real"], "unit": x["unit"]}
+                   for x in sims],
+        "regime": regime, "affected": len(results), "linked_shocks": linked,
+        "results": results,
+    }
+
+
 if __name__ == "__main__":
     result = simulate_shock("fed_rate", shock_real=25, regime="all")
     print(f"\nShock: fed_rate +25bps ({result['shock_std']:.2f}σ) "

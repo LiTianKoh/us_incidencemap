@@ -30,6 +30,12 @@ export const api = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ node_id, shock_real, shock_std, regime, max_hops }),
     }).then(r => r.json()),
+  simulateScenario: (shocks, regime = "all", max_hops = 10) =>
+    fetch(`${BASE}/simulate/scenario`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ shocks, regime, max_hops }),
+    }).then(r => r.json()),
   prices:      (id, days = 365) => get(`/prices/${id}?days=${days}`),
   priceWindow: (id, date, before=90, after=90) => get(`/prices/${id}/window?date=${date}&days_before=${before}&days_after=${after}`),
 

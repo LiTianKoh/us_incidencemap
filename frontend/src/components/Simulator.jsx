@@ -21,6 +21,8 @@ export default function Simulator({ nodes, edges, onSimResult, currentRegime }) 
   const [sourceId,   setSourceId]   = useState("")
   const [shockReal,  setShockReal]  = useState("")   // raw input in natural units
   const [regime,     setRegime]     = useState(currentRegime ?? "all")
+  const [maxHops,    setMaxHops]    = useState(2)    // backtest: only 1-hop paths have real skill
+  const [extra,      setExtra]      = useState([])   // extra simultaneous shocks [{node, value}]
   const [running,    setRunning]    = useState(false)
   const [results,    setResults]    = useState(null)
   const [error,      setError]      = useState(null)
@@ -63,12 +65,21 @@ export default function Simulator({ nodes, edges, onSimResult, currentRegime }) 
     setExpanded(null)
 
     try {
-      const data = await api.simulate(sourceId, shockNum, null, regime)
+      const extras = extra.filter(x => x.node && x.value !== "" && !isNaN(parseFloat(x.value)))
+      if (extras.some(x => x.node === sourceId) || new Set(extras.map(x => x.node)).size !== extras.length)
+        throw new Error("Each node can only be shocked once — combine duplicates into one shock.")
+      const data = extras.length
+        ? await api.simulateScenario(
+            [{ node_id: sourceId, shock_real: shockNum },
+             ...extras.map(x => ({ node_id: x.node, shock_real: parseFloat(x.value) }))],
+            regime, maxHops)
+        : await api.simulate(sourceId, shockNum, null, regime, maxHops)
       if (data.detail) throw new Error(data.detail)
       setResults(data)
 
       // Auto-highlight: source + all affected nodes + connecting edges
       const affectedIds = new Set(data.results.map(r => r.node_id))
+      if (data.shocks) data.shocks.forEach(x => affectedIds.add(x.node_id))
       const affectedEdges = (edges ?? []).filter(e =>
         (affectedIds.has(e.source) || e.source === sourceId) &&
         (affectedIds.has(e.target) || e.target === sourceId) &&
@@ -200,6 +211,38 @@ export default function Simulator({ nodes, edges, onSimResult, currentRegime }) 
           )}
         </div>
 
+        {/* Extra simultaneous shocks */}
+        <div>
+          {extra.map((x, i) => {
+            const u = sigmas[x.node]?.unit ?? "%"
+            return (
+              <div key={i} className="flex items-center gap-1.5 mb-1.5">
+                <select value={x.node}
+                  onChange={e => setExtra(ex => ex.map((y, j) => j === i ? { ...y, node: e.target.value } : y))}
+                  className="flex-1 min-w-0 bg-slate-800 border border-slate-600 text-slate-200 text-xs rounded px-2 py-1">
+                  <option value="">— node —</option>
+                  {sortedNodes.map(n => <option key={n.id} value={n.id}>{n.label}</option>)}
+                </select>
+                <input type="number" value={x.value} placeholder={u}
+                  onChange={e => setExtra(ex => ex.map((y, j) => j === i ? { ...y, value: e.target.value } : y))}
+                  className="w-20 bg-slate-800 border border-slate-600 text-slate-200 text-xs rounded px-2 py-1" />
+                <span className="text-slate-500 text-xs w-6">{u}</span>
+                <button onClick={() => setExtra(ex => ex.filter((_, j) => j !== i))}
+                  className="text-slate-500 hover:text-red-400 text-xs" title="Remove shock">✕</button>
+              </div>
+            )
+          })}
+          <button onClick={() => setExtra(ex => [...ex, { node: "", value: "" }])}
+            className="text-blue-400 hover:text-blue-300 text-xs">
+            + Add a simultaneous shock
+          </button>
+          {extra.length > 0 && (
+            <p className="text-slate-600 text-xs mt-1">
+              Effects are added together. Each shock is an extra move on top of what the others cause.
+            </p>
+          )}
+        </div>
+
         {/* Regime */}
         <div>
           <label className="text-slate-400 text-xs block mb-1">Regime for betas</label>
@@ -215,6 +258,27 @@ export default function Simulator({ nodes, edges, onSimResult, currentRegime }) 
               </button>
             ))}
           </div>
+        </div>
+
+        {/* Reach */}
+        <div>
+          <label className="text-slate-400 text-xs block mb-1">Reach</label>
+          <div className="flex gap-1.5">
+            {[[1, "Direct only"], [2, "Up to 2 hops"], [10, "Full chain"]].map(([v, l]) => (
+              <button key={v} onClick={() => setMaxHops(v)}
+                title={v === 10 ? "Backtest shows chains of 3+ hops have no out-of-sample skill — indicative only" : undefined}
+                className={`px-2 py-0.5 rounded text-xs font-medium border transition-colors ${
+                  maxHops === v
+                    ? "border-blue-500 bg-slate-600 text-white"
+                    : "bg-slate-800 border-slate-600 text-slate-500 hover:border-slate-400"
+                }`}>
+                {l}
+              </button>
+            ))}
+          </div>
+          <p className="text-slate-600 text-xs mt-1">
+            Direct effects are backtest-validated; longer chains are not.
+          </p>
         </div>
 
         {/* Run button */}
@@ -249,7 +313,9 @@ export default function Simulator({ nodes, edges, onSimResult, currentRegime }) 
               </span>
             </p>
             <p className="text-slate-500 text-xs font-mono">
-              {results.shock_real !== null
+              {results.shocks
+                ? results.shocks.map(x => `${x.node_id} ${x.shock_real > 0 ? "+" : ""}${x.shock_real}${x.unit}`).join("  ·  ")
+                : results.shock_real !== null
                 ? `${results.shock_real > 0 ? "+" : ""}${results.shock_real}${results.unit} = ${results.shock_std > 0 ? "+" : ""}${results.shock_std}σ`
                 : `${results.shock_std > 0 ? "+" : ""}${results.shock_std}σ`
               }
@@ -258,6 +324,13 @@ export default function Simulator({ nodes, edges, onSimResult, currentRegime }) 
               Click canvas to clear highlights.
             </p>
           </div>
+
+          {results.linked_shocks?.length > 0 && (
+            <p className="text-amber-500 text-xs">
+              Linked shocks: {results.linked_shocks.map(l => `${l.from} → ${l.to}`).join(", ")}. One shock also
+              moves another shocked node through the graph, so that node's total includes both.
+            </p>
+          )}
 
           {/* Impact list */}
           <div className="space-y-1">
@@ -321,6 +394,17 @@ export default function Simulator({ nodes, edges, onSimResult, currentRegime }) 
                     <p className="text-slate-500 text-xs font-mono">
                       {r.path.join(" → ")}
                     </p>
+                    {r.contributions?.length > 1 && (
+                      <div className="text-xs text-slate-400 space-y-0.5">
+                        <p className="text-slate-500">Contributions:</p>
+                        {r.contributions.map((c, k) => (
+                          <p key={k} className="font-mono">
+                            {c.source}: {c.impact_pct > 0 ? "+" : ""}{c.impact_pct}{r.unit === "bps" ? " bps" : "%"}
+                            {c.n_hops > 0 && <span className="text-slate-600"> ({c.n_hops} hop{c.n_hops > 1 ? "s" : ""})</span>}
+                          </p>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 )}
               </div>

@@ -13,7 +13,7 @@ silently dropped.
 import json
 from pathlib import Path
 
-from graph.simulator import simulate_shock, BPS_NODES
+from graph.simulator import simulate_shock, simulate_scenario, BPS_NODES
 
 TICKER_MAP_PATH = Path(__file__).parent.parent / "data" / "ticker_map.json"
 
@@ -30,14 +30,21 @@ def portfolio_shock(
     shock_std:  float = None,
     regime:     str   = "all",
     max_hops:   int   = 10,
+    shocks:     list  = None,    # several simultaneous shocks: [{node_id, shock_real|shock_std}]
 ) -> dict:
     tmap = load_ticker_map()
-    sim  = simulate_shock(node_id, shock_real=shock_real, shock_std=shock_std,
-                          regime=regime, max_hops=max_hops)
-    impacts = {r["node_id"]: r for r in sim["results"]}
-
-    # The shocked node itself, in native units (decimal return, or pp for rate nodes)
-    src_native = sim["shock_real"] / 100.0 if sim["shock_real"] is not None else None
+    if shocks:
+        # Scenario: effects of all shocks are summed per node (see simulate_scenario).
+        scen = simulate_scenario(shocks, regime=regime, max_hops=max_hops)
+        impacts = {r["node_id"]: r for r in scen["results"]}
+        sim = {"shock_real": None, "shock_std": None, "unit": None}
+        src_native, node_id = None, "+".join(s["node_id"] for s in scen["shocks"])
+    else:
+        sim  = simulate_shock(node_id, shock_real=shock_real, shock_std=shock_std,
+                              regime=regime, max_hops=max_hops)
+        impacts = {r["node_id"]: r for r in sim["results"]}
+        # The shocked node itself, in native units (decimal return, or pp for rate nodes)
+        src_native = sim["shock_real"] / 100.0 if sim["shock_real"] is not None else None
 
     rows, unmapped = [], []
     for h in holdings:
@@ -63,7 +70,7 @@ def portfolio_shock(
                "impact_native": None, "pnl_pct": 0.0, "pnl": 0.0,
                "path": [], "empirical": True, "fallback_hops": 0, "lag_days": 0}
 
-        if node == node_id:
+        if not shocks and node == node_id:
             native, row["path"] = src_native, [node]
         elif node in impacts:
             r = impacts[node]
@@ -95,7 +102,9 @@ def portfolio_shock(
     est_gross   = sum(abs(r["pnl"]) for r in rows if not r["empirical"])
 
     return {
-        "source": node_id, "shock_real": sim["shock_real"], "shock_std": sim["shock_std"],
+        "source": node_id, "shocks": scen["shocks"] if shocks else None,
+        "linked_shocks": scen["linked_shocks"] if shocks else [],
+        "shock_real": sim["shock_real"], "shock_std": sim["shock_std"],
         "unit": sim["unit"], "regime": regime,
         "total_value": total_value,
         "total_pnl":   total_pnl,

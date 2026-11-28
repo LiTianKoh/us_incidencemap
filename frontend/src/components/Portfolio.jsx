@@ -40,6 +40,7 @@ export default function Portfolio({ nodes, currentRegime, onSimResult }) {
   const [shock,    setShock]    = useState("")
   const [regime,   setRegime]   = useState(currentRegime ?? "all")
   const [sigmas,   setSigmas]   = useState({})
+  const [extra,    setExtra]    = useState([])   // extra simultaneous shocks [{node, value}]
   const [running,  setRunning]  = useState(false)
   const [result,   setResult]   = useState(null)
   const [error,    setError]    = useState(null)
@@ -60,10 +61,17 @@ export default function Portfolio({ nodes, currentRegime, onSimResult }) {
     if (holdings.length === 0) { setError("Add at least one holding."); return }
     setRunning(true); setError(null); setResult(null)
     try {
+      const extras = extra.filter(x => x.node && x.value !== "" && !isNaN(parseFloat(x.value)))
+      if (extras.some(x => x.node === sourceId) || new Set(extras.map(x => x.node)).size !== extras.length)
+        throw new Error("Each node can only be shocked once — combine duplicates into one shock.")
+      const payload = extras.length
+        ? { holdings, regime, shocks: [{ node_id: sourceId, shock_real: shockN },
+              ...extras.map(x => ({ node_id: x.node, shock_real: parseFloat(x.value) }))] }
+        : { holdings, node_id: sourceId, shock_real: shockN, regime }
       const res = await fetch("http://localhost:8000/portfolio/shock", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ holdings, node_id: sourceId, shock_real: shockN, regime }),
+        body: JSON.stringify(payload),
       })
       const data = await res.json()
       if (data.detail) throw new Error(typeof data.detail === "string" ? data.detail : JSON.stringify(data.detail))
@@ -134,6 +142,27 @@ export default function Portfolio({ nodes, currentRegime, onSimResult }) {
         <span className="text-slate-400 w-8">{unit}</span>
       </div>
 
+      <div>
+        {extra.map((x, i) => (
+          <div key={i} className="flex items-center gap-1.5 mb-1.5">
+            <select value={x.node}
+              onChange={(e) => setExtra(ex => ex.map((y, j) => j === i ? { ...y, node: e.target.value } : y))}
+              className="flex-1 min-w-0 bg-slate-700 text-white rounded px-2 py-1.5 text-xs">
+              <option value="">Select node…</option>
+              {sorted.map(n => <option key={n.id} value={n.id}>{n.label ?? n.id}</option>)}
+            </select>
+            <input type="number" value={x.value} placeholder={sigmas[x.node]?.unit ?? "%"}
+              onChange={(e) => setExtra(ex => ex.map((y, j) => j === i ? { ...y, value: e.target.value } : y))}
+              className="w-20 bg-slate-700 text-white rounded px-2 py-1.5 text-xs" />
+            <span className="text-slate-500 text-xs w-6">{sigmas[x.node]?.unit ?? "%"}</span>
+            <button onClick={() => setExtra(ex => ex.filter((_, j) => j !== i))}
+              className="text-slate-500 hover:text-red-400 text-xs" title="Remove shock">✕</button>
+          </div>
+        ))}
+        <button onClick={() => setExtra(ex => [...ex, { node: "", value: "" }])}
+          className="text-blue-400 hover:text-blue-300 text-xs">+ Add a simultaneous shock</button>
+      </div>
+
       <div className="flex flex-wrap gap-1">
         {["all", "zirp", "hiking", "easing", "risk_off", "normal"].map(r => (
           <button key={r} onClick={() => setRegime(r)}
@@ -156,7 +185,9 @@ export default function Portfolio({ nodes, currentRegime, onSimResult }) {
         <div className="space-y-3">
           <div className="bg-slate-700 rounded p-3 space-y-1">
             <p className="text-slate-400 text-xs">
-              {result.source} {result.shock_real > 0 ? "+" : ""}{result.shock_real}{result.unit}
+              {result.shocks
+                ? result.shocks.map(x => `${x.node_id} ${x.shock_real > 0 ? "+" : ""}${x.shock_real}${x.unit}`).join(" · ")
+                : <>{result.source} {result.shock_real > 0 ? "+" : ""}{result.shock_real}{result.unit}</>}
               {" · "}{result.regime} regime
             </p>
             <p className={`text-xl font-semibold ${result.total_pnl < 0 ? "text-red-400" : "text-emerald-400"}`}>

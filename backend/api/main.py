@@ -297,6 +297,30 @@ def portfolio_ticker_map():
     return load_ticker_map()
 
 
+@app.post("/simulate/scenario")
+async def simulate_scenario_endpoint(body: dict):
+    """
+    Body: { shocks: [{node_id, shock_real | shock_std}, ...], regime?, max_hops? }
+    Several simultaneous shocks; per-node effects are summed (see graph.simulator).
+    """
+    from graph.simulator import simulate_scenario
+    shocks = body.get("shocks") or []
+    if not shocks:
+        raise HTTPException(status_code=400, detail="shocks is empty")
+    clean = []
+    for sh in shocks:
+        if not sh.get("node_id") or (sh.get("shock_real") is None and sh.get("shock_std") is None):
+            raise HTTPException(status_code=400, detail="each shock needs node_id and shock_real or shock_std")
+        clean.append({"node_id": sh["node_id"],
+                      "shock_real": float(sh["shock_real"]) if sh.get("shock_real") is not None else None,
+                      "shock_std":  float(sh["shock_std"])  if sh.get("shock_std")  is not None else None})
+    try:
+        return simulate_scenario(clean, regime=body.get("regime", "all"),
+                                 max_hops=int(body.get("max_hops", 10)))
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+
 @app.post("/portfolio/shock")
 async def portfolio_shock_endpoint(body: dict):
     """
@@ -307,10 +331,17 @@ async def portfolio_shock_endpoint(body: dict):
 
     holdings = body.get("holdings") or []
     node_id  = body.get("node_id")
-    if not node_id:
-        raise HTTPException(status_code=400, detail="node_id is required")
+    shocks   = body.get("shocks") or None      # several simultaneous shocks
     if not holdings:
         raise HTTPException(status_code=400, detail="holdings is empty")
+    if shocks:
+        try:
+            return portfolio_shock(holdings, None, regime=body.get("regime", "all"),
+                                   max_hops=int(body.get("max_hops", 10)), shocks=shocks)
+        except ValueError as e:
+            raise HTTPException(status_code=404, detail=str(e))
+    if not node_id:
+        raise HTTPException(status_code=400, detail="node_id is required")
     sr, ss = body.get("shock_real"), body.get("shock_std")
     if sr is None and ss is None:
         raise HTTPException(status_code=400, detail="shock_real or shock_std is required")

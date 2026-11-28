@@ -61,6 +61,12 @@ start.sh / start.ps1       one-terminal launchers (Mac/Linux, Windows)
   quality gate (R2 >= 0.02, n >= 20, sign agrees with the edge direction), else the
   flagged fallback (direction x 0.10) is used. Each result reports its own unit
   (% or bps), `fallback_hops` and `empirical`; the UI shows "est." for fallbacks.
+- Multi-shock scenarios (simulator.simulate_scenario, POST /simulate/scenario; portfolio
+  /portfolio/shock also takes `shocks`): several simultaneous shocks are propagated
+  separately and ADDED per node (betas are linear). Each shock is an extra independent
+  move, so if one shock also reaches another shocked node, that node's total includes
+  both; `linked_shocks` flags this. Each result lists per-shock `contributions`. The
+  Simulator and Portfolio tabs have "+ Add a simultaneous shock" rows.
 - Portfolio shock (portfolio.py): holdings (ticker, value) map to nodes via
   data/ticker_map.json or an explicit node override. Equity-like holdings take the
   node's simulated return; bond holdings carry a duration (P&L% = -duration x yield
@@ -123,5 +129,5 @@ start.sh / start.ps1       one-terminal launchers (Mac/Linux, Windows)
   close), an as-of date / staleness warning on the badge, incremental refresh (button
   + on backend start), optional hysteresis around the VIX threshold. Caveat: the
   backtest shows regime-matched betas do not yet beat all-history betas out of sample.
-- Risk-desk layer, remaining: multi-shock scenarios, reverse stress tests, path-level P&L attribution
+- Risk-desk layer, remaining: reverse stress tests, path-level P&L attribution
   (portfolio shock P&L itself is built)
