@@ -235,6 +235,37 @@ export default function Validation({ backtest, onRun, onHighlight }) {
             </p>
           </div>
 
+          {backtest.hop_depth && (
+            <div className="bg-slate-700 rounded px-3 py-2 text-xs text-slate-300 space-y-1">
+              <p className="text-slate-100 font-medium">Skill by hop depth</p>
+              <p className="text-slate-500">
+                Out-of-sample, gated like the live simulator. Skill = 1 − error ÷ error of predicting no move; above 0 beats doing nothing.
+              </p>
+              <table className="w-full text-xs">
+                <thead>
+                  <tr className="text-slate-500 text-left">
+                    <th className="font-normal">Hops</th><th className="font-normal">Paths</th>
+                    <th className="font-normal">Typical skill</th><th className="font-normal">Beat zero</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {backtest.hop_depth.by_depth.map((r) => (
+                    <tr key={r.hops}>
+                      <td>{r.hops}</td><td>{r.paths}</td>
+                      <td className={r.median_path_skill > 0.02 ? "text-emerald-400" : "text-amber-400"}>
+                        {r.median_path_skill == null ? "—" : `${(r.median_path_skill * 100).toFixed(1)}%`}
+                      </td>
+                      <td>{r.share_beating_zero == null ? "—" : pct(r.share_beating_zero)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <p className="text-slate-500">
+                Typical = median across paths (pooled skill is dragged by a few outlier paths). Results tagged “chain” in the Simulator are the 2+ hop rows.
+              </p>
+            </div>
+          )}
+
           <div className="flex gap-1">
             {[["edges", "Edges"], ["episodes", "Episodes"]].map(([k, l]) => (
               <button key={k} onClick={() => setView(k)}

@@ -79,9 +79,14 @@ start.sh / start.ps1       one-terminal launchers (Mac/Linux, Windows)
   hikes/long-end surge and SVB through the full simulator using only betas known
   before each episode. Source shocks are the realised source move over the window.
   The Validation tab shows the results (run/re-run button, edge table, episode
-  replays; clicking an episode card highlights every affected node on the graph) and the Inspector shows a validated/weak/fails badge on each edge.
+  replays; clicking an episode card highlights every affected node on the graph; a hop-depth
+  table shows skill by path length — typical 1-hop paths beat predicting nothing, 2-3 hop chains do not) and the Inspector shows a validated/weak/fails badge on each edge.
 - Sidebar: drag the handle to resize (width saved in localStorage, double-click to
   reset); the tab strip scrolls with ‹ › arrows when tabs overflow.
+- Hub layout (hubLayout.js, "◎ Hub layout" button, undoable): hubs = best-connected ~12% of
+  nodes (min 6 neighbours), spread apart so their rings never overlap; every other node sits
+  on concentric rings around its most-connected hub, angled toward the other hubs it links
+  to. Tunables are constants at the top of the file. Auto-layout (force-directed) remains.
 - Positions persist in localStorage. With nothing saved (first run / Auto-layout) a
   one-off force-directed layout runs and is saved; afterwards new nodes are placed
   near neighbours and existing positions are never re-laid-out.

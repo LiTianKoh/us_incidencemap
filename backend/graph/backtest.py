@@ -313,6 +313,89 @@ def backtest_episode(name: str, source: str, start: str, end: str) -> dict:
 
 # ── Summary + CLI ────────────────────────────────────────────────────────────
 
+def hop_depth_skill(max_depth: int = 3) -> dict:
+    """
+    Does skill survive chaining? For every simple path of 1..max_depth edges where
+    every node has data, predict the END node's monthly move from the START node's
+    move as  x * prod(beta_i) * DAMPEN^(h-1), each beta fitted point-in-time on
+    strictly earlier months and quality-gated (R2, sign) exactly like the live
+    simulator; a month where any hop fails the gate is skipped (the simulator would
+    use a guess there). Moves are scaled by the end node's own std so paths pool.
+    skill = 1 - MSE(model)/MSE(predict zero): >0 beats doing nothing.
+    """
+    from graph.simulator import DAMPEN_PER_HOP
+    edges = _load_edges()
+    adj = {}
+    for e in edges:
+        adj.setdefault(e["source"], []).append(e)
+
+    paths = []
+    def dfs(nodes, es):
+        if es:
+            paths.append((list(nodes), list(es)))
+        if len(es) >= max_depth:
+            return
+        for e in adj.get(nodes[-1], []):
+            if e["target"] in nodes:
+                continue
+            dfs(nodes + [e["target"]], es + [e])
+    for n in list(adj):
+        dfs([n], [])
+
+    acc = {h: {"paths": 0, "y": [], "pred": [], "beat": 0, "ps": []} for h in range(1, max_depth + 1)}
+    for nodes, es in paths:
+        h = len(es)
+        pairs = [_pair(e["source"], e["target"], e.get("lag_days", 0)) for e in es]
+        if any(p is None for p in pairs):
+            continue
+        x0 = pairs[0]["x"]
+        yT = pairs[-1]["y"]
+        df = pd.concat([x0, yT], axis=1, join="inner").dropna()
+        df.columns = ["x", "y"]
+        if len(df) < MIN_TRAIN + MIN_OOS:
+            continue
+        sd = float(df["y"].std())
+        if sd == 0:
+            continue
+        ys, ps = [], []
+        for t in df.index[MIN_TRAIN:]:
+            b, ok = 1.0, True
+            for p_, e in zip(pairs, es):
+                tr = p_[p_.index < t]
+                if len(tr) < MIN_BETA_N:
+                    ok = False; break
+                bi = _beta(tr["x"].values, tr["y"].values)
+                c = np.corrcoef(tr["x"].values, tr["y"].values)[0, 1] if bi is not None else np.nan
+                if bi is None or np.isnan(c) or c * c < MIN_BETA_R2 or bi * e.get("direction", 1) <= 0:
+                    ok = False; break
+                b *= bi
+            if not ok:
+                continue
+            ys.append(df.loc[t, "y"] / sd)
+            ps.append(b * df.loc[t, "x"] * DAMPEN_PER_HOP ** (h - 1) / sd)
+        if len(ys) < MIN_OOS:
+            continue
+        ys, ps = np.array(ys), np.array(ps)
+        a = acc[h]
+        a["paths"] += 1
+        a["y"].append(ys); a["pred"].append(ps)
+        a["beat"] += int(np.mean((ys - ps) ** 2) < np.mean(ys ** 2))
+        a["ps"].append(1 - np.mean((ys - ps) ** 2) / np.mean(ys ** 2))
+
+    out = []
+    for h, a in acc.items():
+        if not a["paths"]:
+            out.append({"hops": h, "paths": 0, "obs": 0, "skill": None, "median_path_skill": None, "share_beating_zero": None})
+            continue
+        y, pr = np.concatenate(a["y"]), np.concatenate(a["pred"])
+        mz, mm = float(np.mean(y ** 2)), float(np.mean((y - pr) ** 2))
+        out.append({"hops": h, "paths": a["paths"], "obs": int(len(y)),
+                    "skill": round(1 - mm / mz, 4),
+                    "median_path_skill": round(float(np.median(a["ps"])), 4),
+                    "share_beating_zero": round(a["beat"] / a["paths"], 3)})
+    return {"damping": DAMPEN_PER_HOP, "by_depth": out}
+
+
 def summarise_edges(rows: list) -> dict:
     def share(rs, v): return round(sum(r["verdict"] == v for r in rs) / len(rs), 3) if rs else None
     by_conf = {}
@@ -348,6 +431,7 @@ def run_all(write: bool = True) -> dict:
         "summary":  summarise_edges(edge_rows),
         "edges":    sorted(edge_rows, key=lambda r: -r["oos_r2"]),
         "episodes": episodes,
+        "hop_depth": hop_depth_skill(),
     }
     if write:
         with open(RESULT_PATH, "w") as f:
@@ -368,6 +452,13 @@ def _print(result: dict, saved: bool = True) -> None:
     rl = s["regime_layer"]
     print(f"Regime layer: {rl['edges_with_regime_betas']} edges with regime betas; "
           f"median OOS-R² lift {rl['median_lift']}; improved on {rl['share_improved']} of them")
+
+    hd = result.get("hop_depth")
+    if hd:
+        print("\n=== Skill by hop depth (1 - MSE/MSE(zero); >0 beats predicting nothing) ===")
+        for r in hd["by_depth"]:
+            print(f"   {r['hops']} hop(s): paths={r['paths']}  obs={r['obs']}  skill={r['skill']}  median-path={r['median_path_skill']}  "
+                  f"beat-zero share={r['share_beating_zero']}")
 
     print("\nBest 8 edges (by out-of-sample R²):")
     for r in result["edges"][:8]:

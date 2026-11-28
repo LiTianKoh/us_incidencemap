@@ -288,16 +288,6 @@
     "notes": "Rate hikes push up long-end yields, though effect is weaker than on 2Y"
   },
   {
-    "source": "hy_spreads",
-    "target": "spx",
-    "direction": -1,
-    "label": "credit stress signal",
-    "lag_days": 5,
-    "confidence": 2,
-    "magnitude": null,
-    "notes": "Widening HY spreads signal corporate stress and lead equity weakness"
-  },
-  {
     "source": "cpi",
     "target": "fed_rate",
     "direction": 1,

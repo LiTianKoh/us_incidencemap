@@ -1,3 +1,4 @@
+import { computeHubOrbitLayout } from "../hubLayout"
 import { useEffect, useRef, useState, useCallback } from "react"
 import cytoscape from "cytoscape"
 
@@ -496,6 +497,26 @@ export default function GraphCanvas({
     })
   }
 
+  // Hub-and-orbit layout: big nodes spread apart, their neighbours ring around them
+  function hubLayout() {
+    const cy = cyRef.current
+    if (!cy) return
+    const before = {}
+    cy.nodes().forEach(n => { before[n.data("id")] = { ...n.position() } })
+    const ids   = cy.nodes().map(n => n.data("id"))
+    const edges = cy.edges().map(e => ({ source: e.data("source"), target: e.data("target") }))
+    const { positions } = computeHubOrbitLayout(ids, edges)
+    applyPositions(cy, positions)
+    cy.nodes().removeClass("newly-placed")
+    try { localStorage.setItem(POS_KEY, JSON.stringify(positions)) } catch { /* ignore */ }
+    cy.fit(undefined, 40)
+    pushUndoRef.current?.({
+      label: "Hub layout",
+      undo:  () => applyPositions(cyRef.current, before),
+      redo:  () => applyPositions(cyRef.current, positions),
+    })
+  }
+
   // Keep Cytoscape's canvas in sync when the sidebar is resized
   useEffect(() => {
     const el = containerRef.current
@@ -550,6 +571,12 @@ export default function GraphCanvas({
 
       {/* Bottom-right controls */}
       <div className="absolute bottom-4 right-4 flex gap-2">
+        <button onClick={hubLayout}
+          title="Spread the best-connected nodes apart and orbit their neighbours around them (undo with ⌘/Ctrl+Z)"
+          className="bg-slate-700 hover:bg-slate-600 text-slate-400 hover:text-white
+                     rounded-lg px-3 py-2 text-xs transition-colors border border-slate-600 shadow-lg">
+          ◎ Hub layout
+        </button>
         <button onClick={autoLayout}
           title="Re-run the layout (undo with ⌘/Ctrl+Z)"
           className="bg-slate-700 hover:bg-slate-600 text-slate-400 hover:text-white

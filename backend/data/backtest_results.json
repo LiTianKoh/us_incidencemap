@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T12:07:15+00:00",
+  "generated_at": "2026-11-27T12:53:17+00:00",
   "params": {
     "min_train_months": 60,
     "min_oos_months": 36,
@@ -1845,6 +1845,97 @@
       "betas_through": "2008-08-31",
       "source_move": 142.79,
       "unit": "%",
+      "n_affected": 7,
+      "affected": [
+        {
+          "node": "sec_tech",
+          "n_hops": 1,
+          "path": [
+            "vix",
+            "sec_tech"
+          ],
+          "predicted": -36.496,
+          "unit": "%",
+          "empirical": true,
+          "scored": true
+        },
+        {
+          "node": "spx",
+          "n_hops": 1,
+          "path": [
+            "vix",
+            "spx"
+          ],
+          "predicted": -19.374,
+          "unit": "%",
+          "empirical": true,
+          "scored": true
+        },
+        {
+          "node": "bitcoin",
+          "n_hops": 1,
+          "path": [
+            "vix",
+            "bitcoin"
+          ],
+          "predicted": -11.424,
+          "unit": "%",
+          "empirical": false,
+          "scored": false
+        },
+        {
+          "node": "consumer_sent",
+          "n_hops": 2,
+          "path": [
+            "vix",
+            "spx",
+            "consumer_sent"
+          ],
+          "predicted": -5.364,
+          "unit": "%",
+          "empirical": true,
+          "scored": true
+        },
+        {
+          "node": "ethereum",
+          "n_hops": 2,
+          "path": [
+            "vix",
+            "bitcoin",
+            "ethereum"
+          ],
+          "predicted": -0.914,
+          "unit": "%",
+          "empirical": false,
+          "scored": false
+        },
+        {
+          "node": "coinbase_stock",
+          "n_hops": 2,
+          "path": [
+            "vix",
+            "bitcoin",
+            "coinbase_stock"
+          ],
+          "predicted": -0.914,
+          "unit": "%",
+          "empirical": false,
+          "scored": false
+        },
+        {
+          "node": "crypto_etf_flows",
+          "n_hops": 2,
+          "path": [
+            "vix",
+            "bitcoin",
+            "crypto_etf_flows"
+          ],
+          "predicted": -0.914,
+          "unit": "%",
+          "empirical": false,
+          "scored": false
+        }
+      ],
       "n_scored": 3,
       "n_empirical": 3,
       "hit_rate_all": 1.0,
@@ -1911,6 +2002,111 @@
       "betas_through": "2018-09-30",
       "source_move": 100.96,
       "unit": "%",
+      "n_affected": 8,
+      "affected": [
+        {
+          "node": "bitcoin",
+          "n_hops": 1,
+          "path": [
+            "vix",
+            "bitcoin"
+          ],
+          "predicted": -14.527,
+          "unit": "%",
+          "empirical": true,
+          "scored": true
+        },
+        {
+          "node": "sec_tech",
+          "n_hops": 1,
+          "path": [
+            "vix",
+            "sec_tech"
+          ],
+          "predicted": -13.798,
+          "unit": "%",
+          "empirical": true,
+          "scored": true
+        },
+        {
+          "node": "spx",
+          "n_hops": 1,
+          "path": [
+            "vix",
+            "spx"
+          ],
+          "predicted": -10.375,
+          "unit": "%",
+          "empirical": true,
+          "scored": true
+        },
+        {
+          "node": "consumer_sent",
+          "n_hops": 2,
+          "path": [
+            "vix",
+            "spx",
+            "consumer_sent"
+          ],
+          "predicted": -2.894,
+          "unit": "%",
+          "empirical": true,
+          "scored": true
+        },
+        {
+          "node": "ethereum",
+          "n_hops": 2,
+          "path": [
+            "vix",
+            "bitcoin",
+            "ethereum"
+          ],
+          "predicted": -1.162,
+          "unit": "%",
+          "empirical": false,
+          "scored": true
+        },
+        {
+          "node": "coinbase_stock",
+          "n_hops": 2,
+          "path": [
+            "vix",
+            "bitcoin",
+            "coinbase_stock"
+          ],
+          "predicted": -1.162,
+          "unit": "%",
+          "empirical": false,
+          "scored": false
+        },
+        {
+          "node": "crypto_etf_flows",
+          "n_hops": 2,
+          "path": [
+            "vix",
+            "bitcoin",
+            "crypto_etf_flows"
+          ],
+          "predicted": -1.162,
+          "unit": "%",
+          "empirical": false,
+          "scored": false
+        },
+        {
+          "node": "gdp",
+          "n_hops": 3,
+          "path": [
+            "vix",
+            "spx",
+            "consumer_sent",
+            "gdp"
+          ],
+          "predicted": -0.231,
+          "unit": "%",
+          "empirical": false,
+          "scored": true
+        }
+      ],
       "n_scored": 6,
       "n_empirical": 4,
       "hit_rate_all": 0.833,
@@ -2023,6 +2219,111 @@
       "betas_through": "2020-01-31",
       "source_move": 146.38,
       "unit": "%",
+      "n_affected": 8,
+      "affected": [
+        {
+          "node": "sec_tech",
+          "n_hops": 1,
+          "path": [
+            "vix",
+            "sec_tech"
+          ],
+          "predicted": -19.6,
+          "unit": "%",
+          "empirical": true,
+          "scored": true
+        },
+        {
+          "node": "spx",
+          "n_hops": 1,
+          "path": [
+            "vix",
+            "spx"
+          ],
+          "predicted": -15.162,
+          "unit": "%",
+          "empirical": true,
+          "scored": true
+        },
+        {
+          "node": "bitcoin",
+          "n_hops": 1,
+          "path": [
+            "vix",
+            "bitcoin"
+          ],
+          "predicted": -11.71,
+          "unit": "%",
+          "empirical": false,
+          "scored": true
+        },
+        {
+          "node": "ethereum",
+          "n_hops": 2,
+          "path": [
+            "vix",
+            "bitcoin",
+            "ethereum"
+          ],
+          "predicted": -10.146,
+          "unit": "%",
+          "empirical": false,
+          "scored": true
+        },
+        {
+          "node": "consumer_sent",
+          "n_hops": 2,
+          "path": [
+            "vix",
+            "spx",
+            "consumer_sent"
+          ],
+          "predicted": -4.27,
+          "unit": "%",
+          "empirical": true,
+          "scored": true
+        },
+        {
+          "node": "coinbase_stock",
+          "n_hops": 2,
+          "path": [
+            "vix",
+            "bitcoin",
+            "coinbase_stock"
+          ],
+          "predicted": -0.937,
+          "unit": "%",
+          "empirical": false,
+          "scored": false
+        },
+        {
+          "node": "crypto_etf_flows",
+          "n_hops": 2,
+          "path": [
+            "vix",
+            "bitcoin",
+            "crypto_etf_flows"
+          ],
+          "predicted": -0.937,
+          "unit": "%",
+          "empirical": false,
+          "scored": false
+        },
+        {
+          "node": "gdp",
+          "n_hops": 3,
+          "path": [
+            "vix",
+            "spx",
+            "consumer_sent",
+            "gdp"
+          ],
+          "predicted": -0.342,
+          "unit": "%",
+          "empirical": false,
+          "scored": true
+        }
+      ],
       "n_scored": 5,
       "n_empirical": 3,
       "hit_rate_all": 1.0,
@@ -2131,6 +2432,104 @@
       "betas_through": "2022-02-28",
       "source_move": 297.0,
       "unit": "bps",
+      "n_affected": 7,
+      "affected": [
+        {
+          "node": "yield_curve",
+          "n_hops": 1,
+          "path": [
+            "yield_2y",
+            "yield_curve"
+          ],
+          "predicted": -44.275,
+          "unit": "bps",
+          "empirical": true,
+          "scored": true
+        },
+        {
+          "node": "gdp",
+          "n_hops": 2,
+          "path": [
+            "yield_2y",
+            "yield_curve",
+            "gdp"
+          ],
+          "predicted": -3.542,
+          "unit": "%",
+          "empirical": false,
+          "scored": true
+        },
+        {
+          "node": "sec_financials",
+          "n_hops": 2,
+          "path": [
+            "yield_2y",
+            "yield_curve",
+            "sec_financials"
+          ],
+          "predicted": -3.542,
+          "unit": "%",
+          "empirical": false,
+          "scored": true
+        },
+        {
+          "node": "consumer_sent",
+          "n_hops": 4,
+          "path": [
+            "yield_2y",
+            "yield_curve",
+            "gdp",
+            "nfp",
+            "consumer_sent"
+          ],
+          "predicted": -0.318,
+          "unit": "%",
+          "empirical": false,
+          "scored": true
+        },
+        {
+          "node": "nfp",
+          "n_hops": 3,
+          "path": [
+            "yield_2y",
+            "yield_curve",
+            "gdp",
+            "nfp"
+          ],
+          "predicted": -0.283,
+          "unit": "%",
+          "empirical": false,
+          "scored": true
+        },
+        {
+          "node": "spx",
+          "n_hops": 3,
+          "path": [
+            "yield_2y",
+            "yield_curve",
+            "gdp",
+            "spx"
+          ],
+          "predicted": -0.283,
+          "unit": "%",
+          "empirical": false,
+          "scored": true
+        },
+        {
+          "node": "fed",
+          "n_hops": 3,
+          "path": [
+            "yield_2y",
+            "yield_curve",
+            "gdp",
+            "fed"
+          ],
+          "predicted": -0.283,
+          "unit": "%",
+          "empirical": false,
+          "scored": false
+        }
+      ],
       "n_scored": 6,
       "n_empirical": 1,
       "hit_rate_all": 0.667,
@@ -2252,6 +2651,257 @@
       "betas_through": "2021-12-31",
       "source_move": 256.5,
       "unit": "bps",
+      "n_affected": 19,
+      "affected": [
+        {
+          "node": "real_yield_10y",
+          "n_hops": 1,
+          "path": [
+            "yield_10y",
+            "real_yield_10y"
+          ],
+          "predicted": 125.294,
+          "unit": "bps",
+          "empirical": true,
+          "scored": true
+        },
+        {
+          "node": "yield_curve",
+          "n_hops": 1,
+          "path": [
+            "yield_10y",
+            "yield_curve"
+          ],
+          "predicted": 70.44,
+          "unit": "bps",
+          "empirical": true,
+          "scored": true
+        },
+        {
+          "node": "sec_tech",
+          "n_hops": 1,
+          "path": [
+            "yield_10y",
+            "sec_tech"
+          ],
+          "predicted": -20.52,
+          "unit": "%",
+          "empirical": false,
+          "scored": true
+        },
+        {
+          "node": "sec_realestate",
+          "n_hops": 1,
+          "path": [
+            "yield_10y",
+            "sec_realestate"
+          ],
+          "predicted": -20.52,
+          "unit": "%",
+          "empirical": false,
+          "scored": true
+        },
+        {
+          "node": "sec_utilities",
+          "n_hops": 1,
+          "path": [
+            "yield_10y",
+            "sec_utilities"
+          ],
+          "predicted": -20.52,
+          "unit": "%",
+          "empirical": false,
+          "scored": true
+        },
+        {
+          "node": "xauusd",
+          "n_hops": 2,
+          "path": [
+            "yield_10y",
+            "real_yield_10y",
+            "xauusd"
+          ],
+          "predicted": -11.603,
+          "unit": "%",
+          "empirical": true,
+          "scored": true
+        },
+        {
+          "node": "bitcoin",
+          "n_hops": 2,
+          "path": [
+            "yield_10y",
+            "real_yield_10y",
+            "bitcoin"
+          ],
+          "predicted": -10.024,
+          "unit": "%",
+          "empirical": false,
+          "scored": true
+        },
+        {
+          "node": "crypto_etf_flows",
+          "n_hops": 2,
+          "path": [
+            "yield_10y",
+            "real_yield_10y",
+            "crypto_etf_flows"
+          ],
+          "predicted": -10.024,
+          "unit": "%",
+          "empirical": false,
+          "scored": false
+        },
+        {
+          "node": "ai_roi_sentiment",
+          "n_hops": 2,
+          "path": [
+            "yield_10y",
+            "real_yield_10y",
+            "ai_roi_sentiment"
+          ],
+          "predicted": -10.024,
+          "unit": "%",
+          "empirical": false,
+          "scored": false
+        },
+        {
+          "node": "spx",
+          "n_hops": 2,
+          "path": [
+            "yield_10y",
+            "sec_tech",
+            "spx"
+          ],
+          "predicted": -9.303,
+          "unit": "%",
+          "empirical": false,
+          "scored": true
+        },
+        {
+          "node": "ethereum",
+          "n_hops": 3,
+          "path": [
+            "yield_10y",
+            "real_yield_10y",
+            "bitcoin",
+            "ethereum"
+          ],
+          "predicted": -7.907,
+          "unit": "%",
+          "empirical": false,
+          "scored": true
+        },
+        {
+          "node": "gdp",
+          "n_hops": 2,
+          "path": [
+            "yield_10y",
+            "yield_curve",
+            "gdp"
+          ],
+          "predicted": 5.635,
+          "unit": "%",
+          "empirical": false,
+          "scored": true
+        },
+        {
+          "node": "sec_financials",
+          "n_hops": 2,
+          "path": [
+            "yield_10y",
+            "yield_curve",
+            "sec_financials"
+          ],
+          "predicted": 5.635,
+          "unit": "%",
+          "empirical": false,
+          "scored": true
+        },
+        {
+          "node": "consumer_sent",
+          "n_hops": 3,
+          "path": [
+            "yield_10y",
+            "sec_tech",
+            "spx",
+            "consumer_sent"
+          ],
+          "predicted": -2.919,
+          "unit": "%",
+          "empirical": false,
+          "scored": true
+        },
+        {
+          "node": "housing",
+          "n_hops": 2,
+          "path": [
+            "yield_10y",
+            "sec_realestate",
+            "housing"
+          ],
+          "predicted": -1.642,
+          "unit": "%",
+          "empirical": false,
+          "scored": true
+        },
+        {
+          "node": "coinbase_stock",
+          "n_hops": 3,
+          "path": [
+            "yield_10y",
+            "real_yield_10y",
+            "bitcoin",
+            "coinbase_stock"
+          ],
+          "predicted": -0.802,
+          "unit": "%",
+          "empirical": false,
+          "scored": true
+        },
+        {
+          "node": "ai_capex_cycle",
+          "n_hops": 3,
+          "path": [
+            "yield_10y",
+            "real_yield_10y",
+            "ai_roi_sentiment",
+            "ai_capex_cycle"
+          ],
+          "predicted": -0.802,
+          "unit": "%",
+          "empirical": false,
+          "scored": false
+        },
+        {
+          "node": "nfp",
+          "n_hops": 3,
+          "path": [
+            "yield_10y",
+            "yield_curve",
+            "gdp",
+            "nfp"
+          ],
+          "predicted": 0.451,
+          "unit": "%",
+          "empirical": false,
+          "scored": true
+        },
+        {
+          "node": "fed",
+          "n_hops": 3,
+          "path": [
+            "yield_10y",
+            "yield_curve",
+            "gdp",
+            "fed"
+          ],
+          "predicted": 0.451,
+          "unit": "%",
+          "empirical": false,
+          "scored": false
+        }
+      ],
       "n_scored": 15,
       "n_empirical": 3,
       "hit_rate_all": 0.867,
@@ -2491,6 +3141,47 @@
       "betas_through": "2023-02-28",
       "source_move": -75.0,
       "unit": "bps",
+      "n_affected": 3,
+      "affected": [
+        {
+          "node": "yield_curve",
+          "n_hops": 1,
+          "path": [
+            "yield_2y",
+            "yield_curve"
+          ],
+          "predicted": 11.361,
+          "unit": "bps",
+          "empirical": true,
+          "scored": true
+        },
+        {
+          "node": "gdp",
+          "n_hops": 2,
+          "path": [
+            "yield_2y",
+            "yield_curve",
+            "gdp"
+          ],
+          "predicted": 0.909,
+          "unit": "%",
+          "empirical": false,
+          "scored": true
+        },
+        {
+          "node": "sec_financials",
+          "n_hops": 2,
+          "path": [
+            "yield_2y",
+            "yield_curve",
+            "sec_financials"
+          ],
+          "predicted": 0.909,
+          "unit": "%",
+          "empirical": false,
+          "scored": true
+        }
+      ],
       "n_scored": 2,
       "n_empirical": 1,
       "hit_rate_all": 0.5,
