@@ -405,7 +405,8 @@ def simulate_scenario(
             "via":        dom["path"][-2] if len(dom["path"]) > 1 else nid,
             "confidence": 1,
             "contributions": [
-                {"source": c["source"], "impact_pct": round(c["impact"] * 100, 3),
+                {"source": c["source"], "impact": round(c["impact"], 6),
+                 "impact_pct": round(c["impact"] * 100, 3),
                  "n_hops": c["n_hops"], "path": c["path"], "empirical": c["empirical"]}
                 for c in sorted(cs, key=lambda c: -abs(c["impact"]))],
         })

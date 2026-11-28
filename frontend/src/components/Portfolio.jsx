@@ -120,6 +120,14 @@ export default function Portfolio({ nodes, currentRegime, onSimResult }) {
     })
   }
 
+  function highlightLink(e) {
+    onSimResult?.({
+      sourceNode: e.source, path: [e.source, e.target],
+      edges: [{ source: e.source, target: e.target }],
+      net_direction: 0, total_lag_days: 0, isSimulation: true,
+    })
+  }
+
   const maxPnl = result ? Math.max(...result.holdings.map(h => Math.abs(h.pnl)), 1) : 1
 
   return (
@@ -231,6 +239,47 @@ export default function Portfolio({ nodes, currentRegime, onSimResult }) {
               </p>
             )}
           </div>
+
+          {result.attribution && (result.attribution.by_edge.length > 0 || result.attribution.by_shock.length > 1) && (
+            <div className="bg-slate-700 rounded p-3 space-y-2">
+              <p className="text-slate-200 text-xs font-medium">Where the P&amp;L comes from</p>
+
+              {result.attribution.by_shock.length > 1 && (
+                <div className="space-y-1">
+                  <p className="text-slate-500 text-xs">By shock</p>
+                  {result.attribution.by_shock.map((sh) => (
+                    <div key={sh.source} className="flex justify-between gap-2 text-xs">
+                      <span className="text-slate-300 truncate">
+                        {sh.source}
+                        <span className="text-slate-600"> · {sh.top.map(t => t.ticker).join(", ")}</span>
+                      </span>
+                      <span className={`font-mono ${sh.pnl < 0 ? "text-red-400" : "text-emerald-400"}`}>{money(sh.pnl)}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {result.attribution.by_edge.length > 0 && (
+                <div className="space-y-1">
+                  <p className="text-slate-500 text-xs">Links carrying the most P&amp;L (click to highlight)</p>
+                  {result.attribution.by_edge.slice(0, 8).map((e) => (
+                    <div key={e.source + e.target} onClick={() => highlightLink(e)}
+                         className="flex justify-between gap-2 text-xs cursor-pointer hover:bg-slate-600 rounded px-1 -mx-1">
+                      <span className="text-slate-300 truncate">
+                        {e.source} → {e.target}
+                        <span className="text-slate-600"> · {e.tickers.join(", ")}</span>
+                        {!e.empirical && <span className="text-amber-500"> est.</span>}
+                      </span>
+                      <span className={`font-mono ${e.pnl < 0 ? "text-red-400" : "text-emerald-400"}`}>{money(e.pnl)}</span>
+                    </div>
+                  ))}
+                  <p className="text-slate-600 text-xs">
+                    A multi-hop path's P&amp;L is counted on each of its links, so compare links; don't add them up.
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
 
           <div className="space-y-1">
             {result.holdings.map((h, i) => (

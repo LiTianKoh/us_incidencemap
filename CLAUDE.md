@@ -73,6 +73,11 @@ start.sh / start.ps1       one-terminal launchers (Mac/Linux, Windows)
   change). Each line reports its causal path and whether it is empirical; est_share
   is the share of gross P&L resting on guessed betas. Unmapped holdings and holdings
   with no modelled path are reported, never dropped ("no path" is not "safe").
+- P&L attribution (portfolio_shock -> `attribution`, shown in the Portfolio tab): every
+  holding's P&L is split by the shock that caused it (`by_shock`, sums exactly to total
+  P&L) and by the graph links its path uses (`by_edge`, "P&L carried through the link").
+  A multi-hop path's P&L is counted on every link of that path, so links are compared,
+  not summed. Clicking a link highlights it on the graph.
 - Reverse stress test (reverse_stress.py, POST /portfolio/reverse-stress, Portfolio tab):
   "which single move loses X% of the portfolio?" For every node with data, P&L per σ is
   measured with a 2σ probe (default max 2 hops, the depth the backtest supports) and
@@ -137,5 +142,5 @@ start.sh / start.ps1       one-terminal launchers (Mac/Linux, Windows)
   close), an as-of date / staleness warning on the badge, incremental refresh (button
   + on backend start), optional hysteresis around the VIX threshold. Caveat: the
   backtest shows regime-matched betas do not yet beat all-history betas out of sample.
-- Risk-desk layer, remaining: path-level P&L attribution
-  (portfolio shock P&L itself is built)
+- Risk-desk layer: forward shocks, multi-shock, reverse stress and P&L attribution are all built;
+  a portfolio-replay backtest (how the portfolio would have fared in past episodes) is the open idea

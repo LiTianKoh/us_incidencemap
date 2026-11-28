@@ -72,11 +72,15 @@ def portfolio_shock(
                "impact_native": None, "pnl_pct": 0.0, "pnl": 0.0,
                "path": [], "empirical": True, "fallback_hops": 0, "lag_days": 0}
 
+        contribs = []     # [{source, impact(native), path, empirical}] driving this holding
         if not shocks and node == node_id:
             native, row["path"] = src_native, [node]
+            contribs = [{"source": node_id, "impact": native, "path": [node], "empirical": True}]
         elif node in impacts:
             r = impacts[node]
             native = r["impact"]
+            contribs = r.get("contributions") or [
+                {"source": node_id, "impact": native, "path": r["path"], "empirical": r["empirical"]}]
             row.update(path=r["path"], empirical=r["empirical"],
                        fallback_hops=r["fallback_hops"], lag_days=r["lag_days"])
         else:
@@ -95,7 +99,46 @@ def portfolio_shock(
         else:
             row["pnl_pct"] = native
         row["pnl"] = value * row["pnl_pct"]
+        row["_contribs"] = contribs if row["status"] == "ok" else []
         rows.append(row)
+
+    # ── Attribution: split every holding's P&L by the shock and the path that caused it.
+    def _pnl_of(row, native):
+        if row["node"] in BPS_NODES:
+            return row["value"] * (-row["duration"] * native / 100.0) if row["duration"] is not None else 0.0
+        return row["value"] * native
+
+    by_shock, by_edge = {}, {}
+    for row in rows:
+        for c in row.pop("_contribs", []):
+            cp = _pnl_of(row, c["impact"])
+            if cp == 0:
+                continue
+            sh = by_shock.setdefault(c["source"], {"source": c["source"], "pnl": 0.0, "tickers": {}})
+            sh["pnl"] += cp
+            sh["tickers"][row["ticker"]] = sh["tickers"].get(row["ticker"], 0.0) + cp
+            path = c["path"]
+            for a, b in zip(path[:-1], path[1:]):
+                e = by_edge.setdefault((a, b), {"source": a, "target": b, "pnl": 0.0, "abs_pnl": 0.0,
+                                               "tickers": set(), "empirical": True})
+                e["pnl"] += cp
+                e["abs_pnl"] += abs(cp)
+                e["tickers"].add(row["ticker"])
+                e["empirical"] = e["empirical"] and c["empirical"]
+    attribution = {
+        "by_shock": sorted(
+            ({"source": v["source"], "pnl": v["pnl"],
+              "top": [{"ticker": t, "pnl": p} for t, p in
+                      sorted(v["tickers"].items(), key=lambda kv: -abs(kv[1]))[:3]]}
+             for v in by_shock.values()), key=lambda v: -abs(v["pnl"])),
+        # P&L carried through each link. A multi-hop path's P&L is counted on every link of
+        # it, so these numbers are NOT additive across links — compare links, don't sum them.
+        "by_edge": sorted(
+            ({"source": e["source"], "target": e["target"], "pnl": e["pnl"],
+              "abs_pnl": e["abs_pnl"], "n_holdings": len(e["tickers"]),
+              "tickers": sorted(e["tickers"]), "empirical": e["empirical"]}
+             for e in by_edge.values()), key=lambda e: -e["abs_pnl"])[:15],
+    }
 
     rows.sort(key=lambda r: abs(r["pnl"]), reverse=True)
     total_value = sum(abs(r["value"]) for r in rows)
@@ -114,4 +157,5 @@ def portfolio_shock(
         "est_share":   (est_gross / gross) if gross else None,
         "holdings":    rows,
         "unmapped":    unmapped,
+        "attribution": attribution,
     }
