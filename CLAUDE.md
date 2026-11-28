@@ -73,6 +73,14 @@ start.sh / start.ps1       one-terminal launchers (Mac/Linux, Windows)
   change). Each line reports its causal path and whether it is empirical; est_share
   is the share of gross P&L resting on guessed betas. Unmapped holdings and holdings
   with no modelled path are reported, never dropped ("no path" is not "safe").
+- Reverse stress test (reverse_stress.py, POST /portfolio/reverse-stress, Portfolio tab):
+  "which single move loses X% of the portfolio?" For every node with data, P&L per σ is
+  measured with a 2σ probe (default max 2 hops, the depth the backtest supports) and
+  scaled linearly, giving the required shock in the node's unit and in σ with a
+  plausible / severe (>2σ) / extreme (>3.5σ) tag, plus each node's loss from a 3σ move.
+  Moves needing a >100% fall are counted as unreachable. Target figures are approximate
+  (the simulator drops impacts <0.001). Unmodelled tickers are listed, not assumed safe.
+  "use as shock" copies a result into the forward test.
 - Undo/redo (useUndo.js, ⌘/Ctrl+Z, Shift+⌘/Ctrl+Z, header buttons): node moves,
   Auto-layout (runs in place, no reload) and node/edge edits (label, description,
   notes, direction, confidence, lag, regimes — undo PATCHes the old values back).
@@ -129,5 +137,5 @@ start.sh / start.ps1       one-terminal launchers (Mac/Linux, Windows)
   close), an as-of date / staleness warning on the badge, incremental refresh (button
   + on backend start), optional hysteresis around the VIX threshold. Caveat: the
   backtest shows regime-matched betas do not yet beat all-history betas out of sample.
-- Risk-desk layer, remaining: reverse stress tests, path-level P&L attribution
+- Risk-desk layer, remaining: path-level P&L attribution
   (portfolio shock P&L itself is built)

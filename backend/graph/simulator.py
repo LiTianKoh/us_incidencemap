@@ -198,6 +198,7 @@ def simulate_shock(
     regime:     str   = "all",
     max_hops:   int   = MAX_HOPS,
     betas:      dict  = None,   # inject point-in-time betas (backtesting)
+    sigmas:     dict  = None,   # inject cached node sigmas (batch runs, e.g. reverse stress)
 ) -> dict:
     """
     Propagate a shock from node_id.
@@ -214,7 +215,8 @@ def simulate_shock(
     # `betas` may be injected (e.g. point-in-time betas for backtesting)
     if betas is None:
         betas = _load_betas(regime, directions)
-    sigmas = _load_node_sigmas()
+    if sigmas is None:
+        sigmas = _load_node_sigmas()
 
     if node_id not in nodes:
         raise ValueError(f"Unknown node: '{node_id}'")

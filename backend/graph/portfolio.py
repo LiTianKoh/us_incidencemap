@@ -31,6 +31,8 @@ def portfolio_shock(
     regime:     str   = "all",
     max_hops:   int   = 10,
     shocks:     list  = None,    # several simultaneous shocks: [{node_id, shock_real|shock_std}]
+    sigmas:     dict  = None,    # cached node sigmas (batch runs)
+    betas:      dict  = None,
 ) -> dict:
     tmap = load_ticker_map()
     if shocks:
@@ -41,7 +43,7 @@ def portfolio_shock(
         src_native, node_id = None, "+".join(s["node_id"] for s in scen["shocks"])
     else:
         sim  = simulate_shock(node_id, shock_real=shock_real, shock_std=shock_std,
-                              regime=regime, max_hops=max_hops)
+                              regime=regime, max_hops=max_hops, sigmas=sigmas, betas=betas)
         impacts = {r["node_id"]: r for r in sim["results"]}
         # The shocked node itself, in native units (decimal return, or pp for rate nodes)
         src_native = sim["shock_real"] / 100.0 if sim["shock_real"] is not None else None

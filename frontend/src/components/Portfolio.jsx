@@ -41,6 +41,10 @@ export default function Portfolio({ nodes, currentRegime, onSimResult }) {
   const [regime,   setRegime]   = useState(currentRegime ?? "all")
   const [sigmas,   setSigmas]   = useState({})
   const [extra,    setExtra]    = useState([])   // extra simultaneous shocks [{node, value}]
+  const [target,   setTarget]   = useState("5")   // reverse stress: % loss to reach
+  const [rev,      setRev]      = useState(null)
+  const [revBusy,  setRevBusy]  = useState(false)
+  const [revErr,   setRevErr]   = useState(null)
   const [running,  setRunning]  = useState(false)
   const [result,   setResult]   = useState(null)
   const [error,    setError]    = useState(null)
@@ -54,6 +58,29 @@ export default function Portfolio({ nodes, currentRegime, onSimResult }) {
     (a.label ?? a.id).localeCompare(b.label ?? b.id))
   const unit   = sigmas[sourceId]?.unit ?? "%"
   const shockN = parseFloat(shock)
+
+  async function runReverse() {
+    const holdings = parseHoldings(text)
+    const t = parseFloat(target)
+    if (holdings.length === 0) { setRevErr("Add at least one holding."); return }
+    if (isNaN(t) || t <= 0) { setRevErr("Enter a positive loss, e.g. 5 for a 5% loss."); return }
+    setRevBusy(true); setRevErr(null); setRev(null)
+    try {
+      const res = await fetch("http://localhost:8000/portfolio/reverse-stress", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ holdings, target_loss_pct: t, regime }),
+      })
+      const data = await res.json()
+      if (data.detail) throw new Error(typeof data.detail === "string" ? data.detail : JSON.stringify(data.detail))
+      setRev(data)
+    } catch (e) { setRevErr(e.message) } finally { setRevBusy(false) }
+  }
+
+  function useAsShock(r) {
+    setSourceId(r.node_id); setShock(String(r.required_shock)); setExtra([])
+    window.scrollTo?.({ top: 0 })
+  }
 
   async function run() {
     if (!sourceId || isNaN(shockN)) return
@@ -242,6 +269,87 @@ export default function Portfolio({ nodes, currentRegime, onSimResult }) {
           </p>
         </div>
       )}
+
+      {/* Reverse stress test */}
+      <div className="border-t border-slate-700 pt-3 space-y-2">
+        <p className="text-slate-200 font-medium">Reverse stress test</p>
+        <p className="text-slate-500 text-xs">
+          Which single move would cost this portfolio a given loss? Uses the regime above and paths of up to 2 hops.
+        </p>
+        <div className="flex gap-2 items-center">
+          <span className="text-slate-400 text-xs">Lose</span>
+          <input type="number" value={target} onChange={(e) => setTarget(e.target.value)}
+                 className="w-20 bg-slate-700 text-white rounded px-2 py-1.5 text-sm" />
+          <span className="text-slate-400 text-xs">% of portfolio value</span>
+        </div>
+        <button onClick={runReverse} disabled={revBusy}
+                className="w-full bg-slate-600 hover:bg-slate-500 disabled:bg-slate-700 text-white rounded px-3 py-2 font-medium transition-colors">
+          {revBusy ? "Searching…" : "⟲ Find the shocks that do it"}
+        </button>
+        {revErr && <p className="text-red-400">{revErr}</p>}
+
+        {rev && (
+          <div className="space-y-3">
+            <p className="text-slate-500 text-xs">
+              {rev.nodes_tested} nodes tested · target figures are approximate
+              {rev.nodes_unreachable > 0 && ` · ${rev.nodes_unreachable} would need a fall of more than 100%`}
+            </p>
+            {rev.unmodelled_tickers?.length > 0 && (
+              <p className="text-amber-500 text-xs">
+                Not modelled here (no mapping or no path within 2 hops): {rev.unmodelled_tickers.join(", ")}.
+                They are not assumed safe.
+              </p>
+            )}
+
+            <div>
+              <p className="text-slate-300 text-xs mb-1">Smallest move that reaches the target</p>
+              {rev.easiest.length === 0 && (
+                <p className="text-slate-500 text-xs">No single node can do it within a realistic range.</p>
+              )}
+              <div className="space-y-1">
+                {rev.easiest.map((r) => (
+                  <div key={r.node_id} className="bg-slate-700 rounded px-3 py-1.5 text-xs">
+                    <div className="flex justify-between items-center gap-2">
+                      <span className="text-slate-100 truncate">{r.label}</span>
+                      <span className="font-mono text-slate-200 whitespace-nowrap">
+                        {r.required_shock > 0 ? "+" : ""}{r.required_shock}{r.unit === "bps" ? " bps" : "%"}
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center gap-2 mt-0.5">
+                      <span className={
+                        r.plausibility === "plausible" ? "text-emerald-400"
+                        : r.plausibility === "severe" ? "text-amber-400" : "text-red-400"}>
+                        {r.required_sd > 0 ? "+" : ""}{r.required_sd}σ · {r.plausibility}
+                      </span>
+                      <span className="text-slate-500 truncate">
+                        driven by {r.drivers.map(d => d.ticker).join(", ") || "—"}
+                      </span>
+                      <button onClick={() => useAsShock(r)} className="text-blue-400 hover:text-blue-300 whitespace-nowrap">
+                        use as shock
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p className="text-slate-600 text-xs mt-1">
+                σ = standard deviations of that node's monthly moves. Beyond about 2σ is rare; beyond 3.5σ is extreme.
+              </p>
+            </div>
+
+            <div>
+              <p className="text-slate-300 text-xs mb-1">Most dangerous nodes (loss from a 3σ move)</p>
+              <div className="space-y-1">
+                {rev.most_dangerous.map((r) => (
+                  <div key={r.node_id} className="bg-slate-700 rounded px-3 py-1.5 text-xs flex justify-between gap-2">
+                    <span className="text-slate-100 truncate">{r.label}</span>
+                    <span className="font-mono text-red-400 whitespace-nowrap">{r.loss_pct_at_3sd}%</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   )
 }

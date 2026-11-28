@@ -321,6 +321,29 @@ async def simulate_scenario_endpoint(body: dict):
         raise HTTPException(status_code=404, detail=str(e))
 
 
+@app.post("/portfolio/reverse-stress")
+async def reverse_stress_endpoint(body: dict):
+    """
+    Body: { holdings: [{ticker, value, node?, duration?}], target_loss_pct (e.g. 5),
+            regime?, max_hops? (default 2), top_n? }
+    Which single-node move would cost the portfolio target_loss_pct of its value?
+    """
+    from graph.reverse_stress import reverse_stress
+    holdings = body.get("holdings") or []
+    if not holdings:
+        raise HTTPException(status_code=400, detail="holdings is empty")
+    try:
+        target = float(body.get("target_loss_pct"))
+    except (TypeError, ValueError):
+        raise HTTPException(status_code=400, detail="target_loss_pct is required")
+    try:
+        return reverse_stress(holdings, target, regime=body.get("regime", "all"),
+                              max_hops=int(body.get("max_hops", 2)),
+                              top_n=int(body.get("top_n", 15)))
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
 @app.post("/portfolio/shock")
 async def portfolio_shock_endpoint(body: dict):
     """
