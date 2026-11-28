@@ -7,6 +7,39 @@ const VERDICT_STYLE = {
 }
 const pct = (x) => (x == null ? "—" : `${Math.round(x * 100)}%`)
 
+const GLOSSARY = [
+  ["Hop / path", "A hop is one arrow. A path is one specific chain of arrows: A → B is 1 hop, A → B → C is 2. “48 paths at 1 hop” = 48 direct arrows that had data on both ends."],
+  ["Walk-forward", "Each month is predicted using only earlier months, so nothing from the future leaks in. It is an honest out-of-sample test."],
+  ["Skill", "1 − (model error ÷ error of predicting “no move”). 0% = no better than guessing nothing; +12% = errors 12% smaller; negative = worse than guessing nothing."],
+  ["Typical skill", "Median skill across paths at that depth, so a few wild paths don’t distort it."],
+  ["Beat zero", "Share of paths that predicted better than “no move”. Pure noise ≈ 50%."],
+  ["Out-of-sample R²", "Share of a node’s monthly movement the arrow explains on data it had not seen. Small values are normal for noisy monthly data."],
+  ["Validated / weak / fails", "Per-arrow verdict: validated = predicts well out of sample; weak = small effect; fails = no better than chance."],
+  ["Sign contradicts direction", "Arrows whose measured sign is opposite to the one you drew — worth checking by hand."],
+  ["Regime layer", "Compares betas fitted only on months in the same regime vs. all history. If regime betas win on fewer than half the edges, splitting by regime is adding noise, not value."],
+]
+
+function Glossary() {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className="bg-slate-700 rounded px-3 py-2 text-xs">
+      <button onClick={() => setOpen(o => !o)} className="w-full flex justify-between text-slate-200 font-medium">
+        <span>What do these numbers mean?</span><span className="text-slate-500">{open ? "▲" : "▼"}</span>
+      </button>
+      {open && (
+        <dl className="mt-2 space-y-2">
+          {GLOSSARY.map(([t, d]) => (
+            <div key={t}>
+              <dt className="text-slate-100">{t}</dt>
+              <dd className="text-slate-400">{d}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+    </div>
+  )
+}
+
 function Stat({ label, value, tone = "text-white" }) {
   return (
     <div className="bg-slate-700 rounded px-3 py-2">
@@ -212,6 +245,7 @@ export default function Validation({ backtest, onRun, onHighlight }) {
 
       {backtest && s && (
         <>
+          <Glossary />
           <p className="text-slate-600 text-xs">Last run {new Date(backtest.generated_at).toLocaleString()}</p>
 
           <div className="grid grid-cols-3 gap-2">

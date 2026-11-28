@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T12:53:17+00:00",
+  "generated_at": "2026-11-28T01:48:27+00:00",
   "params": {
     "min_train_months": 60,
     "min_oos_months": 36,
@@ -3242,5 +3242,34 @@
         }
       ]
     }
-  ]
+  ],
+  "hop_depth": {
+    "damping": 0.8,
+    "by_depth": [
+      {
+        "hops": 1,
+        "paths": 48,
+        "obs": 9441,
+        "skill": 0.1385,
+        "median_path_skill": 0.1209,
+        "share_beating_zero": 0.833
+      },
+      {
+        "hops": 2,
+        "paths": 50,
+        "obs": 8874,
+        "skill": 0.0702,
+        "median_path_skill": 0.0087,
+        "share_beating_zero": 0.54
+      },
+      {
+        "hops": 3,
+        "paths": 39,
+        "obs": 6310,
+        "skill": 0.0247,
+        "median_path_skill": -0.0015,
+        "share_beating_zero": 0.385
+      }
+    ]
+  }
 }
